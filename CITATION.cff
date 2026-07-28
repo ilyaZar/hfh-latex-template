@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Bitte zitieren Sie die Vorlage mit den folgenden Angaben."
+title: "HFH-LaTeX-Vorlage fuer wissenschaftliche Arbeiten"
+type: software
+authors:
+  - family-names: "Zarubin"
+    given-names: "Ilya"
+version: 1.0.0
+date-released: "2026-07-28"
+license: LPPL-1.3c

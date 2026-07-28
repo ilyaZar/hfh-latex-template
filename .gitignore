@@ -1,0 +1,40 @@
+# Lokale HFH-Quelldateien und persoenliche Dokumente
+*.docx
+offizielles-titelblatt.pdf
+eigenstaendigkeitserklaerung.pdf
+
+# Erzeugte PDF-Dateien
+main.pdf
+
+# LaTeX-Hilfsdateien
+*.acn
+*.acr
+*.alg
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+
+# Editor- und Betriebssystemdateien
+.DS_Store
+*~
+*.swp

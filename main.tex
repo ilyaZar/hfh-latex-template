@@ -1,0 +1,446 @@
+% HFH-LaTeX-Vorlage fuer wissenschaftliche Arbeiten
+% Copyright (c) 2026 Ilya Zarubin
+%
+% Diese Vorlage ersetzt nicht die jeweils aktuellen offiziellen Regelungen.
+% Sie erhebt keinen Anspruch auf Vollstaendigkeit oder Fehlerfreiheit. Vor
+% jeder Verwendung sind die aktuellen und studiengangsspezifischen
+% HFH-Vorgaben fuer Seminar-, Haus-, Bachelor- und Masterarbeiten zu pruefen.
+% Bei Abweichungen gelten die offiziellen Vorgaben der HFH, des Pruefungsamts
+% und der betreuenden beziehungsweise pruefenden Personen.
+%
+% Diese Datei darf unter den Bedingungen der LaTeX Project Public License,
+% Version 1.3c oder jeder spaeteren Version, verbreitet und veraendert werden.
+% Einzelheiten stehen in der Datei LICENSE.
+%
+% Kompilieren mit pdfLaTeX und BibTeX, zum Beispiel: latexmk -pdf main.tex
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  headings=normal,
+  numbers=noendperiod,
+  listof=totoc,
+  bibliography=totoc
+]{scrreprt}
+
+% ---------------------------------------------------------------------------
+% Metadaten: Diese Werte vor dem Schreiben anpassen.
+% ---------------------------------------------------------------------------
+\newcommand{\MainLanguage}{ngerman} % Fuer Englisch "english" einsetzen.
+\newcommand{\ThesisType}{Bachelorarbeit}
+\newcommand{\ThesisTitle}{Titel der wissenschaftlichen Arbeit}
+\newcommand{\ThesisSubtitle}{Optionaler Untertitel}
+\newcommand{\AuthorName}{Vorname Nachname}
+\newcommand{\MatriculationNumber}{12345678}
+\newcommand{\DegreeProgramme}{Bezeichnung des Studiengangs}
+\newcommand{\Department}{Fachbereich}
+\newcommand{\FirstExaminer}{Titel Vorname Nachname}
+\newcommand{\SecondExaminer}{Titel Vorname Nachname}
+\newcommand{\SubmissionDate}{TT. Monat JJJJ}
+
+% Der Abstract bleibt sichtbar, damit seine Einschraenkung nicht uebersehen
+% wird. Fuer Bachelor- und Seminararbeiten den Schalter auf false setzen.
+\newif\ifIncludeAbstract
+\IncludeAbstracttrue
+
+% Optionale Verzeichnisse nur bei Bedarf einschalten.
+\newif\ifIncludeLegalRegisters
+\IncludeLegalRegistersfalse
+\newif\ifIncludeAIRegister
+\IncludeAIRegistertrue
+\newif\ifIncludeAppendix
+\IncludeAppendixtrue
+
+% ---------------------------------------------------------------------------
+% Sprache, Schriften und Seitenlayout
+% ---------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,ngerman]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage{etoolbox}
+
+\usepackage[
+  a4paper,
+  portrait,
+  left=3cm,
+  right=4cm,
+  top=2.5cm,
+  bottom=2.5cm
+]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+% Deutsch ist voreingestellt. Babel stellt auch englische Trennung und
+% Bezeichnungen bereit.
+\AtBeginDocument{\selectlanguage{\MainLanguage}}
+\newcommand{\DEEN}[2]{\iflanguage{english}{#2}{#1}}
+
+% Standardmaessig werden drei Ebenen nummeriert: 1, 1.1 und 1.1.1. Fuer eine
+% umfangreiche Arbeit beide Werte auf 3 setzen, um Ebene vier zu aktivieren.
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+% Hauptueberschriften sind 14 pt gross, tiefere Ebenen 12 pt und fett.
+\setkomafont{disposition}{\normalfont\bfseries\setstretch{1}}
+\setkomafont{chapter}{\fontsize{14}{17}\selectfont}
+\setkomafont{section}{\fontsize{12}{14.5}\selectfont}
+\setkomafont{subsection}{\fontsize{12}{14.5}\selectfont}
+\setkomafont{subsubsection}{\fontsize{12}{14.5}\selectfont}
+\RedeclareSectionCommand[beforeskip=0pt,afterskip=18pt]{chapter}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{section}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsection}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsubsection}
+
+% ---------------------------------------------------------------------------
+% Kopfzeile, Fusszeile, Fussnoten, Gleitumgebungen und Quellen
+% ---------------------------------------------------------------------------
+\usepackage[automark,singlespacing=true]{scrlayer-scrpage}
+\clearpairofpagestyles
+\ihead{\AuthorName}
+\ohead{\MatriculationNumber}
+\cfoot{}
+\AtBeginDocument{%
+  \ifdefstring{\MainLanguage}{english}
+    {\cfoot{Page \thepage\ of \pageref*{LastNumberedPage}}}
+    {\cfoot{Seite \thepage\ von \pageref*{LastNumberedPage}}}}
+\setkomafont{pageheadfoot}{\normalfont\fontsize{10}{12}\selectfont}
+\setlength{\headheight}{15pt}
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\setlength{\footnotesep}{16pt}
+\deffootnote[0.5cm]{0.5cm}{0cm}{%
+  \raggedright\makebox[0.5cm][l]{\textsuperscript{\thefootnotemark}}}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{caption}
+\captionsetup{
+  format=plain,
+  justification=justified,
+  singlelinecheck=false,
+  font={footnotesize,it},
+  labelfont={bf,it},
+  labelsep=colon,
+  skip=6pt
+}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+
+% Diese Umgebung setzt Tabellentext in empfohlenen 10 pt und einzeilig.
+\newenvironment{hfhtable}[1][htbp]
+  {\begin{table}[#1]\centering\footnotesize\setstretch{1}}
+  {\end{table}}
+\newcommand{\source}[1]{%
+  \par\vspace{3pt}{\footnotesize\itshape
+    \DEEN{Quelle}{Source}: #1\par}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage[round,authoryear]{natbib}
+\setlength{\bibhang}{0.5cm}
+\setlength{\bibsep}{6pt}
+\AtBeginEnvironment{thebibliography}{\singlespacing}
+
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+\hypersetup{
+  pdftitle={\ThesisTitle},
+  pdfauthor={\AuthorName},
+  pdfsubject={\ThesisType}
+}
+
+\newcommand{\TemplateHint}[1]{%
+  \par\begingroup\small\itshape\color{gray}#1\par\endgroup}
+
+% Das Titelblatt ist Seite 1, zeigt aber keine Seitenzahl. Bei einer
+% anmeldepflichtigen Arbeit ist es durch das offizielle Titelblatt des
+% Pruefungsamts zu ersetzen. Der alternative Befehl nimmt eine einseitige PDF.
+\newcommand{\MakeThesisTitle}{%
+  \setcounter{page}{1}
+  \thispagestyle{empty}
+  \begin{center}
+    \vspace*{1.2cm}
+    {\large Hamburger Fern-Hochschule\par}
+    \vspace{0.3cm}
+    {\Department\par}
+
+    \vfill
+    {\large\ThesisType\par}
+    \vspace{1.2cm}
+    {\bfseries\fontsize{20}{24}\selectfont\ThesisTitle\par}
+    \vspace{0.5cm}
+    {\large\ThesisSubtitle\par}
+    \vfill
+
+    \begin{tabular}{@{}ll@{}}
+      \DEEN{Verfasser/in}{Author}: & \AuthorName \\
+      \DEEN{Matrikelnummer}{Student ID}: & \MatriculationNumber \\
+      \DEEN{Studiengang}{Degree programme}: & \DegreeProgramme \\
+      \DEEN{Erstprüfer/in}{First examiner}: & \FirstExaminer \\
+      \DEEN{Zweitprüfer/in}{Second examiner}: & \SecondExaminer \\
+      \DEEN{Abgabedatum}{Submission date}: & \SubmissionDate
+    \end{tabular}
+  \end{center}
+  \clearpage
+}
+
+\newcommand{\MakeOfficialTitlePage}[1]{%
+  \includepdf[pages=1,pagecommand={\thispagestyle{empty}}]{#1}
+  \setcounter{page}{2}
+}
+
+% Die HFH-Word-Datei fuehrt das Inhaltsverzeichnis in sich selbst auf. Dieser
+% Befehl bildet das ohne Nummerierung der Ueberschrift nach.
+\makeatletter
+\newcommand{\ThesisTableOfContents}{%
+  \chapter*{\contentsname}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\contentsname}
+  \@starttoc{toc}
+}
+\makeatother
+
+\begin{document}
+
+\MakeThesisTitle
+% Alternative fuer ein offizielles Titelblatt:
+% \MakeOfficialTitlePage{offizielles-titelblatt.pdf}
+
+\ifIncludeAbstract
+  \addchap{Abstract}
+  \TemplateHint{\DEEN
+    {Dieser Abschnitt ist nur für Masterarbeiten vorgesehen. Für eine
+     Bachelor-, Seminar-, Haus- oder Projektarbeit ist er einschließlich des
+     Befehls \texttt{\string\addchap\{Abstract\}} zu löschen. Bei einer
+     Masterarbeit umfasst der Abstract etwa eine, höchstens zwei Seiten und
+     fasst Forschungsanlass, Fragestellung, theoretische Basis, Methode,
+     Ergebnisse und Schlussfolgerung eigenständig verständlich zusammen.}
+    {This section is intended for master's theses only. Delete it for a
+     bachelor's thesis, seminar paper, term paper, or project paper. A
+     master's abstract should be about one and no more than two pages and
+     concisely cover the research context, question, theory, method, findings,
+     and conclusion.}}
+
+  \DEEN
+    {Hier steht der kurze, ergebnisorientierte Abstract der Masterarbeit.}
+    {Insert the concise, results-oriented master's abstract here.}
+\fi
+
+\ThesisTableOfContents
+\listoffigures
+\listoftables
+
+\addchap{\DEEN{Abkürzungsverzeichnis}{List of Abbreviations}}
+\begin{tabular}{@{}p{2.5cm}%
+  p{\dimexpr\textwidth-2.5cm-2\tabcolsep\relax}@{}}
+  HFH & Hamburger Fern-Hochschule \\
+  KI  & Künstliche Intelligenz
+\end{tabular}
+\TemplateHint{\DEEN
+  {Einträge alphabetisch sortieren. Erklärungsbedürftige Abkürzungen werden
+   zusätzlich bei der ersten Verwendung im Text ausgeschrieben.}
+  {Sort entries alphabetically. In addition, spell out each non-standard
+   abbreviation at first use in the text.}}
+
+% ---------------------------------------------------------------------------
+% Haupttext
+% ---------------------------------------------------------------------------
+\chapter{\DEEN{Einleitung}{Introduction}}
+
+\section{\DEEN{Problemstellung und Zielsetzung}{Problem and Objective}}
+
+Die Hamburger Fern-Hochschule (HFH) bildet den institutionellen Rahmen dieser
+Arbeit. Hier werden Problemstellung, Forschungsfrage, Zielsetzung und Aufbau
+präzise eingeführt. Wissenschaftliche Aussagen werden mit geeigneten Quellen
+belegt \citep[vgl.][S.~21--24]{booth2016}.
+
+Ein neuer Gedanke beginnt in einem neuen Absatz. Der Text ist im Blocksatz
+gesetzt und wird automatisch getrennt. Eine Fußnote demonstriert die
+vorgesehene Form.\footnote{Diese beispielhafte Fußnote beginnt mit einem
+Großbuchstaben und endet mit einem Punkt.}
+
+\section{\DEEN{Aufbau der Arbeit}{Structure of the Thesis}}
+
+Beschreiben Sie knapp, wie die folgenden Kapitel zur Beantwortung der
+Forschungsfrage beitragen. Ein Gliederungspunkt sollte nie nur einen einzigen
+Unterpunkt besitzen.
+
+\chapter{\DEEN{Theoretischer Rahmen}{Theoretical Framework}}
+
+\section{\DEEN{Begriffe und Modelle}{Concepts and Models}}
+
+Definieren und ordnen Sie die zentralen Begriffe und Modelle ein. Die
+Gliederung sollte in der Regel nicht tiefer als drei Ebenen reichen.
+
+\subsection{\DEEN{Zentraler Begriff}{Central Concept}}
+
+Entwickeln Sie den theoretischen Bezugsrahmen aus der Fachliteratur.
+
+\subsection{\DEEN{Weiterführendes Modell}{Additional Model}}
+
+Grenzen Sie konkurrierende Ansätze voneinander ab und begründen Sie Ihre
+Auswahl.
+
+\chapter{\DEEN{Methodik}{Methodology}}
+
+\section{\DEEN{Forschungsdesign}{Research Design}}
+
+Dokumentieren Sie das Vorgehen so, dass es fachlich nachvollziehbar ist.
+Formeln werden mit kapitelbezogener Nummerierung gesetzt:
+\begin{equation}
+  \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i.
+  \label{eq:mean}
+\end{equation}
+Gleichung~\eqref{eq:mean} wird im laufenden Text erläutert.
+
+\section{\DEEN{Datengrundlage}{Data Basis}}
+
+Tabellen und Abbildungen werden im Text ausdrücklich aufgegriffen. Tabelle
+\ref{tab:sample} zeigt eine kompakte Ergebnisdarstellung.
+
+\begin{hfhtable}
+  \caption{\DEEN{Beispielhafte Ergebnisübersicht}{Example Results Overview}}
+  \label{tab:sample}
+  \begin{tabularx}{\textwidth}{@{}Yrr@{}}
+    \toprule
+    \textbf{\DEEN{Kategorie}{Category}} &
+    \textbf{\DEEN{Anzahl}{Count}} &
+    \textbf{\DEEN{Anteil}{Share}} \\
+    \midrule
+    A & 24 & 60\,\% \\
+    B & 16 & 40\,\% \\
+    \bottomrule
+  \end{tabularx}
+  \source{\DEEN{Eigene Darstellung}{Author's own work}.}
+\end{hfhtable}
+
+\chapter{\DEEN{Ergebnisse und Diskussion}{Results and Discussion}}
+
+\section{\DEEN{Ergebnisse}{Results}}
+
+Abbildung~\ref{fig:sample} dient als Platzhalter. Jede Abbildung muss ohne
+unnötige Rückfragen verständlich beschriftet, fortlaufend nummeriert und im
+Text referenziert sein.
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\rule{0pt}{4cm}\rule{0.72\textwidth}{0pt}}
+  \caption{\DEEN{Platzhalter für eine Abbildung}{Figure Placeholder}}
+  \label{fig:sample}
+  \source{\DEEN{Eigene Darstellung}{Author's own work}.}
+\end{figure}
+
+\section{\DEEN{Diskussion}{Discussion}}
+
+Ordnen Sie die Ergebnisse in den Forschungsstand ein, diskutieren Sie ihre
+Tragweite und benennen Sie Grenzen der Untersuchung.
+
+\chapter{\DEEN{Fazit und Ausblick}{Conclusion and Outlook}}
+
+Beantworten Sie die Forschungsfrage auf Grundlage der Ergebnisse. Trennen Sie
+Schlussfolgerungen, Limitationen und weiterführenden Forschungsbedarf klar.
+
+% ---------------------------------------------------------------------------
+% Verzeichnisse nach dem Haupttext
+% ---------------------------------------------------------------------------
+\renewcommand{\bibname}{\DEEN{Quellenverzeichnis}{References}}
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\ifIncludeLegalRegisters
+  \addchap{\DEEN{Rechtsprechungsverzeichnis}{Table of Cases}}
+  \TemplateHint{\DEEN
+    {Nur bei verwendeten Gerichtsentscheidungen behalten. Entscheidungen mit
+     Gericht, Entscheidungsart, Datum, Aktenzeichen und Fundstelle aufführen.}
+    {Retain only if court decisions were cited. Give the court, decision type,
+     date, case number, and publication reference.}}
+
+  \addchap{\DEEN
+    {Verzeichnis der Verwaltungsanweisungen und Parlamentaria}
+    {Administrative and Parliamentary Sources}}
+  \TemplateHint{\DEEN
+    {Nur bei Bedarf behalten und die verwendeten amtlichen Dokumente mit
+     eindeutiger Fundstelle aufführen.}
+    {Retain only when needed and identify every cited official document
+     unambiguously.}}
+\fi
+
+\ifIncludeAIRegister
+  \addchap{\DEEN
+    {Verzeichnis der eingesetzten KI-Werkzeuge}
+    {Register of AI Tools Used}}
+  \TemplateHint{\DEEN
+    {Diesen Abschnitt nur behalten, wenn KI-Werkzeuge eingesetzt wurden. Die
+     Einträge müssen den tatsächlichen Einsatz nachvollziehbar dokumentieren.}
+    {Retain this section only if AI tools were used. Entries must document the
+     actual use transparently.}}
+
+  \begingroup
+  \footnotesize
+  \setstretch{1}
+  \begin{tabularx}{\textwidth}{@{}YYYY@{}}
+    \toprule
+    \textbf{\DEEN{Werkzeug}{Tool}} &
+    \textbf{\DEEN{Betroffener Teil}{Affected Part}} &
+    \textbf{\DEEN{Art des Einsatzes}{Type of Use}} &
+    \textbf{\DEEN{Prüfung und Übernahme}{Review and Adoption}} \\
+    \midrule
+    \textit{Name und Version} & \textit{Kapitel/Arbeitsschritt} &
+    \textit{Funktion} &
+    \textit{Kritische Prüfung und konkrete Verwendung} \\
+    \bottomrule
+  \end{tabularx}
+  \endgroup
+\fi
+
+\ifIncludeAppendix
+  \addchap{\DEEN{Anlagenverzeichnis}{List of Appendices}}
+  \textbf{\DEEN{Anlage A}{Appendix A}:}
+  \nameref{app:material}\dotfill\pageref{app:material}
+
+  \appendix
+  \chapter{\DEEN{Ergänzendes Material}{Supplementary Material}}
+  \label{app:material}
+  Fügen Sie hier nur Material ein, das für das Verständnis notwendig ist,
+  aber den Lesefluss im Haupttext stören würde. Der Anhang ist nicht dazu
+  gedacht, die vorgegebene Seitenbegrenzung zu umgehen.
+\fi
+
+% Diese Marke bestimmt die Gesamtzahl in der Fusszeile. Die abschliessende
+% Erklaerung ist absichtlich ausgenommen und zeigt keine Seitenzahl.
+\phantomsection
+\label{LastNumberedPage}
+\clearpage
+\pagestyle{empty}
+\chapter*{\DEEN{Eigenständigkeitserklärung}{Declaration of Authorship}}
+\thispagestyle{empty}
+
+\TemplateHint{\DEEN
+  {Dies ist nur ein Platzhalter. Fügen Sie hier als letzte Seite die aktuelle,
+   unveränderte Eigenständigkeitserklärung aus dem WebCampus ein. Sie darf
+   weder eine sichtbare Seitenzahl noch einen Eintrag im Inhaltsverzeichnis
+   erhalten und muss entsprechend den aktuellen Vorgaben datiert und
+   unterschrieben werden.}
+  {This is a placeholder only. Insert the current, unmodified declaration
+   supplied through WebCampus as the final page. It must have neither a visible
+   page number nor a table-of-contents entry and must be dated and signed as
+   currently required.}}
+
+% Zum Einfuegen der offiziellen Erklaerung den Platzhalter oben ersetzen durch:
+% \includepdf[pages=-,pagecommand={\thispagestyle{empty}}]
+%   {eigenstaendigkeitserklaerung.pdf}
+
+\end{document}
