@@ -147,6 +147,3 @@ für später von Nutzerinnen und Nutzern eingefügte offizielle HFH-Dokumente.
 - [HFH: Fachbereich Technik](https://www.hfh-fernstudium.de/fernhochschule-fachbereich-technik)
 - [HFH-Wegweiser durchs Studium](https://www.hfh-fernstudium.de/fernstudium-studieren-wegweiser)
 - [HFH-Hinweise zur Abschlussarbeit](https://www.hfh-fernstudium.de/blog/abschlussarbeit-so-nimmst-du-die-letzte-huerde-des-studiums)
-- [Overleaf: Template Gallery](https://docs.overleaf.com/templates/submitting-to-the-overleaf-template-gallery)
-- [Overleaf: Lizenzierung](https://docs.overleaf.com/templates/licensing-and-copyright)
-- [Overleaf: Open-in-Overleaf-API](https://www.overleaf.com/devs)
