@@ -114,12 +114,6 @@ Tabelle 1 macht zu diesen Abständen keine Vorgabe. Eine Änderung sollte daher
 erst gegen die offizielle Word-Formatvorlage und nicht nur gegen diese
 Bachelorarbeit geprüft werden.
 
-### 3. Fußzeilenposition
-
-Die Bachelorarbeit richtet „Seite x von 55“ rechts aus. Die LaTeX-Vorlage
-zentriert die Seitenangabe. Tabelle 1 schreibt keine Position vor. Dies ist
-daher kein belastbarer Änderungsgrund.
-
 ## Nicht zu ändernde Punkte
 
 Der Vergleich bestätigt folgende Einstellungen der LaTeX-Vorlage:
@@ -137,6 +131,7 @@ Der Vergleich bestätigt folgende Einstellungen der LaTeX-Vorlage:
   Word-Vorlage mit etwa 20,7 Punkt nach.
 - Der Verzicht auf `microtype` vermeidet die in Word nicht vorhandene
   Zeichenexpansion und optische Randausrichtung.
+- Die Seitenangabe steht wie in der Word-Vorlage rechts in der Fußzeile.
 
 ## Test ausführen
 
