@@ -95,9 +95,15 @@
 \newenvironment{hfhfigure}[1][htbp]
   {\begin{figure}[#1]\centering\footnotesize\setstretch{1}}
   {\end{figure}}
-\newcommand{\source}[1]{%
-  \par\vspace{3pt}{\footnotesize\itshape\setstretch{1}%
-    Quelle: #1\par}}
+\newcommand{\HFHSourceLine}[2]{%
+  \par\vspace{3pt}\begingroup
+    \footnotesize\itshape\setstretch{1}#1%
+    Quelle: #2\par
+  \endgroup}
+\newcommand{\source}[1]{\HFHSourceLine{\centering}{#1}}
+\newcommand{\sourceleft}[1]{\HFHSourceLine{\raggedright}{#1}}
+\newcommand{\sourceindented}[2][1.75cm]{%
+  \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \usepackage{etoolbox}

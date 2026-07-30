@@ -48,7 +48,7 @@
 
 % Optionale Verzeichnisse nur bei Bedarf einschalten.
 \newif\ifIncludeLegalRegisters
-\IncludeLegalRegistersfalse
+\IncludeLegalRegisterstrue
 \newif\ifIncludeAIRegister
 \IncludeAIRegistertrue
 \newif\ifIncludeAppendix
@@ -58,11 +58,9 @@
 % Sprache, Schriften und Seitenlayout
 % ---------------------------------------------------------------------------
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[english,ngerman]{babel} % B.4
 \usepackage{newtxtext,newtxmath} % C.1
 \usepackage{xcolor}
-\usepackage{csquotes}
 \usepackage{etoolbox}
 
 \usepackage[
@@ -118,9 +116,8 @@
 \pagestyle{scrheadings}
 \renewcommand*{\chapterpagestyle}{scrheadings}
 
-\usepackage{chngcntr}
 \counterwithout{footnote}{chapter} % E.5
-\setlength{\footnotesep}{16pt} % E.3-E.4
+\setlength{\footnotesep}{14pt} % E.3-E.4
 \newcommand*{\HFHFootnoteMark}{%
   \raisebox{0.7ex}{\fontsize{9}{9}\selectfont\thefootnotemark}} % E.1
 \deffootnotemark{\HFHFootnoteMark} % E.1
@@ -130,6 +127,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{longtable}
 \usepackage{array}
 \usepackage{caption}
 \captionsetup{
@@ -154,9 +152,16 @@
 \newenvironment{hfhfigure}[1][htbp]
   {\begin{figure}[#1]\centering\footnotesize\setstretch{1}} % G.6-G.7
   {\end{figure}}
-\newcommand{\source}[1]{%
-  \par\vspace{3pt}{\footnotesize\itshape\setstretch{1}%
-    \DEEN{Quelle}{Source}: #1\par}} % F.1, G.1
+\newcommand{\HFHSourceLine}[2]{%
+  \par\vspace{3pt}\begingroup
+    \footnotesize\itshape\setstretch{1}#1%
+    \DEEN{Quelle}{Source}: #2\par
+  \endgroup} % F.1, G.1
+% Tabelle 1 legt keine Ausrichtung fest; zentriert ist der Standard.
+\newcommand{\source}[1]{\HFHSourceLine{\centering}{#1}}
+\newcommand{\sourceleft}[1]{\HFHSourceLine{\raggedright}{#1}}
+\newcommand{\sourceindented}[2][1.75cm]{%
+  \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \usepackage[round,authoryear]{natbib}
@@ -221,8 +226,7 @@
   \setcounter{page}{2}
 }
 
-% Die HFH-Word-Datei fuehrt das Inhaltsverzeichnis in sich selbst auf. Dieser
-% Befehl bildet das ohne Nummerierung der Ueberschrift nach.
+% Die HFH-Vorlage fuehrt das Inhaltsverzeichnis in sich selbst auf. Dieser
 \makeatletter
 \newcommand{\ThesisTableOfContents}{%
   \chapter*{\contentsname}
@@ -240,23 +244,15 @@
 
 \ifIncludeAbstract % J.3
   \addchap{Abstract}
-  \TemplateHint{\DEEN
-    {Dieser Abschnitt ist nur für Masterarbeiten vorgesehen. Für eine
-     Bachelor\mbox{-,} Seminar\mbox{-,} Haus- oder Projektarbeit ist er
-     einschließlich des
-     Befehls \texttt{\string\addchap\{Abstract\}} zu löschen. Bei einer
-     Masterarbeit umfasst der Abstract etwa eine, höchstens zwei Seiten und
-     fasst Forschungsanlass, Fragestellung, theoretische Basis, Methode,
-     Ergebnisse und Schlussfolgerung eigenständig verständlich zusammen.}
-    {This section is intended for master's theses only. Delete it for a
-     bachelor's thesis, seminar paper, term paper, or project paper. A
-     master's abstract should be about one and no more than two pages and
-     concisely cover the research context, question, theory, method, findings,
-     and conclusion.}}
-
-  \DEEN
-    {Hier steht der kurze, ergebnisorientierte Abstract der Masterarbeit.}
-    {Insert the concise, results-oriented master's abstract here.}
+  Masterarbeiten wird ein Abstract im Umfang von etwa ein, maximal zwei
+  Seiten vorangestellt. Für alle anderen wissenschaftlichen Arbeiten ist dies
+  nicht nötig! Ein Abstract stellt kurz und präzise die Kerninformationen zum
+  Forschungshintergrund, zur Aufgabenstellung, zu den Leitthesen, der
+  theoretischen Grundlage, der Methodik/Vorgehensweise, den Hauptergebnissen
+  und dem Fazit der Arbeit (im Sinne eines Management Summary) dar. Es ist
+  ergebnisorientiert zu verfassen und muss unabhängig vom Text verständlich
+  sein. Die Leser sollen insbesondere die zentralen Erkenntnisse erfahren,
+  die aus der Bearbeitung der Themenstellung gewonnen wurden.
 \fi
 
 \ThesisTableOfContents % J.4
@@ -264,61 +260,352 @@
 \listoftables % J.4
 
 \addchap{\DEEN{Abkürzungsverzeichnis}{List of Abbreviations}} % J.5
+Wenn Sie in Ihrer Arbeit Abkürzungen benutzen, sind diese in einem
+Abkürzungsverzeichnis zu erläutern. Es wird nach den Kürzeln alphabetisch
+aufsteigend sortiert. Allgemeinsprachliche Abkürzungen (wie vgl., z.\,B.,
+u.\,a., usw., etc.) oder Abkürzungen, die üblicherweise in Quellenangaben
+genutzt werden (wie ff., Nr., Jg., Hrsg., Aufl.) müssen \textit{nicht} im
+Abkürzungsverzeichnis aufgenommen werden. Alle anderen Abkürzungen (z.\,B.
+themen- und fachspezifische oder unternehmensinterne Abkürzungen, Namen von
+Institutionen, Organisationen, Fachzeitschriften, Gesetzen oder andere
+erklärungsbedürftige Abkürzungen) erfordern ausnahmslos einen Eintrag im
+Abkürzungsverzeichnis.
+
+Das Abkürzungsverzeichnis enthebt Sie nicht von der Aufgabe, eine Abkürzung
+bei deren erstmaliger Verwendung im Text einzuführen: Bei der ersten Nennung
+wird der Begriff ausgeschrieben und die Abkürzung in Klammern dahinter
+gesetzt.
+
+Im Folgenden eine beispielhafte Darstellung des
+Abkürzungsverzeichnisses:
+
 \begin{tabularx}{\textwidth}{@{}p{2.5cm}Y@{}}
+  CP  & Credit Points \\
   HFH & Hamburger Fern-Hochschule \\
-  KI  & Künstliche Intelligenz
+  PL  & Prüfungsleistung \\
+  SSB & Studiengangsspezifische Bestimmungen
 \end{tabularx}
-\TemplateHint{\DEEN
-  {Einträge alphabetisch sortieren. Erklärungsbedürftige Abkürzungen werden
-   zusätzlich bei der ersten Verwendung im Text ausgeschrieben.}
-  {Sort entries alphabetically. In addition, spell out each non-standard
-   abbreviation at first use in the text.}}
 
 % ---------------------------------------------------------------------------
-% Haupttext
+% Verwendung und formale Muster
 % ---------------------------------------------------------------------------
-\chapter{\DEEN{Einleitung}{Introduction}}
+\addchap{\DEEN{Verwendungshinweis}{How to Use This Template}}
 
-\section{\DEEN{Problemstellung und Zielsetzung}{Problem and Objective}}
+Diese Vorlage zur Erstellung von wissenschaftlichen Arbeiten an der
+Hamburger Fern-Hochschule (HFH) basiert auf den Richtlinien zur Erstellung
+wissenschaftlicher Arbeiten an der HFH (Fachbereiche Wirtschaft und Recht
+sowie Technik) und wurde mit LaTeX erstellt. Die Vorlage stellt ein Angebot
+dar, das von Ihnen genutzt werden \textit{kann}, dessen Verwendung aber nicht
+verpflichtend ist.
 
-Die Hamburger Fern-Hochschule (HFH) bildet den institutionellen Rahmen dieser
-Arbeit. Hier werden Problemstellung, Forschungsfrage, Zielsetzung und Aufbau
-präzise eingeführt. Wissenschaftliche Aussagen werden mit geeigneten Quellen
-belegt \citep[vgl.][S.~21--24]{booth2016}.
+Am einfachsten öffnen Sie über den Link in der README eine eigene
+Overleaf-Kopie. Alternativ können Sie das Repository herunterladen oder
+klonen. Passen Sie anschließend den Metadatenblock am Anfang von
+\texttt{main.tex} an und löschen oder überschreiben Sie alle Beispielinhalte,
+die Sie nicht benötigen. Die PDF wird mit
+\texttt{latexmk -pdf main.tex} beziehungsweise durch erneutes Kompilieren in
+Overleaf vollständig aktualisiert.
 
-Ein neuer Gedanke beginnt in einem neuen Absatz. Der Text ist im Blocksatz
-gesetzt und wird automatisch getrennt. Eine Fußnote demonstriert die
-% E.6-E.7 sind Inhaltsregeln: Grossbuchstabe am Anfang und Punkt am Ende.
-vorgesehene Form.\footnote{Diese beispielhafte Fußnote beginnt mit einem
-Großbuchstaben und endet mit einem Punkt.}
+Die Nutzung der Vorlage entbindet Sie nicht davon, die entsprechenden
+\textbf{Studienbriefe zum wissenschaftlichen Arbeiten}, die sich mit der
+Erstellung und Gestaltung wissenschaftlicher Arbeiten in Ihrem konkreten
+Studiengang befassen, zu lesen und die dort gegebenen Hinweise (z.\,B. zu
+qualitativen Anforderungen an wissenschaftliche Arbeiten, zum Zitieren, zum
+Umgang mit Quellen und zu weiteren formalen Aspekten) in Ihren Arbeiten
+umzusetzen.
 
-\section{\DEEN{Aufbau der Arbeit}{Structure of the Thesis}}
+\chapter{\DEEN
+  {Formale Aspekte zur Erstellung wissenschaftlicher Arbeiten}
+  {Formal Aspects of Academic Papers}}
 
-Beschreiben Sie knapp, wie die folgenden Kapitel zur Beantwortung der
-Forschungsfrage beitragen. Ein Gliederungspunkt sollte nie nur einen einzigen
-Unterpunkt besitzen.
+Der erste Eindruck, den die Betreuer/innen bzw. Prüfer/innen Ihrer Arbeit
+erhalten, ist ein formaler. Betrachten Sie daher die formale Gestaltung Ihrer
+Arbeit als ein Kriterium, welches in die Bewertung mit einfließt.
 
-\chapter{\DEEN{Theoretischer Rahmen}{Theoretical Framework}}
+Alle wichtigen Formatvorgaben, die für wissenschaftliche Arbeiten an der HFH
+gelten, sind in der Präambel dieser LaTeX-Vorlage definiert. Bei nicht
+zwingend vorgeschriebenen Formaten können Sie die dort gekennzeichneten
+KOMA-Script-, \texttt{caption}-, Schrift- und Abstandseinstellungen ändern.
+Eine Änderung wirkt sich auf alle Dokumentteile aus, die den jeweiligen
+Befehl verwenden. Soll beispielsweise die empfohlene Standardschrift
+geändert werden, wird die zentrale Schriftpaketzeile angepasst und nicht
+jeder Absatz einzeln formatiert. Die Kommentare in \texttt{main.tex}
+verweisen mit A.1 bis J.11 auf die Prüfmatrix in der README.
 
-\section{\DEEN{Begriffe und Modelle}{Concepts and Models}}
+Die folgende Tabelle zeigt noch einmal die wesentlichen Formatierungen für
+eine wissenschaftliche Arbeit an der HFH im Überblick auf. Ob es sich dabei
+um eine zwingend einzuhaltende Vorgabe (V) der HFH handelt oder lediglich um
+eine Empfehlung (E) sehen Sie anhand der letzten Spalte.
 
-Definieren und ordnen Sie die zentralen Begriffe und Modelle ein. Die
-Gliederung sollte in der Regel nicht tiefer als drei Ebenen reichen.
+\begingroup
+\footnotesize
+\setstretch{1}
+\begin{longtable}{@{}p{0.22\textwidth}p{0.62\textwidth}
+  >{\centering\arraybackslash}p{0.08\textwidth}@{}}
+  \caption{Tabellenbeschriftung 1}
+  \label{tab:hfh-format}\\
+  \toprule
+  \textbf{Hauptpunkte} &
+  \textbf{Unterpunkte} &
+  \textbf{V / E} \\
+  \midrule
+  \endfirsthead
+  \caption[]{Tabellenbeschriftung 1 (Fortsetzung)}\\
+  \toprule
+  \textbf{Hauptpunkte} &
+  \textbf{Unterpunkte} &
+  \textbf{V / E} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
 
-\subsection{\DEEN{Zentraler Begriff}{Central Concept}}
+  Seitenformat &
+  DIN A4, Hochformat &
+  V \\
+  &
+  einseitig bedruckt &
+  V \\
+  &
+  Ränder: L 3\,cm, R: 4\,cm, O/U: 2,5\,cm &
+  V \\
+  \midrule
 
-Entwickeln Sie den theoretischen Bezugsrahmen aus der Fachliteratur.
+  Absatzformat &
+  Zeilenabstand 1,5-zeilig &
+  V \\
+  &
+  Blocksatz &
+  V \\
+  &
+  Abstand zwischen den Absätzen 6 Punkt
+  (neuer Absatz bei neuem Gedanken) &
+  E \\
+  &
+  automatische Silbentrennung &
+  E \\
+  \midrule
 
-\subsection{\DEEN{Weiterführendes Modell}{Additional Model}}
+  Zeichenformat &
+  gut lesbare Schriftart und Schriftgröße (Empfehlungen: Times New Roman in
+  12 Punkt, Arial in 11 Punkt, Univers in 11 Punkt) &
+  E \\
+  &
+  Schriftgröße Hauptüberschriften/1. Gliederungsebene 14 - 16 Punkt,
+  Fettdruck (im Textteil, nicht im Inhaltsverzeichnis) &
+  E \\
+  &
+  Schriftgröße Überschriften ab 2. Gliederungsebene 12 Punkt, Fettdruck &
+  E \\
+  \midrule
 
-Grenzen Sie konkurrierende Ansätze voneinander ab und begründen Sie Ihre
-Auswahl.
+  Kopf- / Fußzeilen &
+  Schriftgröße 2 Punkt kleiner als Standardschrift &
+  E \\
+  &
+  Name/Matrikelnummer in Kopfzeile &
+  V \\
+  \midrule
 
-\chapter{\DEEN{Methodik}{Methodology}}
+  Fußnoten &
+  Fußnotenzeichen: Schriftgröße 9--10 Punkt hochgestellt &
+  E \\
+  &
+  Schriftgröße Fußnotentext 2 Punkt kleiner als Standardschrift &
+  V \\
+  &
+  Zeilenabstand innerhalb der Fußnote 1-zeilig &
+  V \\
+  &
+  Zeilenabstand zwischen den einzelnen Fußnoten 1,5-zeilig
+  (bzw. ca. 4 Punkt Abstand zur nächsten Fußnote) &
+  V \\
+  &
+  fortlaufende Fußnotennummerierung &
+  V \\
+  &
+  Fußnote beginnt grundsätzlich mit Großbuchstaben &
+  V \\
+  &
+  Punkt am Ende der Fußnote &
+  V \\
+  \midrule
 
-\section{\DEEN{Forschungsdesign}{Research Design}}
+  Tabellen &
+  Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe &
+  V \\
+  &
+  Schriftgröße von Tabellennummer/-bezeichnung ca. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Abstand zwischen Bezeichnung und Tabelle ca. 6 Punkt &
+  E \\
+  &
+  Bezug/Verweis im laufenden Text &
+  V \\
+  &
+  Zeilenabstand innerhalb einer Tabelle 1-zeilig &
+  E \\
+  &
+  Schriftgröße in der Tabelle i.\,d.\,R. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Text in Kopfzeile / Randspalte der Tabelle ggf. fett &
+  E \\
+  \midrule
 
-Dokumentieren Sie das Vorgehen so, dass es fachlich nachvollziehbar ist.
+  Abbildungen &
+  Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe &
+  V \\
+  &
+  Schriftgröße von Abbildungsnummer/-bezeichnung ca. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Abstand zwischen Abbildung und Bezeichnung ca. 6 Punkt &
+  E \\
+  &
+  Abstand zwischen Bezeichnung und nachfolgendem Text ca. 12 Punkt &
+  E \\
+  &
+  Bezug / Verweis im laufenden Text &
+  V \\
+  &
+  Zeilenabstand bei Text innerhalb einer Abbildung 1-zeilig &
+  E \\
+  &
+  Schriftgröße in der Abbildung i.\,d.\,R. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  \midrule
+
+  Formeln &
+  Erstellung mit Formeleditor und mit kapitelorientierter Nummerierung &
+  E \\
+  \midrule
+
+  Quellenverzeichnis, Verzeichnis der Gesetze, Rechtsverordnungen etc. &
+  Zeilenabstand innerhalb der Quellenangabe 1-zeilig &
+  V \\
+  &
+  Zeilenabstand zwischen den einzelnen Quellen 1,5-zeilig
+  (alternativ: 6 Punkt Abstand zur nächsten Quellenangabe) &
+  V \\
+  &
+  Sondereinzug: hängend bei 0,5\,cm &
+  E \\
+  &
+  Quellen nach Autor/Herausgeber alphabetisch aufsteigend sortiert &
+  V \\
+\end{longtable}
+\endgroup
+\source{HFH-Formatvorgaben, in diese LaTeX-Vorlage übertragen.}
+
+Sollten Sie für eine Tabelle oder Abbildung eine Quelle angeben, setzen Sie
+diese in einen neuen Absatz darunter. Verwenden Sie dafür standardmäßig
+\texttt{\string\source}. Die kommentierten Befehle
+\texttt{\string\sourceleft} und \texttt{\string\sourceindented} zeigen die
+beiden alternativen Ausrichtungen.
+
+\section{\DEEN{Muster für die Gliederung}{Outline Example}}
+
+Dieser Text kann in formaler Hinsicht als Muster für die Abfassung von
+wissenschaftlichen Arbeiten verwendet werden. Die Datei enthält außer den
+HFH-Richtlinien entsprechenden Formatdefinitionen bereits beispielhafte
+Textinhalte. Diese Textinhalte dienen als unverbindliches Muster für die
+Gliederung der zu schreibenden wissenschaftlichen Arbeit und können gelöscht
+und/oder überschrieben werden.
+
+\subsection{\DEEN{Gliederungstiefe}{Outline Depth}}
+
+Eine über drei (bei umfangreicheren Arbeiten vier) Ebenen hinausgehende
+Untergliederung ist im Allgemeinen zu vermeiden.
+
+\subsubsection{\dots}
+
+\subsection{\DEEN{Gliederungslogik}{Outline Logic}}
+
+Bei keinem Gliederungspunkt darf lediglich \textit{ein} Unterpunkt existieren:
+wenn „1.1.1“, dann auch „1.1.2“!
+
+\dots
+
+\section{\DEEN{Muster für Abbildungen}{Figure Examples}}
+
+Alle Abbildungen müssen grundsätzlich für sich „lesbar“ sein und bedürfen
+stets eines Bezugs im Text (bspw. „siehe Abb. 1“).
+Abbildung~\ref{fig:hfh-logo} wird deshalb im laufenden Text ausdrücklich
+aufgegriffen.
+
+\begin{hfhfigure}[htbp]
+  \includegraphics[width=1.10in]{images/hfh-logo.png}
+  \caption{Beispiel für eine Abbildung HFH-Logo}
+  \label{fig:hfh-logo}
+  % Standard: zentriert.
+  \source{Hamburger Fern-Hochschule.}
+  % Alternative: linksbuendig.
+  % \sourceleft{Hamburger Fern-Hochschule.}
+  % Alternative: Word-Abbildungsstil mit 2,25 cm Einzug.
+  % \sourceindented[2.25cm]{Hamburger Fern-Hochschule.}
+\end{hfhfigure}
+
+Sofern die Abbildung aus einer anderen Quelle entnommen wurde, bedarf es
+einer Quellenangabe. Wurde der Inhalt gegenüber der Originalquelle verändert,
+so ist mit dem Zusatz „in Anlehnung an \dots“ oder „vgl. \dots“ darauf
+hinzuweisen. Ist die Abbildung selbstständig auf Basis eigener Überlegungen
+entstanden, sollte dies durch einen entsprechenden Vermerk (eigene
+Darstellung) kenntlich gemacht werden.
+
+Auch Abbildung~\ref{fig:work} wird im laufenden Text ausdrücklich
+aufgegriffen.
+
+\begin{hfhfigure}[htbp]
+  \includegraphics[width=1.81in]{images/arbeitsplatz.jpg}
+  \caption{Bei der Arbeit}
+  \label{fig:work}
+  % Standard: zentriert.
+  \source{ioannis kounadeas, Fotolia, Bild 4598956.}
+  % Alternative: linksbuendig.
+  % \sourceleft{ioannis kounadeas, Fotolia, Bild 4598956.}
+  % Alternative: Word-Abbildungsstil mit 2,25 cm Einzug.
+  % \sourceindented[2.25cm]{%
+  %   ioannis kounadeas, Fotolia, Bild 4598956.}
+\end{hfhfigure}
+
+\section{\DEEN{Muster für Tabellen}{Table Example}}
+
+Tabellen werden neben der fortlaufenden Tabellennummer mit einer
+Tabellenüberschrift versehen. Tabelle~\ref{tab:sample} wird im laufenden Text
+ausdrücklich aufgegriffen.
+
+\begin{hfhtable}
+  \caption{Tabellenbeschriftung 2}
+  \label{tab:sample}
+  \begin{tabularx}{\textwidth}{@{}YYYY@{}}
+    \toprule
+    \textbf{Kopfzeile 1} &
+    \textbf{Kopfzeile 2} &
+    \textbf{Kopfzeile 3} &
+    \textbf{Kopfzeile 4} \\
+    \midrule
+    Zeile 1/Spalte 1 & Zeile 1/Spalte 2 &
+    Zeile 1/Spalte 3 & Zeile 1/Spalte 4 \\
+    Zeile 2/Spalte 1 & Zeile 2/Spalte 2 &
+    Zeile 2/Spalte 3 & Zeile 2/Spalte 4 \\
+    \bottomrule
+  \end{tabularx}
+  % Standard: zentriert.
+  \source{Eigene Darstellung.}
+  % Alternative: linksbuendig.
+  % \sourceleft{Eigene Darstellung.}
+  % Alternative: Word-Tabellenstil mit 1,75 cm Einzug.
+  % \sourceindented[1.75cm]{Eigene Darstellung.}
+\end{hfhtable}
+
+\section{\DEEN{Muster für Formeln}{Equation Example}}
+
 Formeln werden mit kapitelbezogener Nummerierung gesetzt:
 % H.1
 \begin{equation}
@@ -327,88 +614,186 @@ Formeln werden mit kapitelbezogener Nummerierung gesetzt:
 \end{equation}
 Gleichung~\eqref{eq:mean} wird im laufenden Text erläutert.
 
-\section{\DEEN{Datengrundlage}{Data Basis}}
+\chapter{\DEEN
+  {Aufbau wissenschaftlicher Arbeiten}
+  {Structure of Academic Papers}}
 
-Tabellen und Abbildungen werden im Text ausdrücklich aufgegriffen. Tabelle
-% F.4
-\ref{tab:sample} zeigt eine kompakte Ergebnisdarstellung.
+An der HFH sind verschiedene wissenschaftliche Arbeiten in Form von Haus-,
+Projekt- und Abschlussarbeiten zu erbringen. Eine solche wissenschaftliche
+Arbeit besteht dabei aus mehreren Teilen. Die verbindliche Reihenfolge der
+Teile einer wissenschaftlichen Arbeit an der HFH ist den folgenden
+Abschnitten zu entnehmen (Ergänzungen durch Verzeichnisse bzw. Anlagen sind
+je nach der von Ihnen behandelten Thematik möglich und zu empfehlen).
 
-\begin{hfhtable}
-  % F.1-F.3
-  \caption{\DEEN{Beispielhafte Ergebnisübersicht}{Example Results Overview}}
-  \label{tab:sample}
-  \begin{tabularx}{\textwidth}{@{}Yrr@{}}
-    \toprule
-    % F.7
-    \textbf{\DEEN{Kategorie}{Category}} &
-    \textbf{\DEEN{Anzahl}{Count}} &
-    \textbf{\DEEN{Anteil}{Share}} \\
-    \midrule
-    A & 24 & 60\,\% \\
-    B & 16 & 40\,\% \\
-    \bottomrule
-  \end{tabularx}
-  \source{\DEEN{Eigene Darstellung}{Author's own work}.}
-\end{hfhtable}
+\section{\DEEN{Titelblatt}{Title Page}}
 
-\chapter{\DEEN{Ergebnisse und Diskussion}{Results and Discussion}}
+Das Titelblatt für themenvereinbarungspflichtige Arbeiten (z.\,B.
+Projektarbeit, Abschlussarbeit) erhalten Sie nach Themenanmeldung und
+-bestätigung vorgefertigt vom Prüfungsamt. Für andere wissenschaftliche
+Arbeiten finden Sie Gestaltungsvorgaben dazu in den separaten Hinweisen zu
+den jeweiligen Arbeiten.
 
-\section{\DEEN{Ergebnisse}{Results}}
+Das Titelblatt wird als „Seite 1“ mitgezählt, erhält aber selbst keine
+sichtbare Seitenzahl. In dieser LaTeX-Vorlage ersetzt
+\texttt{\string\MakeOfficialTitlePage\{datei.pdf\}} das generische Titelblatt
+durch die bereitgestellte Seite.
 
-% G.5
-Abbildung~\ref{fig:sample} dient als Platzhalter. Jede Abbildung muss ohne
-unnötige Rückfragen verständlich beschriftet, fortlaufend nummeriert und im
-Text referenziert sein.
+\section{\DEEN{Inhaltsverzeichnis}{Table of Contents}}
 
-\begin{hfhfigure}[htbp]
-  \fbox{\rule{0pt}{4cm}\rule{0.72\textwidth}{0pt}}
-  % G.1-G.3
-  \caption{\DEEN{Platzhalter für eine Abbildung}{Figure Placeholder}}
-  \label{fig:sample}
-  \source{\DEEN{Eigene Darstellung}{Author's own work}.}
-\end{hfhfigure}
+Das Inhaltsverzeichnis wird aus den Befehlen
+\texttt{\string\chapter}, \texttt{\string\section} und den tieferen
+Gliederungsbefehlen automatisch aufgebaut. Nach Änderungen aktualisiert ein
+vollständiger \texttt{latexmk}-Lauf die Einträge, Seitenzahlen und Verweise.
 
-\section{\DEEN{Diskussion}{Discussion}}
+Die HFH empfiehlt die Verwendung der Dezimalgliederung -- wie sie auch in
+dieser Vorlage genutzt wird. In juristischen Arbeiten wird häufig auch das
+alphanumerische System verwendet (siehe dazu Hinweise in den entsprechenden
+Studienbriefen zum wissenschaftlichen Arbeiten).
 
-Ordnen Sie die Ergebnisse in den Forschungsstand ein, diskutieren Sie ihre
-Tragweite und benennen Sie Grenzen der Untersuchung.
+\section{\DEEN
+  {Abbildungsverzeichnis und Tabellenverzeichnis}
+  {Lists of Figures and Tables}}
 
-\chapter{\DEEN{Fazit und Ausblick}{Conclusion and Outlook}}
+Nach dem Inhaltsverzeichnis sind ein Abbildungsverzeichnis und ein
+Tabellenverzeichnis eingerichtet. Sie werden automatisch aus
+\texttt{\string\caption}-Befehlen erzeugt. Jede Abbildung und Tabelle erhält
+zusätzlich ein eindeutiges \texttt{\string\label}; im laufenden Text wird mit
+\texttt{\string\ref} darauf verwiesen. Quellen stehen mit
+\texttt{\string\source} in einem eigenen Absatz unter dem Objekt und werden
+dadurch nicht Bestandteil des Verzeichniseintrags. Nach Änderungen
+aktualisiert ein vollständiger \texttt{latexmk}-Lauf beide Verzeichnisse.
 
-Beantworten Sie die Forschungsfrage auf Grundlage der Ergebnisse. Trennen Sie
-Schlussfolgerungen, Limitationen und weiterführenden Forschungsbedarf klar.
+\section{\DEEN{Abkürzungsverzeichnis}{List of Abbreviations}}
+
+Eine Erläuterung mit Beispielen finden Sie vorne im
+Abkürzungsverzeichnis.
+
+\section{\DEEN
+  {Inhaltsteil der wissenschaftlichen Arbeit}
+  {Main Body of the Academic Paper}}
+
+Dies ist der wesentliche Teil Ihrer Arbeit, der in der Regel aus einem
+einleitenden Teil, einem Hauptteil und einem abschließenden Teil besteht.
+
+\section{\DEEN{Quellenverzeichnis}{References}}
+
+Im Quellenverzeichnis werden alle (und \textit{ausschließlich} die) Quellen
+aufgeführt, die Sie in der Arbeit wortwörtlich oder sinngemäß zitiert haben.
+Ordnen Sie alle Einträge in das Quellenverzeichnis unabhängig von der Art der
+Quelle alphabetisch nach dem Nachnamen des (ersten) Verfassers bzw.
+Herausgebers.
+\TemplateHint{Der Verweis \citep{booth2016} demonstriert einen
+  Literaturbeleg. Ersetzen Sie ihn zusammen mit dem Beispieleintrag in
+  \texttt{references.bib} durch die tatsächlich verwendeten Quellen.}
+
+\section{\DEEN
+  {Rechtsprechungsverzeichnis (bei Bedarf)}
+  {Table of Cases (if Required)}}
+
+Es enthält eventuell verwendete gerichtliche Entscheidungen (Urteile,
+Beschlüsse etc.) mit Fundstelle.
+
+\section{\DEEN
+  {Verzeichnis der Verwaltungsanweisungen, Parlamentaria und Ähnliches
+   (bei Bedarf)}
+  {Administrative and Parliamentary Sources (if Required)}}
+
+Es enthält eventuell verwendete Verwaltungsvorschriften von Landes- oder
+Bundesbehörden und eventuell zitierte Parlamentaria (wie Bundestags- oder
+Bundesratsdrucksachen).
+
+\section{\DEEN
+  {Verzeichnis der eingesetzten KI-Werkzeuge (bei Bedarf)}
+  {Register of AI Tools Used (if Required)}}
+
+Wenn Sie KI-Tools als Hilfsmittel bei der Erstellung Ihrer wissenschaftlichen
+Arbeit verwenden, sollten Sie deren Einsatz sorgfältig dokumentieren.
+Detaillierte Hinweise dazu finden Sie in den „Informationen zum Umgang mit
+Künstlicher Intelligenz bei der Erstellung wissenschaftlicher Arbeiten an
+der HFH“ -- verfügbar im WebCampus unter den Studienbriefen zum Modul WSA.
+
+\section{\DEEN
+  {Anlagenverzeichnis (bei Bedarf)}
+  {List of Appendices (if Required)}}
+
+Werden der Arbeit mehrere Anlagen hinzugefügt, sollte ein Anlagenverzeichnis
+erstellt werden. Dieses gibt einen Überblick über die der Arbeit beigefügten
+Anlagen mit Nummer, Bezeichnung der Anlage und Seitenangabe in systematisch
+geordneter Reihenfolge.
+
+\section{\DEEN{Anlagen}{Appendices}}
+
+In den Anlagenteil (Anhang) werden all jene Dokumente aufgenommen, die dabei
+helfen, das Verständnis der Arbeit zu steigern, die aber bei einem Einfügen
+in den laufenden Text den Gedankenfluss stören würden. Überfrachten Sie den
+Anhang allerdings nicht mit Elementen, die anderweitig nicht unterzubringen
+sind. Das heißt, alle Anlagen sollten wirklich notwendig sein.
+
+Der Anhang ist nicht dahingehend zu „missbrauchen“, die Seitenbeschränkung
+durch Verlagerung von Textpassagen oder Abbildungen in den Anhang zu
+unterlaufen.
+
+\section{\DEEN
+  {Eigenständigkeitserklärung}
+  {Declaration of Authorship}}
+
+Mit der Anfertigung Ihrer wissenschaftlichen Arbeit übernehmen Sie die
+Verpflichtung, ehrlich wissenschaftlich zu arbeiten. Plagiieren, d.\,h.
+geistiges Eigentum stehlen, gilt als Täuschung und wird gemäß der
+Rahmenprüfungsordnung der HFH als nicht bestanden bewertet.
+
+Aus diesem Grund sind Sie verpflichtet, am Ende Ihrer Arbeit eine
+Eigenständigkeitserklärung abzugeben.
 
 % ---------------------------------------------------------------------------
 % Verzeichnisse nach dem Haupttext
 % ---------------------------------------------------------------------------
 \renewcommand{\bibname}{\DEEN{Quellenverzeichnis}{References}}
+\TemplateHint{%
+  Name, Vorname (Erscheinungsjahr): Titel der Quelle, ggf. Untertitel.
+  Auflage. Erscheinungsort: Verlag.\par
+  Name, Vorname (Erscheinungsjahr): Titel des Beitrags/Aufsatzes. ggf.
+  Untertitel. In: Name des Herausgebers (Hrsg.): Titel des Sammelwerkes.
+  Auflage, Erscheinungsort: Verlag, erste -- letzte Seite des
+  Beitrags/Aufsatzes im Sammelwerk.\par
+  Name, Vorname (Erscheinungsjahr): Titel des Aufsatzes. ggf. Untertitel. In:
+  Titel von Zeitschrift/Journal/Jahrbuch bzw. deren übliche Abkürzung.
+  Jahrgang als „Jg.“, ggf. Heftnummer als „H.“, erste -- letzte Seite bzw.
+  Spalte des Beitrags.\par
+  Name, Vorname (Jahr der Veröffentlichung/Aktualisierung): Titel der
+  Internetseite/des Internetdokumentes. ggf. Untertitel. URL: vollständige
+  Adresse der konkreten Seite [Stand: Tag Ihres letzten Zugriffs].}
 \bibliographystyle{plainnat} % I.4
 \bibliography{references} % J.7
 
 \ifIncludeLegalRegisters % J.8
   \addchap{\DEEN{Rechtsprechungsverzeichnis}{Table of Cases}}
-  \TemplateHint{\DEEN
-    {Nur bei verwendeten Gerichtsentscheidungen behalten. Entscheidungen mit
-     Gericht, Entscheidungsart, Datum, Aktenzeichen und Fundstelle aufführen.}
-    {Retain only if court decisions were cited. Give the court, decision type,
-     date, case number, and publication reference.}}
+  \TemplateHint{%
+    Name des Gerichts (i.\,d.\,R. abgekürzt), Art der Entscheidung: Urt.
+    (= Urteil), Beschl. (= Beschluss), G. (= Gutachten), vom (Datum der
+    Entscheidung), Aktenzeichen, Fundstelle (Abkürzung, falls üblich),
+    Erscheinungsjahr, ggf. Band, Teil, erste Seite bzw. Spalte des
+    Entscheidungstextes.}
   % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
-  % \begin{hfhsourceentries}
-  %   \hfhsourceentry{Gericht, Entscheidungsart, Datum, Aktenzeichen, Fundstelle}
-  % \end{hfhsourceentries}
+  \begin{hfhsourceentries}
+    \hfhsourceentry{Name des Gerichts \dots}
+  \end{hfhsourceentries}
 
   \addchap{\DEEN
     {Verzeichnis der Verwaltungsanweisungen und Parlamentaria}
     {Administrative and Parliamentary Sources}}
-  \TemplateHint{\DEEN
-    {Nur bei Bedarf behalten und die verwendeten amtlichen Dokumente mit
-     eindeutiger Fundstelle aufführen.}
-    {Retain only when needed and identify every cited official document
-     unambiguously.}}
+  \TemplateHint{%
+    Bezeichnung der erlassenden Behörde/Stelle vom (Datum), Aktenzeichen
+    (ggf. Betreff), Name der Fundstelle (übliche Abkürzung),
+    Erscheinungsjahr der Fundstelle, ggf. Band, Teil, erste Seite bzw.
+    Spalte.\par
+    Institution-Drucksache, Drucksachennummer vom (Datum),
+    Bezeichnung/Betreff der Drucksache, ggf. Seitenangaben.}
   % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
-  % \begin{hfhsourceentries}
-  %   \hfhsourceentry{Behoerde, Datum, Aktenzeichen, Fundstelle}
-  % \end{hfhsourceentries}
+  \begin{hfhsourceentries}
+    \hfhsourceentry{Behörde, Datum, Aktenzeichen, Fundstelle.}
+    \hfhsourceentry{Institution-Drucksache, Nummer, Datum, Betreff.}
+  \end{hfhsourceentries}
 \fi
 
 \ifIncludeAIRegister % J.9
@@ -426,32 +811,75 @@ Schlussfolgerungen, Limitationen und weiterführenden Forschungsbedarf klar.
   \setstretch{1}
   \begin{tabularx}{\textwidth}{@{}YYYY@{}}
     \toprule
-    \textbf{\DEEN{Werkzeug}{Tool}} &
-    \textbf{\DEEN{Betroffener Teil}{Affected Part}} &
-    \textbf{\DEEN{Art des Einsatzes}{Type of Use}} &
-    \textbf{\DEEN{Prüfung und Übernahme}{Review and Adoption}} \\
+    \textbf{Name des verwendeten KI-Tools} &
+    \textbf{Betroffene Teile der Arbeit} &
+    \textbf{Einsatzform / Genutzte Funktion} &
+    \textbf{Einsatztiefe bzw. Erläuterung, wie die Ergebnisse genutzt
+      wurden} \\
     \midrule
-    \textit{Name und Version} & \textit{Kapitel/Arbeitsschritt} &
+    \textit{(Name des genutzten KI-basierten Hilfsmittels, ggf. mit
+      Versionsangabe)} &
+    \textit{(Auf welche Teile der eigenen Arbeit hat sich die Nutzung
+      bezogen?)} &
     \textit{Funktion} &
     \textit{Kritische Prüfung und konkrete Verwendung} \\
     \bottomrule
   \end{tabularx}
   \endgroup
+
+  \textit{Beispiele für Einsatzform / genutzte Funktion
+  (nicht abschließend):}
+  \begin{itemize}
+    \item Vorschläge für Textgliederung
+    \item Formulierungsvorschläge für einzelne Textpassagen
+    \item Vorschläge für Übergänge zwischen Abschnitten
+    \item Übersetzen von Fachartikel
+    \item Wortwiederholungen vermeiden, Synonyme finden
+    \item Beispiele finden
+    \item Vorschläge für Visualisierungen
+    \item Textkorrektur
+    \item \dots
+  \end{itemize}
+
+  \textit{Beispiele für Einsatztiefe bzw. Erläuterung, wie die Ergebnisse
+  genutzt wurden:}
+  \begin{itemize}
+    \item KI-Vorschlag diente lediglich zur Inspiration; finaler Titel wurde
+      eigenständig entwickelt.
+    \item Ergebnisse aus KI-gestütztem Brainstorming wurden selektiv
+      übernommen und kritisch reflektiert.
+    \item Vorschläge der KI dienten lediglich als Denkanstoß, tatsächlicher
+      Text vollständig selbst formuliert.
+    \item Vorschläge der KI anhand wissenschaftlicher Quellen überprüft und
+      stark überarbeitet.
+    \item Inhaltlich fehlerhafte KI-Antwort wurde erkannt und korrigiert.
+    \item KI-Übersetzung wurde überprüft und mit Fachvokabular ergänzt.
+    \item KI half beim Finden geeigneter Synonyme; Auswahl erfolgte unter
+      Berücksichtigung des Kontexts manuell.
+    \item KI-Hilfe beim Finden von Beispielen, aber Auswahl, Bewertung und
+      sprachliche Einbettung eigenständig.
+    \item KI-generierte Grafik wurde vollständig übernommen und als solche
+      kenntlich gemacht.
+  \end{itemize}
 \fi
 
 \ifIncludeAppendix % J.10
   \addchap{\DEEN{Anlagenverzeichnis}{List of Appendices}}
   \begin{tabularx}{\textwidth}{@{}lXr@{}}
-    \textbf{\DEEN{Anlage A}{Appendix A}:} &
-    \nameref{app:material}\dotfill & \pageref{app:material}
+    \textbf{\DEEN{Anlage 1}{Appendix 1}:} &
+    \nameref{app:material-one}\dotfill & \pageref{app:material-one} \\
+    \textbf{\DEEN{Anlage 2}{Appendix 2}:} &
+    \nameref{app:material-two}\dotfill & \pageref{app:material-two}
   \end{tabularx}
 
   \appendix
-  \chapter{\DEEN{Ergänzendes Material}{Supplementary Material}}
-  \label{app:material}
+  \chapter{\DEEN{Bezeichnung der Anlage}{Appendix Title}}
+  \label{app:material-one}
   Fügen Sie hier nur Material ein, das für das Verständnis notwendig ist,
-  aber den Lesefluss im Haupttext stören würde. Der Anhang ist nicht dazu
-  gedacht, die vorgegebene Seitenbegrenzung zu umgehen.
+  aber den Lesefluss im Haupttext stören würde.
+
+  \chapter{\DEEN{Bezeichnung der Anlage}{Appendix Title}}
+  \label{app:material-two}
 \fi
 
 % Diese Marke bestimmt die Gesamtzahl in der Fusszeile. Die abschliessende
@@ -463,18 +891,15 @@ Schlussfolgerungen, Limitationen und weiterführenden Forschungsbedarf klar.
 \chapter*{\DEEN{Eigenständigkeitserklärung}{Declaration of Authorship}} % J.11
 \thispagestyle{empty}
 
-\TemplateHint{\DEEN
-  {Dies ist nur ein Platzhalter. Fügen Sie hier als letzte Seite die aktuelle,
-   unveränderte Eigenständigkeitserklärung aus dem WebCampus ein. Sie darf
-   weder eine sichtbare Seitenzahl noch einen Eintrag im Inhaltsverzeichnis
-   erhalten und muss entsprechend den aktuellen Vorgaben datiert und
-   unterschrieben werden.}
-  {This is a placeholder only. Insert the current, unmodified declaration
-   supplied through WebCampus as the final page. It must have neither a visible
-   page number nor a table-of-contents entry and must be dated and signed as
-   currently required.}}
+Sie finden die vorformulierte Eigenständigkeitserklärung im WebCampus unter
+den modulunabhängigen Materialien Ihres Studienganges (unter „Formulare und
+Verfahrenshinweise“). Fügen Sie diese Seite unverändert als letzte Seite Ihrer
+Arbeit ein. Die Eigenständigkeitserklärung wird nicht mit einer Seitenzahl
+versehen und erscheint auch nicht im Inhaltsverzeichnis. Die Erklärung muss
+in den abzugebenden Exemplaren Ihrer Arbeit unterschrieben und mit dem
+aktuellen Datum versehen werden.
 
-% Zum Einfuegen der offiziellen Erklaerung den Platzhalter oben ersetzen durch:
+% Zum Einfuegen der offiziellen Erklaerung diesen Platzhalter ersetzen durch:
 % \includepdf[pages=-,pagecommand={\thispagestyle{empty}}]
 %   {eigenstaendigkeitserklaerung.pdf}
 

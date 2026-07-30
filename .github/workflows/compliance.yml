@@ -1,0 +1,28 @@
+name: compliance
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v7.0.1
+
+      - name: compile and verify template
+        uses: xu-cheng/latex-action@4.1.0
+        with:
+          root_file: main.tex
+          texlive_version: 2026
+          os: debian
+          extra_system_packages: git python3 poppler-utils
+          post_compile: |
+            python3 tests/run_table1_compliance.py
