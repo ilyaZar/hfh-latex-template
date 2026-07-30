@@ -20,6 +20,13 @@ REQUIRED_ARCHIVE_FILES = {
 PUBLIC_PREFIX = "images/"
 PRIVATE_SUFFIXES = {".docx"}
 RESTRICTED_MEDIA_SUFFIXES = {".jpeg", ".jpg", ".pdf", ".png"}
+METADATA_MARKERS = {
+    b"Exif\x00\x00": "EXIF",
+    b"Photoshop 3.0": "Photoshop/IPTC",
+    b"http://ns.adobe.com": "Adobe XMP",
+    b"<x:xmpmeta": "XMP",
+    b"<?xpacket": "XMP",
+}
 
 
 def run(*command: str) -> bytes:
@@ -63,6 +70,20 @@ def check_repository_privacy(paths: list[PurePosixPath]) -> None:
         raise ValueError("\n".join(violations))
 
 
+def check_public_image_metadata(paths: list[PurePosixPath]) -> None:
+    violations = []
+    for path in paths:
+        path_text = path.as_posix()
+        if not path_text.startswith(PUBLIC_PREFIX):
+            continue
+        payload = (ROOT / path_text).read_bytes()
+        for marker, label in METADATA_MARKERS.items():
+            if marker in payload:
+                violations.append(f"{label}-Metadaten in {path_text}")
+    if violations:
+        raise ValueError("\n".join(violations))
+
+
 def check_archive() -> list[str]:
     with tempfile.TemporaryDirectory(prefix="hfh-overleaf-") as directory:
         archive = Path(directory) / "template.zip"
@@ -94,7 +115,9 @@ def check_archive() -> list[str]:
 
 def main() -> int:
     try:
-        check_repository_privacy(tracked_files())
+        paths = tracked_files()
+        check_repository_privacy(paths)
+        check_public_image_metadata(paths)
         names = check_archive()
     except (RuntimeError, ValueError, zipfile.BadZipFile) as error:
         print(f"FEHLER: {error}", file=sys.stderr)

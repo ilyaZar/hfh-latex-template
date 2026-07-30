@@ -20,9 +20,18 @@ def require(pattern: str, text: str, message: str) -> None:
 def main() -> int:
     text = MAIN.read_text(encoding="utf-8")
 
-    if re.search(r"\\usepackage(?:\[[^\]]*\])?\{chngcntr\}", text):
-        print("FEHLER: chngcntr darf nicht geladen werden", file=sys.stderr)
-        return 1
+    forbidden_packages = {
+        "chngcntr": "die LaTeX-Kernelbefehle ersetzen chngcntr",
+        "inputenc": "UTF-8 ist seit LaTeX 2018 Kernelstandard",
+    }
+    for package, reason in forbidden_packages.items():
+        pattern = rf"\\usepackage(?:\[[^\]]*\])?\{{{package}\}}"
+        if re.search(pattern, text):
+            print(
+                f"FEHLER: {package} darf nicht geladen werden ({reason})",
+                file=sys.stderr,
+            )
+            return 1
 
     requirements = (
         (

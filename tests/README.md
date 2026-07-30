@@ -21,7 +21,9 @@ Der Lauf:
 - vermisst A4-Format, Abstände, Einzüge und eingebettete Schriften
 - lehnt redundante oder veraltete LaTeX-Pakete im Testlauf ab
 - prüft die produktiven Formatdefinitionen in `main.tex`
+- prüft Leitfadenkapitel, LaTeX-Anpassungen und öffentliche Beispiele
 - prüft den Datenschutz und die Dateifreigabe des Overleaf-Archivs
+- lehnt EXIF-, IPTC-, Photoshop- und XMP-Daten in Beispielbildern ab
 
 Die gerenderte PDF und alle LaTeX-Hilfsdateien sind lokale Build-Artefakte und
 werden nicht versioniert.

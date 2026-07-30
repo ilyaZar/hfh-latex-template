@@ -41,6 +41,7 @@ def main() -> int:
             "test_compliance_checker.py",
         )
         run(sys.executable, "check_template_contract.py")
+        run(sys.executable, "check_guidance_content.py")
         run(sys.executable, "check_compliance.py", "../main.tex")
         run(
             sys.executable,
