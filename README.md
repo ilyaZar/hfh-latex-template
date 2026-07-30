@@ -17,10 +17,11 @@ HFH Hamburger Fern-Hochschule, primär auf Deutsch und optional auf Englisch.
 > der HFH, des Prüfungsamts und der betreuenden beziehungsweise prüfenden
 > Personen.
 
-Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Erklärende Texte
-aus den zugrundeliegenden Dokumenten wurden nicht übernommen. Diese Dokumente
-sind nicht Bestandteil der öffentlichen Vorlage und werden nicht
-weiterverteilt.
+Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Allgemeine
+Anleitungen und Beispiele aus der offiziellen Word-Vorlage sind enthalten;
+Word-spezifische Bedienhinweise wurden sachlogisch für LaTeX und Overleaf
+angepasst. Die Quelldokumente selbst sind nicht Bestandteil der öffentlichen
+Vorlage und werden nicht weiterverteilt.
 
 ## Schnellstart
 
@@ -49,8 +50,11 @@ vorbereitet:
 - TeX Live: aktuelle von Overleaf angebotene Version
 - Bibliografie: BibTeX über `natbib` und `plainnat`
 
-Der Link **In Overleaf öffnen** importiert den jeweils aktuellen Stand des
-`main`-Branches als neues Overleaf-Projekt. Er funktioniert, sobald das
+Der Link **In Overleaf öffnen** importiert das über `.gitattributes`
+freigegebene Archiv des jeweils aktuellen `main`-Branches als neues
+Overleaf-Projekt. Es enthält nur `main.tex`, `references.bib`, `README.md`,
+`LICENSE` und die öffentlichen Dateien unter `images/`. Entwicklungsdateien,
+CI und Tests werden nicht importiert. Der Link funktioniert, sobald das
 Repository als `ilyaZar/hfh-latex-template` öffentlich erreichbar ist.
 
 Eine Einreichung in die Overleaf Gallery ist vorgesehen. Overleaf akzeptiert
@@ -218,13 +222,13 @@ Inhaltsvorgaben. Auch diese sind geprüft:
   entsprechend.
 - J.3 - Der Abstract ist nur für Masterarbeiten vorgesehen und umfasst etwa
   eine, höchstens zwei Seiten. `\IncludeAbstracttrue` beziehungsweise
-  `\IncludeAbstractfalse` und der sichtbare Vorlagenhinweis bilden dies ab.
+  `\IncludeAbstractfalse` und der sichtbare Erläuterungstext bilden dies ab.
 - J.4 - Inhalts-, Abbildungs- und Tabellenverzeichnis werden automatisch
   erzeugt. Quellenzeilen von Abbildungen und Tabellen erscheinen durch den
   getrennten Befehl `\source` nicht in den Verzeichnissen.
 - J.5 - Das Abkürzungsverzeichnis ist alphabetisch zu sortieren; nicht
   allgemeinsprachliche Abkürzungen sind bei der ersten Verwendung
-  auszuschreiben. Muster und Vorlagenhinweis machen beide Inhaltsprüfungen
+  auszuschreiben. Muster und Erläuterungstext machen beide Inhaltsprüfungen
   sichtbar.
 - J.6 - Die Dezimalgliederung soll regelmäßig drei, bei umfangreichen Arbeiten
   höchstens vier Ebenen umfassen. Ein Gliederungspunkt darf nicht nur einen
@@ -267,8 +271,13 @@ Inhaltsvorgaben. Auch diese sind geprüft:
 
 Copyright (c) 2026 Ilya Zarubin. Die Vorlagendateien stehen unter der
 LaTeX Project Public License, Version 1.3c oder später. Einzelheiten stehen in
-`LICENSE`. Die Lizenz gilt nicht für die nicht verteilte HFH-Word-Datei oder
-für später von Nutzerinnen und Nutzern eingefügte offizielle HFH-Dokumente.
+`LICENSE`. Die Lizenz gilt nicht für die nicht verteilte HFH-Word-Datei, das
+HFH-Logo, das Bild `images/arbeitsplatz.jpg` oder für später von Nutzerinnen
+und Nutzern eingefügte offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt
+laut eingebetteter Quellenangabe der offiziellen Vorlage von ioannis
+kounadeas, Fotolia, Bild 4598956. Die Bilddateien wurden ausschließlich aus
+der offiziellen HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben
+unberührt.
 
 ## Quellen und Dokumentation
 

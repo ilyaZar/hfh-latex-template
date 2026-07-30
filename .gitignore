@@ -6,6 +6,7 @@ eigenstaendigkeitserklaerung.pdf
 
 # Erzeugte PDF-Dateien
 main.pdf
+/tests/*.pdf
 
 # LaTeX-Hilfsdateien
 *.acn
