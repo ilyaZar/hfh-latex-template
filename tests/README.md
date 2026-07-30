@@ -14,8 +14,8 @@ Seitengrenze entsteht daher aus dem Satz der Vorlage.
 |------|-------------------------------------|---------:|-----:|
 | A    | Kapitelbeginn und Abschnitt 1.1     |      6-7 |  1-2 |
 | B    | Reiner Fließtext                    |    18-19 |  3-4 |
-| C    | Zwei Unterkapitel und Fließtext     |    20-21 |  5-6 |
-| D    | Kapitel mit drei Gliederungsebenen  |    34-35 |  7-8 |
+| C    | Zwei Unterkapitel und Fließtext     |    20-21 |  5-7 |
+| D    | Kapitel mit drei Gliederungsebenen  |    34-35 |  8-9 |
 
 Die konkreten Paare für die manuelle Kontrolle sind:
 
@@ -25,8 +25,9 @@ Die konkreten Paare für die manuelle Kontrolle sind:
 - Original 19 und Test 4
 - Original 20 und Test 5
 - Original 21 und Test 6
-- Original 34 und Test 7
-- Original 35 und Test 8
+- Fortsetzung von Original 21 und Test 7
+- Original 34 und Test 8
+- Original 35 und Test 9
 
 ## Wichtiger Befund zum PDF-Container
 
@@ -57,12 +58,11 @@ In jedem Bild steht das Original links und die Test-PDF rechts.
 | Hauptüberschrift        | 13,17 pt     | 14,00 pt        | 13,95 pt |
 | Kopf-/Fußzeile          | 9,34 pt      | 9,93 pt         | 9,96 pt  |
 | Linke Textkante         | 105,84 pt    | 84,70 pt        | 85,04 pt |
-| Grundlinienabstand      | 19,44 pt     | 20,67 pt        | 17,93 pt |
+| Grundlinienabstand      | 19,44 pt     | 20,67 pt        | 20,70 pt |
 | Zusätzlicher Absatzraum | ca. 5,7 pt   | ca. 6,1 pt      | ca. 6 pt |
 
 Nach der A4-Normalisierung stimmen Seitenränder, Schriftgrößen,
-Absatzabstand und Kopfzeilenposition sehr gut überein. Der wesentliche
-Unterschied ist das Zeilenraster.
+Grundlinienabstand, Absatzabstand und Kopfzeilenposition sehr gut überein.
 
 ## Ergebnis mit der aktuellen Vorlage
 
@@ -80,13 +80,11 @@ dass Wort- und Seitenumbrüche nicht reproduziert werden.
 
 Beispiele:
 
-- Auf Originalseite 6 endet der Text mit „auditfähig gestaltet sein“. Die
-  aktuelle Testseite 1 enthält bereits Text von Originalseite 7.
-- Der Inhalt von Originalseite 18 reicht in der aktuellen Test-PDF nur über
-  einen Teil von Testseite 3. Testseite 3 enthält bereits einen größeren Teil
-  von Originalseite 19.
-- Bei Originalseite 20 sind mehrere anfängliche Zeilen identisch. Durch das
-  engere Zeilenraster verschiebt sich der Seitenabschluss trotzdem.
+- Der Seitenabschluss von Originalseite 6 wird nahezu getroffen.
+- Der Inhalt von Originalseite 18 reicht in der Test-PDF weiterhin nur über
+  einen Teil von Testseite 3.
+- Fall C benötigt in der Test-PDF drei statt zwei Seiten. Neben den
+  Schriftmetriken wirken sich hier auch die Überschriftenabstände aus.
 
 ## Potenzielle Anpassungen
 
@@ -94,17 +92,7 @@ Die folgenden Änderungen wurden nur in temporären Experimenten getestet. Sie
 sind nicht in die produktive Vorlage und nicht in die finale Test-PDF
 übernommen worden.
 
-### 1. Zeilenraster prüfen
-
-`\onehalfspacing` erzeugt im aktuellen LaTeX-Satz einen Grundlinienabstand von
-17,93 Punkt. Der auf A4 zurückgerechnete Word-Satz verwendet etwa 20,67 Punkt.
-
-Ein temporärer Versuch mit `\setstretch{1.43}` traf den Seitenabschluss von
-Originalseite 6 nahezu exakt und verbesserte die Seitenverteilung deutlich.
-Vor einer produktiven Änderung muss geprüft werden, ob die HFH mit
-„1,5-zeilig“ die Word-Auslegung oder die übliche LaTeX-Auslegung meint.
-
-### 2. Mikrotypografische Expansion prüfen
+### 1. Mikrotypografische Expansion prüfen
 
 Die Word-Datei verwendet keine mit `microtype` vergleichbare
 Zeichenexpansion. Ein temporärer Versuch mit ausgeschalteter Expansion und
@@ -114,7 +102,7 @@ Als vorsichtiger Kandidat wäre zunächst nur
 `\microtypesetup{expansion=false}` zu untersuchen. Das Paket vollständig zu
 entfernen ist anhand dieses Tests nicht gerechtfertigt.
 
-### 3. Schriftmetriken
+### 2. Schriftmetriken
 
 Im Original ist Times New Roman eingebettet. Die Vorlage verwendet
 TeX Gyre Termes X über `newtxtext`. Größe und Erscheinungsbild sind sehr
@@ -124,7 +112,7 @@ Für pixelgenaue Word-Reproduktion wäre Times New Roman mit LuaLaTeX oder
 XeLaTeX zu testen. Tabelle 1 nennt die konkrete Schrift jedoch nur als
 Empfehlung. Ein Compilerwechsel ist deshalb derzeit nicht zu empfehlen.
 
-### 4. Überschriftenabstände
+### 3. Überschriftenabstände
 
 Der sichtbare Abstand nach einer Abschnittsüberschrift beträgt im
 normalisierten Original ungefähr 14 Punkt, im aktuellen Testsatz etwa
@@ -135,7 +123,7 @@ Tabelle 1 macht zu diesen Abständen keine Vorgabe. Eine Änderung sollte daher
 erst gegen die offizielle Word-Formatvorlage und nicht nur gegen diese
 Bachelorarbeit geprüft werden.
 
-### 5. Fußzeilenposition
+### 4. Fußzeilenposition
 
 Die Bachelorarbeit richtet „Seite x von 55“ rechts aus. Die LaTeX-Vorlage
 zentriert die Seitenangabe. Tabelle 1 schreibt keine Position vor. Dies ist
@@ -151,6 +139,11 @@ Der Vergleich bestätigt folgende Einstellungen der LaTeX-Vorlage:
 - 10-Punkt-Kopf- und Fußzeilen
 - ungefähr 6 Punkt Abstand zwischen Absätzen
 - Name links und Matrikelnummer rechts in der Kopfzeile
+
+## Übernommene Anpassungen
+
+- `\setstretch{1.43}` bildet den 1,5-zeiligen Grundlinienabstand der
+  Word-Vorlage mit etwa 20,7 Punkt nach.
 
 ## Test ausführen
 
@@ -173,8 +166,9 @@ Die finale PDF ist `bachelor-layout-comparison.pdf`.
 - [Original 19 / Test 4][raw-019-004]
 - [Original 20 / Test 5][raw-020-005]
 - [Original 21 / Test 6][raw-021-006]
-- [Original 34 / Test 7][raw-034-007]
-- [Original 35 / Test 8][raw-035-008]
+- [Original 21 / Test 7][raw-021-007]
+- [Original 34 / Test 8][raw-034-008]
+- [Original 35 / Test 9][raw-035-009]
 
 ### Auf A4 normalisiertes Original
 
@@ -184,8 +178,9 @@ Die finale PDF ist `bachelor-layout-comparison.pdf`.
 - [Original 19 / Test 4][norm-019-004]
 - [Original 20 / Test 5][norm-020-005]
 - [Original 21 / Test 6][norm-021-006]
-- [Original 34 / Test 7][norm-034-007]
-- [Original 35 / Test 8][norm-035-008]
+- [Original 21 / Test 7][norm-021-007]
+- [Original 34 / Test 8][norm-034-008]
+- [Original 35 / Test 9][norm-035-009]
 
 [raw-006-001]: screenshots/compare-original-006-test-001.png
 [raw-007-002]: screenshots/compare-original-007-test-002.png
@@ -193,13 +188,15 @@ Die finale PDF ist `bachelor-layout-comparison.pdf`.
 [raw-019-004]: screenshots/compare-original-019-test-004.png
 [raw-020-005]: screenshots/compare-original-020-test-005.png
 [raw-021-006]: screenshots/compare-original-021-test-006.png
-[raw-034-007]: screenshots/compare-original-034-test-007.png
-[raw-035-008]: screenshots/compare-original-035-test-008.png
+[raw-021-007]: screenshots/compare-original-021-test-007.png
+[raw-034-008]: screenshots/compare-original-034-test-008.png
+[raw-035-009]: screenshots/compare-original-035-test-009.png
 [norm-006-001]: screenshots/normalized-compare-original-006-test-001.png
 [norm-007-002]: screenshots/normalized-compare-original-007-test-002.png
 [norm-018-003]: screenshots/normalized-compare-original-018-test-003.png
 [norm-019-004]: screenshots/normalized-compare-original-019-test-004.png
 [norm-020-005]: screenshots/normalized-compare-original-020-test-005.png
 [norm-021-006]: screenshots/normalized-compare-original-021-test-006.png
-[norm-034-007]: screenshots/normalized-compare-original-034-test-007.png
-[norm-035-008]: screenshots/normalized-compare-original-035-test-008.png
+[norm-021-007]: screenshots/normalized-compare-original-021-test-007.png
+[norm-034-008]: screenshots/normalized-compare-original-034-test-008.png
+[norm-035-009]: screenshots/normalized-compare-original-035-test-009.png
