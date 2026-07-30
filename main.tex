@@ -118,9 +118,8 @@
 \pagestyle{scrheadings}
 \renewcommand*{\chapterpagestyle}{scrheadings}
 
-\usepackage{chngcntr}
 \counterwithout{footnote}{chapter} % E.5
-\setlength{\footnotesep}{16pt} % E.3-E.4
+\setlength{\footnotesep}{14pt} % E.3-E.4
 \newcommand*{\HFHFootnoteMark}{%
   \raisebox{0.7ex}{\fontsize{9}{9}\selectfont\thefootnotemark}} % E.1
 \deffootnotemark{\HFHFootnoteMark} % E.1
@@ -154,9 +153,16 @@
 \newenvironment{hfhfigure}[1][htbp]
   {\begin{figure}[#1]\centering\footnotesize\setstretch{1}} % G.6-G.7
   {\end{figure}}
-\newcommand{\source}[1]{%
-  \par\vspace{3pt}{\footnotesize\itshape\setstretch{1}%
-    \DEEN{Quelle}{Source}: #1\par}} % F.1, G.1
+\newcommand{\HFHSourceLine}[2]{%
+  \par\vspace{3pt}\begingroup
+    \footnotesize\itshape\setstretch{1}#1%
+    \DEEN{Quelle}{Source}: #2\par
+  \endgroup} % F.1, G.1
+% Tabelle 1 legt keine Ausrichtung fest; zentriert ist der Standard.
+\newcommand{\source}[1]{\HFHSourceLine{\centering}{#1}}
+\newcommand{\sourceleft}[1]{\HFHSourceLine{\raggedright}{#1}}
+\newcommand{\sourceindented}[2][1.75cm]{%
+  \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
 \usepackage[round,authoryear]{natbib}
@@ -348,7 +354,13 @@ Tabellen und Abbildungen werden im Text ausdrücklich aufgegriffen. Tabelle
     B & 16 & 40\,\% \\
     \bottomrule
   \end{tabularx}
+  % Standard: zentriert.
   \source{\DEEN{Eigene Darstellung}{Author's own work}.}
+  % Alternative: linksbuendig.
+  % \sourceleft{\DEEN{Eigene Darstellung}{Author's own work}.}
+  % Alternative: Word-Tabellenstil mit 1,75 cm Einzug.
+  % \sourceindented[1.75cm]{%
+  %   \DEEN{Eigene Darstellung}{Author's own work}.}
 \end{hfhtable}
 
 \chapter{\DEEN{Ergebnisse und Diskussion}{Results and Discussion}}
@@ -365,7 +377,13 @@ Text referenziert sein.
   % G.1-G.3
   \caption{\DEEN{Platzhalter für eine Abbildung}{Figure Placeholder}}
   \label{fig:sample}
+  % Standard: zentriert.
   \source{\DEEN{Eigene Darstellung}{Author's own work}.}
+  % Alternative: linksbuendig.
+  % \sourceleft{\DEEN{Eigene Darstellung}{Author's own work}.}
+  % Alternative: Word-Abbildungsstil mit 2,25 cm Einzug.
+  % \sourceindented[2.25cm]{%
+  %   \DEEN{Eigene Darstellung}{Author's own work}.}
 \end{hfhfigure}
 
 \section{\DEEN{Diskussion}{Discussion}}
