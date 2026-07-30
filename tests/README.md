@@ -20,6 +20,8 @@ Der Lauf:
 - prüft offensichtliche Inhaltsverstöße mit positiven und negativen Fällen
 - vermisst A4-Format, Abstände, Einzüge und eingebettete Schriften
 - lehnt redundante oder veraltete LaTeX-Pakete im Testlauf ab
+- prüft die produktiven Formatdefinitionen in `main.tex`
+- prüft den Datenschutz und die Dateifreigabe des Overleaf-Archivs
 
 Die gerenderte PDF und alle LaTeX-Hilfsdateien sind lokale Build-Artefakte und
 werden nicht versioniert.
@@ -39,3 +41,11 @@ werden nicht versioniert.
 
 Der statische Prüfer erkennt nur offensichtliche Verstöße. Inhaltliche
 Richtigkeit und stark verschachtelte eigene Makros bleiben manuell zu prüfen.
+
+## GitHub Actions
+
+Der Workflow `.github/workflows/compliance.yml` führt denselben Testlauf mit
+TeX Live 2026 aus. `tests/`, `.github/`, private Quelldokumente und lokale
+Build-Artefakte dürfen nicht in dem von GitHub erzeugten Overleaf-Archiv
+erscheinen. Öffentliche Beispielbilder sind ausschließlich unter `images/`
+zulässig.

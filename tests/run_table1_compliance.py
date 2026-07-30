@@ -40,6 +40,7 @@ def main() -> int:
             "-v",
             "test_compliance_checker.py",
         )
+        run(sys.executable, "check_template_contract.py")
         run(sys.executable, "check_compliance.py", "../main.tex")
         run(
             sys.executable,
@@ -47,6 +48,7 @@ def main() -> int:
             "table1-compliance.tex",
         )
         run(sys.executable, "check_compliance_pdf.py")
+        run(sys.executable, "check_overleaf_archive.py")
     except subprocess.CalledProcessError as error:
         return error.returncode
     print("Alle isolierten Tabelle-1-Compliance-Tests bestanden")
