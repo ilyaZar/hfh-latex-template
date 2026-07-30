@@ -1,0 +1,465 @@
+% Visueller Regressionstest gegen 1127501_WB00-BAC-PB1-260630.pdf.
+%
+% Diese Datei kopiert die relevanten Formatierungsdefinitionen aus ../main.tex.
+% Sie dient nur dem Vergleich und darf keine produktiven Vorgaben veraendern.
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,
+  headings=normal,
+  numbers=noendperiod
+]{scrreprt}
+
+\newcommand{\MainLanguage}{ngerman}
+\newcommand{\ThesisType}{Bachelorarbeit}
+\newcommand{\ThesisTitle}{Visueller Layoutvergleich}
+\newcommand{\AuthorName}{Marc-William Wagner}
+\newcommand{\MatriculationNumber}{1127501}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english,ngerman]{babel}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{csquotes}
+\usepackage{etoolbox}
+
+\usepackage[
+  a4paper,
+  portrait,
+  left=3cm,
+  right=4cm,
+  top=2.5cm,
+  bottom=2.5cm
+]{geometry}
+
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\AtBeginDocument{\selectlanguage{\MainLanguage}}
+\newcommand{\DEEN}[2]{\iflanguage{english}{#2}{#1}}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+
+\setkomafont{disposition}{\normalfont\bfseries\setstretch{1}}
+\setkomafont{chapter}{\fontsize{14}{17}\selectfont}
+\setkomafont{section}{\fontsize{12}{14.5}\selectfont}
+\setkomafont{subsection}{\fontsize{12}{14.5}\selectfont}
+\setkomafont{subsubsection}{\fontsize{12}{14.5}\selectfont}
+\RedeclareSectionCommand[beforeskip=0pt,afterskip=18pt]{chapter}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{section}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsection}
+\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsubsection}
+
+\usepackage[automark,singlespacing=true]{scrlayer-scrpage}
+\clearpairofpagestyles
+\ihead{\AuthorName}
+\ohead{\MatriculationNumber}
+\cfoot{}
+\AtBeginDocument{%
+  \cfoot{Seite \thepage\ von \pageref*{LastNumberedPage}}}
+\setkomafont{pageheadfoot}{%
+  \normalfont\fontsize{10}{12}\selectfont}
+\setlength{\headheight}{15pt}
+\pagestyle{scrheadings}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+\usepackage{chngcntr}
+\counterwithout{footnote}{chapter}
+\setlength{\footnotesep}{16pt}
+\newcommand*{\HFHFootnoteMark}{%
+  \raisebox{0.7ex}{\fontsize{9}{9}\selectfont\thefootnotemark}}
+\deffootnotemark{\HFHFootnoteMark}
+\deffootnote[0.5cm]{0.5cm}{0cm}{%
+  \raggedright\makebox[0.5cm][l]{\HFHFootnoteMark}}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{caption}
+\captionsetup{
+  format=plain,
+  justification=justified,
+  singlelinecheck=false,
+  font={footnotesize,it},
+  labelfont={bf,it},
+  labelsep=colon,
+  skip=6pt
+}
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\setlength{\intextsep}{12pt}
+\setlength{\textfloatsep}{12pt}
+\numberwithin{equation}{chapter}
+
+\newenvironment{hfhtable}[1][htbp]
+  {\begin{table}[#1]\centering\footnotesize\setstretch{1}}
+  {\end{table}}
+\newenvironment{hfhfigure}[1][htbp]
+  {\begin{figure}[#1]\centering\footnotesize\setstretch{1}}
+  {\end{figure}}
+\newcommand{\source}[1]{%
+  \par\vspace{3pt}{\footnotesize\itshape\setstretch{1}%
+    \DEEN{Quelle}{Source}: #1\par}}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\usepackage[round,authoryear]{natbib}
+\setlength{\bibhang}{0.5cm}
+\setlength{\bibsep}{6pt}
+\AtBeginEnvironment{thebibliography}{\singlespacing}
+
+\newenvironment{hfhsourceentries}
+  {\par\begingroup\singlespacing\setlength{\parskip}{6pt}}
+  {\par\endgroup}
+\newcommand{\hfhsourceentry}[1]{%
+  \par\noindent\hangindent=0.5cm\hangafter=1 #1\par}
+
+\usepackage{xurl}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+\usepackage{pdfpages}
+\hypersetup{
+  pdftitle={\ThesisTitle},
+  pdfauthor={\AuthorName},
+  pdfsubject={\ThesisType}
+}
+
+\newcommand{\TemplateHint}[1]{%
+  \par\begingroup\small\itshape\color{gray}#1\par\endgroup}
+
+\begin{document}
+
+% Vergleich A: Originalseiten 6-7.
+\phantomsection
+\label{test:chapter-start}
+\chapter{Einleitung}
+
+In modernen Industrieunternehmen spielt ein strukturiertes und sicheres
+Zutrittsmanagement eine zentrale Rolle für den Schutz sensibler
+Unternehmensbereiche sowie für die Einhaltung regulatorischer Anforderungen.
+Insbesondere in der pharmazeutischen Industrie unterliegen Produktionsstandorte
+strengen gesetzlichen und organisatorischen Vorgaben, die sowohl den Zugang zu
+Produktionsanlagen als auch zu Labor- und Lagerbereichen betreffen. Neben
+Sicherheitsaspekten müssen dabei auch Anforderungen an Dokumentation,
+Nachvollziehbarkeit sowie Datenschutz berücksichtigt werden.
+
+\section{Problemstellung und Zielsetzung}
+
+Am Pharma-Produktionsstandort Wuppertal der Bayer AG erfolgt die Vergabe von
+Zutrittsberechtigungen für interne Mitarbeitende, externe Dienstleister sowie
+Besucher derzeit überwiegend über manuelle und papierbasierte Prozesse.
+Angesichts einer großen Anzahl von etwa 4200 Personen (Interne und Externe
+Mitarbeitende), die regelmäßig Zugang zum Werksgelände benötigen, führt diese
+Vorgehensweise zu einem höheren administrativen Aufwand und zu langen
+Bearbeitungszeiten im Genehmigungsprozess. Gleichzeitig erschwert die manuelle
+Prozessgestaltung eine transparente Nachvollziehbarkeit von Entscheidungen sowie
+eine effiziente Dokumentation der vergebenen Zutrittsrechte.
+
+Besonders relevant ist diese Problematik vor dem Hintergrund regulatorischer
+Anforderungen im pharmazeutischen Produktionsumfeld. Produktionsstandorte
+unterliegen den Vorgaben der Good Manufacturing Practice (GMP), welche eine
+lückenlose Dokumentation und Kontrolle aller relevanten Prozesse innerhalb der
+Produktionsumgebung verlangen. Das Unternehmen Bayer produziert für den
+internationalen Markt und muss neben den europäischen GMP-Vorgaben auch
+internationale regulatorischer Anforderungen berücksichtigen. Dazu zählen die
+Regularien der US-amerikanischen Food and Drug Administration (FDA) sowie die
+Richtlinien der International Council für Harmonisation (ICH). Da über
+Zutrittsberechtigungen der Zugang zu GMP-relevanten Bereichen gesteuert wird,
+muss auch der zugehörige Genehmigungsprozess entsprechend strukturiert,
+nachvollziehbar und auditfähig gestaltet sein.
+
+Aufgrund der am Standort verarbeiteten Gefahrstoffe wird dieser in der hohen
+Störfallkategorie eingestuft, wodurch ein erhöhtes Sicherheitsniveau und eine
+differenzierte und streng kontrollierte Verwaltung von Zutrittsrechten
+erforderlich wird. Zusätzlich wurde der Standort unternehmensintern als BCC4
+(Business Criticality Classification) eingestuft, diese Klassifizierungen und
+die hohe Störfallkategorie werden im weiteren Verlauf näher erklärt.
+
+Die derzeitige Prozessgestaltung führt unter anderem zu eingeschränkter
+Prozessübersicht, erhöhter Fehleranfälligkeit sowie zu Herausforderungen bei der
+Datenschutz- Grundverordnung (DSGVO) konformen Dokumentation personenbezogener
+Daten. Gleichzeitig steigen mit der fortschreitenden Digitalisierung
+betrieblicher Abläufe die Erwartungen an effiziente, transparente und
+softwaregestützte Prozesslösungen. Vor diesem Hintergrund verfolgt die
+vorliegende Bachelorarbeit das Ziel, den bestehenden Prozess der
+Zutrittsvergabe systematisch zu analysieren und auf dieser Grundlage ein Konzept
+für eine digitale und effizientere Prozessgestaltung zu entwickeln. Dabei sollen
+Anforderungen an eine geeignete Softwarelösung identifiziert, potenzielle
+Systeme bewertet sowie ein digitaler Soll-Prozess für die Vergabe von
+Zutrittsberechtigungen konzipiert werden. Die bestehende physische
+Zutrittsinfrastrukturen wie Zugangstore, Kartenleser oder Schließsysteme bleiben
+davon unverändert bestehen und werden lediglich durch digitale
+Verwaltungsprozesse ergänzt.
+
+Ein weiteres Ziel der Arbeit besteht darin, ein Konzept zur Einführung eines
+entsprechenden digitalen Systems zu entwickeln, das sowohl organisatorische als
+auch technische Aspekte berücksichtigt. Dadurch soll eine Grundlage geschaffen
+werden, auf deren Basis der Zutrittsprozess langfristig effizienter, transparenter
+und revisionssicher gestaltet werden kann.
+
+\section{Motivation und Relevanz des Themas}
+
+Die Digitalisierung betrieblicher Prozesse stellt einen zentralen Bestandteil
+moderner Unternehmensentwicklung dar. Durch den Einsatz digitaler Technologien
+können Arbeitsabläufe effizienter gestaltet, Fehlerquellen reduziert und
+Transparenz innerhalb organisatorischer Prozesse erhöht werden. Insbesondere in
+sicherheitsrelevanten Bereichen wie dem Zutrittsmanagement kommt der
+Digitalisierung eine besondere Bedeutung zu, da hier neben Effizienzsteigerungen
+auch Aspekte der Unternehmenssicherheit und Compliance berücksichtigt werden
+müssen.
+
+\clearpage
+
+% Vergleich B: Originalseiten 18-19.
+\phantomsection
+\label{test:pure-prose}
+technische Einrichtungen manipuliert werden. Zugangskontrollen,
+Sicherungssysteme und räumliche Abschirmungen sind daher geeignet, zur Erfüllung
+der gesetzlichen Betreiberpflichten beizutragen. Im Rahmen der
+Störfallverordnung wird zwischen Betriebsbereichen unterschiedlicher
+Gefährdungsklassen unterschieden. Ein Betriebsbereich liegt vor, wenn
+gefährliche Stoffe in relevanten Mengen vorhanden sind oder entstehen können.
+Dabei wird zwischen der unteren und der oberen Störfallklasse differenziert.
+Betriebsbereiche der oberen Klasse zeichnen sich durch ein erhöhtes
+Gefährdungspotenzial aus, da größere Mengen gefährlicher Stoffe vorhanden sind.
+Daraus resultieren strengere Anforderungen an Sicherheitsmaßnahmen, Überwachung
+und organisatorische Strukturen (vgl. BImSchG 2025: § 3 Abs. 5a).
+
+Im Kontext kritischer Infrastrukturen kommt den Betreibern eine zentrale
+Verantwortung für die Gewährleistung der Sicherheit und Funktionsfähigkeit ihrer
+Anlagen zu. Das KRITIS-Dachgesetz definiert Betreiber kritischer Anlagen, die
+einen maßgeblichen Einfluss auf Einrichtungen ausüben, deren Ausfall zu
+erheblichen Versorgungsengpässen oder Gefährdungen der öffentlichen Sicherheit
+führen kann. Aus dieser besonderen Stellung resultiert eine umfassende
+Verpflichtung zur Sicherstellung der Resilienz kritischer Anlagen. Resilienz wird
+dabei als Fähigkeit verstanden, Vorfälle zu verhindern, sich vor ihnen zu
+schützen, auf sie zu reagieren, deren Auswirkungen zu begrenzen und eine
+schnelle Wiederherstellung der Funktionsfähigkeit zu gewährleisten. Betreiber
+sind somit nicht nur für den sicheren Betrieb verantwortlich, sondern auch für
+präventive Gestaltung robuster und widerstandsfähiger Systeme. (vgl.
+KRITISDachG 2026: 2 f.).
+
+Der Schutz vor unbefugten Eingriffen stellt eine Anforderung im
+sicherheitskritischen Anlagenbetrieb dar und ist im Kontext der
+Störfall-Verordnung verpflichtend zu berücksichtigen. Betreiber von Anlagen
+sind dazu verpflichtet, geeignete Maßnahmen zu ergreifen, um Gefahren durch
+vorsätzliche Eingriffe Dritter zu verhindern und potenzielle Schadensereignisse
+zu minimieren. Ziel ist es, sicherzustellen, dass gefährliche Stoffe so
+gesichert sind, dass ernsthafte Gefahren für Mensch und Umwelt weitestgehend
+ausgeschlossen werden können (vgl. KAS 2019: 2 f.). Dabei umfasst der Begriff
+der unbefugten Eingriffe sowohl physischen Zutritt als auch den Zugriff auf
+Systeme und Daten. Entsprechend müssen Unternehmen organisatorische als auch
+technische Maßnahmen implementieren, die den Zugang zu sensiblen Bereichen
+kontrollieren und überwachen. Das Zutritts- und Zugriffsmanagement spielt
+hierbei eine zentrale Rolle, da physische Zugänge zu Anlagen und digitale
+Zugriffe auf IT- und Steuerungssysteme gezielt eingeschränkt und dokumentiert
+werden müssen (vgl. KAS 2019: 9 f.).
+
+Im Rahmen des unternehmensweiten Sicherheitsmanagements der Bayer AG dient die
+Business Criticality Classification als zentrales Instrument zur Priorisierung
+von Standorten. Als interne Richtlinie der Corporate Global Security ermöglicht
+sie eine systematische Bewertung der geschäftlichen Bedeutung einzelner
+Standorte, um Sicherheitsmaßnahmen und Ressourcen risikoorientiert auszurichten.
+Die BCC unterscheidet vier Kritikalitätsstufen (BCC 1 bis BCC 4), die sich nach
+der Bedeutung eines Standorts für die Geschäftstätigkeit richten. Standorte mit
+hoher Kritikalität unterliegen dabei häufigeren Überprüfungen als weniger
+kritische Standorte, wodurch eine effiziente Allokation von
+Sicherheitsressourcen gewährleistet wird. Die Einstufung erfolgt im Rahmen eines
+standardisierten Bewertungsprozesses unter Beteiligung von Risk Ownern sowie
+Sicherheitsverantwortlichen. Grundlage bildet ein strukturierter
+Selbstbewertungsfragebogen, dessen Ergebnisse zentral dokumentiert werden. Die
+BCC stellt somit ein Steuerungsinstrument dar, das eine nachvollziehbare
+Priorisierung von Standorten ermöglicht und zu gezielten Absicherung
+geschäftskritischer Prozesse innerhalb von Bayer beiträgt (vgl. Grynchak 2024:
+8 f.).
+
+Im Kontext der Unternehmenssicherheit wird der Schutz von Gebäuden, Anlagen und
+Informationen häufig anhand eines mehrschichtigen Sicherheitsmodells
+beschrieben. Dieses sogenannte Schalenmodell unterteilt Sicherheitsmaßnahmen in
+verschiedene Ebenen, die den Zugang zu sicherheitskritischen Bereichen
+schrittweise kontrollieren. Eine zentrale Rolle spielt dabei der Zutrittsschutz,
+der den physischen Zugang zu Gebäuden und sensiblen Bereichen regelt. Durch
+technische Systeme wie Zutrittskontrollanlagen wird sichergestellt, dass
+ausschließlich autorisierte Personen Zugang erhalten. Ergänzend dazu umfasst der
+Zugangsschutz die Absicherung von IT-Systemen durch
+Authentifizierungsmechanismen und technischen Schutzmaßnahmen. Der
+Zugriffsschutz stellt sicher, dass nur berechtigte Personen auf bestimmte Daten
+und Anwendungen zugreifen können (vgl. Müller 2023: 418).
+
+\clearpage
+
+% Vergleich C: Originalseiten 20-21.
+\phantomsection
+\label{test:subsections}
+\setcounter{chapter}{2}
+\setcounter{section}{3}
+\setcounter{subsection}{1}
+\subsection{Schutz vor unbefugtem Zutritt}
+
+Zutrittskontrollsysteme stellen einen wesentlichen Bestandteil der betrieblichen
+Sicherheitsinfrastruktur dar. Sie dienen dazu, den Zugang zu Gebäuden, Anlagen
+und sensiblen Bereichen gezielt zu steuern und unbefugten Zutritt zu verhindern.
+Ein unkontrollierter Zugang stellt ein erhebliches Risiko für Unternehmen dar, da
+er potenzielle Gefahren wie Diebstahl, Sabotage oder Wirtschaftsspionage
+begünstigt. Im Kern basiert ein Zutrittskontrollsystem auf dem Prinzip der
+gezielten Steuerung von Personenströmen. Dabei wird festgelegt, welche Personen
+Zugang zu bestimmten Bereichen erhalten. Dieses Steuerungsprinzip lässt sich
+durch die drei zentralen Kriterien „Wer“, „Wann“ und „Wo“ beschreiben.
+Zutrittskontrollsysteme ermöglichen eine Verwaltung von Zutrittsrechten, diese
+können differenziert nach Zeit- und Raumprofilen vergeben werden (vgl. BHE
+Bundesverband Sicherheitstechnik e.V. 2025: 1).
+
+Ein wesentlicher Bestandteil eines wirksamen Zutrittsmanagements ist die
+Sicherstellung der Aktualität sowie der vollständigen Dokumentation von
+Zutrittsberechtigungen. Dabei kommt insbesondere der Pflege von
+Zutrittsregelungen und zugehörigen Berechtigungslisten eine zentrale Bedeutung
+zu. Diese müssen jederzeit aktuell gehalten werden, um sicherzustellen, dass
+ausschließlich berechtigte Personen Zugang zu sicherheitsrelevanten Bereichen
+erhalten (vgl. Schwarz: 164).
+
+\subsection{Informationssicherheit und Identitäts- und Zugriffsmanagement}
+
+Die Informationssicherheit stellt eine zentrale Voraussetzung für den sicheren
+Betrieb moderner Organisationen dar, da nahezu alle Geschäftsprozesse von
+informationstechnischen Systemen abhängig sind. Ziel der Informationssicherheit
+ist es, Informationen vor unbefugtem Zugriff, Manipulation oder Ausfall zu
+schützen. Dabei stehen die Schutzziele Vertraulichkeit, Integrität und
+Verfügbarkeit im Fokus, deren Verletzung zu erheblichen betrieblichen und
+wirtschaftlichen Schäden führen kann (vgl. BSI 2023: 1).
+
+Im Zuge von Industrie 4.0 werden Produktionsanlagen, IT-Systeme und digitale
+Geschäftsprozesse zunehmend miteinander vernetzt. Dadurch entstehen neue
+Anforderungen an die IT-Sicherheit, da Angriffe auf vernetzte Systeme nicht nur
+digitale Daten, sondern auch physische Anlagen und Produktionsprozesse
+beeinträchtigen können. In den industriellen Umgebungen müssen Systeme vor
+unbefugten Zugriffen, Manipulationen und Datenverlust geschützt werden.
+Vernetzte Komponenten und Systeme benötigen daher geeignete
+Sicherheitsmechanismen zur Authentifizierung, Autorisierung und sicheren
+Kommunikation. Eine zentrale Rolle spielt hierbei das Berechtigungsmanagement,
+durch das festgelegt wird, welche Personen oder Systeme auf bestimmte Funktionen
+und Daten zugreifen dürfen. Darüber hinaus müssen Sicherheitsmaßnahmen gegen
+digitale als auch gegen physische Angriffe ausgelegt sein, um die Integrität und
+Verfügbarkeit der Systeme sicherzustellen (vgl. Vogel -- Heuser et al 2016:
+135 f.).
+
+Das Identitäts- und Berechtigungsmanagement (Identity and Access Management --
+IAM) stellt einen Bestandteil der Informationssicherheit dar und dient der
+kontrollierten Vergabe und Verwaltung von Zugriffsrechten innerhalb einer
+Organisation. Es stellt sicher, dass autorisierte Personen Zugriff auf
+Informationen, Systeme und physische Ressourcen erhalten und somit unbefugte
+Nutzung verhindert wird. Im IT-Grundschutz-Kompendium des Bundesamts für
+Sicherheit in der Informationstechnik (BSI) wird gefordert, dass Berechtigungen
+strukturiert und nachvollziehbar vergeben werden. Hierbei ist sicherzustellen,
+dass Identitäten eindeutig definiert und den jeweiligen Rollen und
+Verantwortlichkeiten zugeordnet werden. Dies ermöglicht eine klare Abgrenzung
+von Zuständigkeiten und reduziert das Risiko von Fehlkonfigurationen oder
+missbräuchlicher Nutzung. Darüber hinaus wird verlangt, dass Prozesse zur
+Einrichtung, Änderung und Löschung von Benutzerkonten definiert und umgesetzt
+werden. Diese Prozesse müssen sicherstellen, dass Berechtigungen jederzeit
+aktuell sind und bei Rollenwechseln oder dem Ausscheiden von Mitarbeitenden
+zeitnah angepasst oder entzogen werden. Eine regelmäßige Überprüfung bestehender
+Berechtigungen ist hierbei unerlässlich, um übermäßige oder nicht mehr benötigte
+Zugriffsrechte zu identifizieren und zu entfernen (vgl. BSI 2023: ORP.4).
+
+Neben hierarchischen und netzwerkbasierten Datenbankmodellen stellen relationale
+Datenbanken heute die Grundlage vieler moderner Informationssysteme dar. Das
+relationale Datenbankmodell wurde 1970 von Edgar Codd entwickelt und basiert auf
+der strukturierten Speicherung von Daten in Tabellen mit Zeilen und Spalten
+(vgl. Taylor, Blum 2025: 50). Im Gegensatz zu hierarchischen Datenbanken, die
+Daten in festen Baumstrukturen organisieren, und Netzwerkdatenbanken, die
+komplexe Verknüpfungen zwischen Datensätzen ermöglichen, zeichnen sich
+relationale Datenbanken durch eine flexible und strukturierte Verwaltung von
+Daten aus.
+
+\clearpage
+
+% Vergleich D: Originalseiten 34-35.
+\phantomsection
+\label{test:nested-chapter}
+\setcounter{chapter}{3}
+\chapter{Systemanalyse und Soll-Konzeption}
+
+Auf Grundlage der in Kapitel 3 identifizierten Schwachstellen des bestehenden
+Zutrittsvergabeprozesses sowie der daraus abgeleiteten Anforderungen werden in
+diesem Kapitel untersucht, welche digitalen Lösungen zur Unterstützung des
+Zutrittsmanagements geeignet sind. Ziel ist es, Systeme zu identifizieren, die
+eine effiziente, transparente und nachvollziehbare Verwaltung von
+Zutrittsberechtigungen ermöglichen und gleichzeitig die organisatorischen,
+technischen sowie regulatorischen Anforderungen des Standortes erfüllen.
+
+Neben der Analyse möglicher Systemlösungen wird im weiteren Verlauf des
+Kapitels ein digitaler Soll-Prozess entwickelt. Dabei erfolgt die Systemanalyse
+zunächst auf Basis der identifizierten Anforderungen, um geeignete technische
+Lösungsansätze zu bestimmen. Aufbauend auf diesen Ergebnissen wird anschließend
+ein Soll-Prozess konzipiert, der die funktionalen Möglichkeiten der Systeme als
+auch die spezifischen Anforderungen des Standorts berücksichtigt.
+
+\section{Bewertung möglicher Systeme}
+
+Im Unternehmensumfeld lassen sich unterschiedliche Systemtypen identifizieren,
+die für die Umsetzung eines digitalen Zutrittsmanagements geeignet sein können.
+Dazu zählen spezialisierte Zutrittsmanagementsysteme,
+Workflow-Management-Systeme und Identity- und Access-Management Lösungen.
+
+\subsection{Identifikation potenzieller digitaler
+Zutrittsmanagementlösungen}
+
+Zur Digitalisierung des bestehenden Zutrittsmanagementprozesses kommen
+grundsätzlich verschiedene Systemansätze in Betracht, die unterschiedliche
+funktionale Schwerpunkte adressieren.
+
+Spezialisierte Zutrittsmanagementsysteme fokussieren sich primär auf die
+Verwaltung physischer Zutrittsberechtigungen sowie die Integration mit
+technischen Komponenten wie Kartenlesern oder elektronischen Schließsystemen.
+Sie ermöglichen die Definition von Zutrittsprofilen und die Steuerung und
+Durchsetzung von Zugangsrechten innerhalb physischer Infrastrukturen. Der
+Schwerpunkt dieser Systeme liegt somit auf der operativen Umsetzung von
+Zutrittsberechtigungen.
+
+Eine weitere Möglichkeit zur Digitalisierung besteht im Einsatz von
+Workflow-Management-Systemen. Diese Systeme dienen der strukturierten Abbildung
+organisatorischer Prozesse und werden insbesondere zur digitalen Umsetzung von
+Genehmigungs- und Freigabeprozessen eingesetzt. Sie ermöglichen die
+modellbasierte Definition von Abläufen, die automatisierte Weiterleitung von
+Aufgaben zwischen verschiedenen Rollen und die transparente Nachverfolgung von
+Prozessschritten.
+
+Darüber hinaus stellen Identity- und Access-Management-Systeme (IAM) eine
+zentrale Komponente moderner IT-Landschaften dar. Sie dienen der Verwaltung
+digitaler Identitäten sowie der Zuordnung von Rollen und Berechtigungen. Durch
+den Einsatz rollenbasierter Zugriffskonzepte können Nutzergruppen und
+Verantwortlichkeiten systematisch abgebildet und verwaltet werden. Der Fokus
+dieser Systeme liegt auf der Governance von Identitäten und digitalen
+Zugriffsrechten.
+
+\subsection{Ableitung eines geeigneten Systemansatzes}
+
+Ausgehend von den Anforderungen an das digitale Zutrittsmanagement ergeben sich
+zentrale funktionale und organisatorische Kriterien. Dazu zählen die
+strukturierte Abbildung von Genehmigungsprozessen, die Einbindung mehrere
+organisatorischen Rollen, die Nachvollziehbarkeit von Entscheidungen und die
+revisionssichere Dokumentation aller Prozessschritte. Darüber hinaus sind die
+Integration in bestehende Systeme und die Einhaltung regulatorischer
+Anforderungen von Bedeutung.
+
+Am Standort Wuppertal ist bereits ein Zutrittskontrollsystem der Firma dormakaba
+im Einsatz, dass die technische Umsetzung und Steuerung physischer
+Zutrittsberechtigungen übernimmt. Dieses System bildet die operative Grundlage
+für die Vergabe und Durchsetzung von Zutrittsrechten. Allerdings ist das
+bestehende Zutrittskontrollsystem primär auf die technische Verwaltung und
+Ausführung von Zutrittsrechten ausgelegt und bietet keine umfassende
+Unterstützung für einen strukturierten digitalen
+Berechtigungsvergabeprozess. Es fehlen Funktionen zur standardisierten
+Beantragung, workflowbasierten Genehmigung, revisionssicheren Dokumentation
+sowie zur Abbildung komplexer Rollen- und Verantwortlichkeitsstrukturen. Darüber
+hinaus können organisatorische Anforderungen, wie die transparente
+Nachverfolgung von Genehmigungsprozessen, nur eingeschränkt umgesetzt werden.
+
+\phantomsection
+\label{LastNumberedPage}
+
+\end{document}
