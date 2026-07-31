@@ -81,10 +81,32 @@ Der Befehl \texttt{\string\printbibliography} erzeugt das
 Quellenverzeichnis automatisch an der vorgesehenen Stelle. Es berücksichtigt
 standardmäßig nur zitierte Datensätze und sortiert sie nach Name, Jahr und
 Titel. Formatieren oder sortieren Sie die Einträge deshalb nicht von Hand.
-\TemplateHint{Der Sammelbeleg
-  \parencite{booth2016,musterbeitrag2024,musteraufsatz2023,musteronline2025}
-  demonstriert die vier Eintragstypen. Ersetzen Sie die Beispiele in
-  \texttt{references.bib} durch die tatsächlich verwendeten Quellen.}
+
+Der Sammelbeleg
+\parencite{booth2016,musterbeitrag2024,musteraufsatz2023,musteronline2025}
+demonstriert mehrere Quellen in einem Klammerbeleg. Eine einzelne Quelle
+zitieren Sie entweder in Klammern mit \parencite{booth2016} oder im Satz mit
+\textcite{booth2016}. Ersetzen Sie die Beispiele in \texttt{references.bib}
+durch die tatsächlich verwendeten Quellen. Die Änderungen erscheinen
+anschließend automatisch im Quellenverzeichnis.
+
+Die folgenden Muster zeigen die benötigten Angaben für typische Quellentypen:
+
+\begin{itemize}
+  \item Name, Vorname (Erscheinungsjahr): Titel der Quelle, ggf. Untertitel.
+    Auflage. Erscheinungsort: Verlag.
+  \item Name, Vorname (Erscheinungsjahr): Titel des Beitrags/Aufsatzes, ggf.
+    Untertitel. In: Name des Herausgebers (Hrsg.): Titel des Sammelwerkes.
+    Auflage, Erscheinungsort: Verlag, erste -- letzte Seite des
+    Beitrags/Aufsatzes im Sammelwerk.
+  \item Name, Vorname (Erscheinungsjahr): Titel des Aufsatzes, ggf. Untertitel.
+    In: Titel von Zeitschrift/Journal/Jahrbuch bzw. deren übliche Abkürzung.
+    Jahrgang als „Jg.“, ggf. Heftnummer als „H.“, erste -- letzte Seite bzw.
+    Spalte des Beitrags.
+  \item Name, Vorname (Jahr der Veröffentlichung/Aktualisierung): Titel der
+    Internetseite/des Internetdokumentes, ggf. Untertitel. URL: vollständige
+    Adresse der konkreten Seite [Stand: Tag Ihres letzten Zugriffs].
+\end{itemize}
 
 \section{\DEEN
   {Rechtsprechungsverzeichnis (bei Bedarf)}
@@ -148,17 +170,3 @@ Eigenständigkeitserklärung abzugeben.
 % ---------------------------------------------------------------------------
 % Verzeichnisse nach dem Haupttext
 % ---------------------------------------------------------------------------
-\TemplateHint{%
-  Name, Vorname (Erscheinungsjahr): Titel der Quelle, ggf. Untertitel.
-  Auflage. Erscheinungsort: Verlag.\par
-  Name, Vorname (Erscheinungsjahr): Titel des Beitrags/Aufsatzes. ggf.
-  Untertitel. In: Name des Herausgebers (Hrsg.): Titel des Sammelwerkes.
-  Auflage, Erscheinungsort: Verlag, erste -- letzte Seite des
-  Beitrags/Aufsatzes im Sammelwerk.\par
-  Name, Vorname (Erscheinungsjahr): Titel des Aufsatzes. ggf. Untertitel. In:
-  Titel von Zeitschrift/Journal/Jahrbuch bzw. deren übliche Abkürzung.
-  Jahrgang als „Jg.“, ggf. Heftnummer als „H.“, erste -- letzte Seite bzw.
-  Spalte des Beitrags.\par
-  Name, Vorname (Jahr der Veröffentlichung/Aktualisierung): Titel der
-  Internetseite/des Internetdokumentes. ggf. Untertitel. URL: vollständige
-  Adresse der konkreten Seite [Stand: Tag Ihres letzten Zugriffs].}
