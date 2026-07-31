@@ -46,6 +46,22 @@
 \RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsection}
 \RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsubsection}
 
+% Das Inhaltsverzeichnis folgt den Abständen der offiziellen Word-Vorlage
+% Die gemeinsame Nummernspalte hält alle nummerierten Titel bündig
+\newlength{\HFHToCNumberWidth}
+\setlength{\HFHToCNumberWidth}{49.6pt}
+\BeforeStartingTOC[toc]{\singlespacing}
+\RedeclareSectionCommand[
+  tocbeforeskip=6pt,
+  tocindent=0pt,
+  tocnumwidth=\HFHToCNumberWidth
+]{chapter}
+\RedeclareSectionCommands[
+  tocbeforeskip=3pt,
+  tocindent=0pt,
+  tocnumwidth=\HFHToCNumberWidth
+]{section,subsection,subsubsection}
+
 % ---------------------------------------------------------------------------
 % Kopfzeile, Fusszeile, Fussnoten, Gleitumgebungen und Quellen
 % ---------------------------------------------------------------------------
@@ -189,14 +205,9 @@
   \setcounter{page}{2}
 }
 
-% Die HFH-Vorlage fuehrt das Inhaltsverzeichnis in sich selbst auf. Dieser
-\makeatletter
-\newcommand{\ThesisTableOfContents}{%
-  \chapter*{\contentsname}
-  \phantomsection
-  \addcontentsline{toc}{chapter}{\contentsname}
-  \@starttoc{toc}
-}
-\makeatother
+% Die HFH-Vorlage führt das Inhaltsverzeichnis in sich selbst auf
+% KOMA-Script setzt dabei Absatz- und Zeilenabstände lokal zurück
+\setuptoc{toc}{totoc}
+\newcommand{\ThesisTableOfContents}{\tableofcontents}
 
 \endinput

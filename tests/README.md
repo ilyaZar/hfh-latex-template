@@ -21,6 +21,7 @@ Der Lauf:
 - vermisst A4-Format, Abstände, Einzüge und eingebettete Schriften
 - lehnt redundante oder veraltete LaTeX-Pakete im Testlauf ab
 - prüft die produktiven Formatdefinitionen in `hfh-formatierungen.sty`
+- vermisst Einseitigkeit, Abstände und Textspalte des Inhaltsverzeichnisses
 - prüft Leitfadenkapitel, LaTeX-Anpassungen und öffentliche Beispiele
 - prüft den Datenschutz und die Dateifreigabe des Overleaf-Archivs
 - lehnt EXIF-, IPTC-, Photoshop- und XMP-Daten in Beispielbildern ab
