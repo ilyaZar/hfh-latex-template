@@ -140,6 +140,8 @@
   {\par\endgroup}
 \newcommand{\hfhsourceentry}[1]{%
   \par\noindent\hangindent=0.5cm\hangafter=1 #1\par} % I.3
+% Formatmuster sehen wie Quellen aus, zählen aber nicht als sortierbare Einträge
+\newcommand{\hfhsourcepattern}[1]{\hfhsourceentry{#1}}
 
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{bookmark}

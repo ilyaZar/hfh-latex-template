@@ -5,27 +5,26 @@
 
 \ifIncludeLegalRegisters % J.8
   \addchap{\DEEN{Rechtsprechungsverzeichnis}{Table of Cases}}
-  Name des Gerichts (i.\,d.\,R. abgekürzt), Art der Entscheidung: Urt.
-  (= Urteil), Beschl. (= Beschluss), G. (= Gutachten), vom (Datum der
-  Entscheidung), Aktenzeichen, Fundstelle (Abkürzung, falls üblich),
-  Erscheinungsjahr, ggf. Band, Teil, erste Seite bzw. Spalte des
-  Entscheidungstextes.
-
-  % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
+  % I.1-I.4: Formatmuster und alphabetisch sortierte Einträge hier setzen
   \begin{hfhsourceentries}
+    \hfhsourcepattern{Name des Gerichts (i.\,d.\,R. abgekürzt), Art der
+      Entscheidung: Urt. (= Urteil), Beschl. (= Beschluss), G. (= Gutachten),
+      vom (Datum der Entscheidung), Aktenzeichen, Fundstelle (Abkürzung, falls
+      üblich), Erscheinungsjahr, ggf. Band, Teil, erste Seite bzw. Spalte des
+      Entscheidungstextes.}
     \hfhsourceentry{Name des Gerichts \dots}
   \end{hfhsourceentries}
 
   \addchap{\DEEN
     {Verzeichnis der Verwaltungsanweisungen und Parlamentaria}
     {Administrative and Parliamentary Sources}}
-  % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
+  % I.1-I.4: Formatmuster und alphabetisch sortierte Einträge hier setzen
   \begin{hfhsourceentries}
-    \hfhsourceentry{Bezeichnung der erlassenden Behörde/Stelle vom (Datum),
+    \hfhsourcepattern{Bezeichnung der erlassenden Behörde/Stelle vom (Datum),
       Aktenzeichen (ggf. Betreff), Name der Fundstelle (übliche Abkürzung),
       Erscheinungsjahr der Fundstelle, ggf. Band, Teil, erste Seite bzw.
       Spalte.}
-    \hfhsourceentry{Institution-Drucksache, Drucksachennummer vom (Datum),
+    \hfhsourcepattern{Institution-Drucksache, Drucksachennummer vom (Datum),
       Bezeichnung/Betreff der Drucksache, ggf. Seitenangaben.}
   \end{hfhsourceentries}
 \fi
