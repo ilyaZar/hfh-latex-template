@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 FORMATTING = ROOT / "hfh-formatierungen.sty"
+MAIN = ROOT / "main.tex"
 
 
 def require(pattern: str, text: str, message: str) -> None:
@@ -19,6 +20,7 @@ def require(pattern: str, text: str, message: str) -> None:
 
 def main() -> int:
     text = FORMATTING.read_text(encoding="utf-8")
+    main_text = MAIN.read_text(encoding="utf-8")
 
     forbidden_packages = {
         "chngcntr": "die LaTeX-Kernelbefehle ersetzen chngcntr",
@@ -36,6 +38,14 @@ def main() -> int:
                 file=sys.stderr,
             )
             return 1
+
+    if "\\@starttoc" in text:
+        print(
+            "FEHLER: Das Inhaltsverzeichnis muss die öffentliche "
+            "KOMA-Script-Schnittstelle verwenden",
+            file=sys.stderr,
+        )
+        return 1
 
     requirements = (
         (
@@ -85,11 +95,48 @@ def main() -> int:
             r"\\setlength\s*\{\\bibitemsep\}\s*\{6pt\}",
             "zwischen Literatureinträgen müssen 6 pt liegen",
         ),
+        (
+            r"\\BeforeStartingTOC\[toc\]\{\\singlespacing\}",
+            "das Inhaltsverzeichnis muss lokal einzeilig gesetzt werden",
+        ),
+        (
+            r"\\setlength\s*\{\\HFHToCNumberWidth\}\s*\{49\.6pt\}",
+            "die vermessene Nummernspalte des Inhaltsverzeichnisses fehlt",
+        ),
+        (
+            r"tocbeforeskip=6pt",
+            "vor Haupteinträgen im Inhaltsverzeichnis müssen 6 pt liegen",
+        ),
+        (
+            r"tocbeforeskip=3pt",
+            "vor untergeordneten Inhaltsverzeichniseinträgen müssen 3 pt "
+            "liegen",
+        ),
+        (
+            r"\\setuptoc\s*\{toc\}\s*\{totoc\}",
+            "das Inhaltsverzeichnis muss sich über KOMA-Script selbst "
+            "aufführen",
+        ),
+        (
+            r"\\newcommand\s*\{\\ThesisTableOfContents\}"
+            r"\s*\{\\tableofcontents\}",
+            "der Vorlagenbefehl muss KOMA-Scripts tableofcontents verwenden",
+        ),
     )
 
     try:
         for pattern, message in requirements:
             require(pattern, text, message)
+    except ValueError as error:
+        print(f"FEHLER: {error}", file=sys.stderr)
+        return 1
+
+    try:
+        require(
+            r"toc=chapterentrywithdots",
+            main_text,
+            "Haupteinträge im Inhaltsverzeichnis benötigen Füllpunkte",
+        )
     except ValueError as error:
         print(f"FEHLER: {error}", file=sys.stderr)
         return 1
