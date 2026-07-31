@@ -5,6 +5,6 @@ type: software
 authors:
   - family-names: "Zarubin"
     given-names: "Ilya"
-version: 1.0.1
+version: 1.0.0
 date-released: "2026-07-31"
 license: LPPL-1.3c
