@@ -67,11 +67,23 @@ freigegebene Archiv des jeweils aktuellen `main`-Branches als neues
 Overleaf-Projekt. Es enthält nur die relevanten Dateien `main.tex`,
 `hfh-formatierungen.sty`, `references.bib`, `README.md`, `LICENSE`, die Kapitel
 unter `docs/` und die öffentlichen Dateien unter `images/`. Entwicklungsdateien,
-CI und Tests werden nicht importiert, und bleiben im GitHub repo. Das heißt
-auch, dass wenn das repo geclont wird
-(`git clone git@github.com:ilyaZar/hfh-latex-template.git`), und das template
-manuell bei Overleaf hochgeladen wird, man am besten auch die tests und andere
-irrelevante Dateien rauslässt.
+CI und Tests werden nicht importiert und bleiben im GitHub-Repository. Wird das
+Repository hingegen vollständig geklont,
+
+```bash
+git clone https://github.com/ilyaZar/hfh-latex-template.git
+cd hfh-latex-template
+```
+
+und die Vorlage anschließend manuell bei Overleaf hochgeladen, sollten die
+Tests und andere irrelevante Dateien weggelassen werden.
+
+Ein bereits für Overleaf bereinigtes ZIP-Archiv lässt sich nach dem Klonen mit
+folgendem Befehl erstellen:
+
+```bash
+git archive --format=zip --output=hfh-template-overleaf.zip HEAD
+```
 
 ## Offizielle Seiten
 
@@ -276,26 +288,36 @@ Inhaltsvorgaben. Auch diese sind geprüft:
 
 ## Disclaimer
 
-> **Wichtiger Hinweis:** Diese Vorlage ersetzt nicht die jeweils aktuellen
-> offiziellen Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit,
-> Fehlerfreiheit oder dauerhafte Übereinstimmung mit allen
-> studiengangsspezifischen HFH-Regelungen. Vor jeder Verwendung und insbesondere
-> vor jeder Abgabe sollten die aktuellen Vorgaben der HFH für Seminar-, Haus-,
-> Bachelor- und Masterarbeiten geprüft werden. Ansonsten Versucht die Vorlage so
-> aktuell wie möglich zu sein.
+> **Wichtiger Hinweis**
+>
+> Diese Vorlage ersetzt nicht die jeweils aktuellen offiziellen Regelungen. Sie
+> erhebt keinen Anspruch auf Vollständigkeit, Fehlerfreiheit oder dauerhafte
+> Übereinstimmung mit allen studiengangsspezifischen HFH-Regelungen.
+>
+> Vor jeder Verwendung und insbesondere vor jeder Abgabe sollten die aktuellen
+> Vorgaben der HFH für Seminar-, Haus-, Bachelor- und Masterarbeiten geprüft
+> werden.
+>
+> Die Vorlage wird dennoch so aktuell wie möglich gehalten.
 
 ## Lizenz
 
+### Lizenz der Vorlagendateien
+
 Copyright (c) 2026 Ilya Zarubin. Die Vorlagendateien stehen unter der LaTeX
 Project Public License, Version 1.3c oder später. Einzelheiten stehen in
-`LICENSE`. Die Lizenz gilt nicht für das HFH-Logo, das Bild
+`LICENSE`. Im Rahmen dieser Lizenz kann die Vorlage insbesondere von
+HFH-Studierenden für Seminar-, Haus-, Bachelor-, Master- und andere
+wissenschaftliche Arbeiten verwendet werden.
+
+### HFH-Logo und Bildrechte
+
+Die Lizenz gilt nicht für das HFH-Logo, das Bild
 `images/arbeitsplatz.jpg` oder für später von Nutzerinnen und Nutzern eingefügte
 offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt laut eingebetteter
 Quellenangabe der offiziellen Vorlage von ioannis kounadeas, Fotolia,
 Bild 4598956. Die Bilddateien wurden ausschließlich aus der offiziellen
-HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben unberührt. Ansonsten kann
-die Vorlage für jeden Studierenden der HFH für Abschluss und Bachelorarbeiten
-frei genutzt werden.
+HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben unberührt.
 
 ## Quellen und Dokumentation
 
