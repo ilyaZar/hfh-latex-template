@@ -191,6 +191,18 @@ def check(pdf: Path, log: Path) -> None:
     ]
     if len(source_lines) != 2:
         raise CheckError("Seite 4 muss zwei Quellenzeilen enthalten")
+    figure_caption = find_line(bbox, 4, "Abbildung 1:")
+    source_alignments = (
+        source_lines[0][1] - table_caption[1],
+        source_lines[1][1] - figure_caption[1],
+    )
+    for index, alignment in enumerate(source_alignments, start=1):
+        between(
+            abs(alignment),
+            0,
+            0.5,
+            f"Quellenzeile {index} muss linksbündig zur Beschriftung sein",
+        )
     source_line = source_lines[-1]
     following_text = find_line(bbox, 4, "Der Text nach der Abbildung")
     source_to_text = following_text[2] - source_line[2]
@@ -219,6 +231,9 @@ def check(pdf: Path, log: Path) -> None:
     print(
         "Tabelle:"
         f" Beschriftungs-Grundlinie zu Kopfzeile {caption_to_table:.2f} pt"
+    )
+    print(
+        "Quellenzeilen: linksbündig zu Tabellen- und Abbildungsbeschriftung"
     )
     print(
         "Quellen:"

@@ -20,7 +20,7 @@ Der Lauf:
 - prüft offensichtliche Inhaltsverstöße mit positiven und negativen Fällen
 - vermisst A4-Format, Abstände, Einzüge und eingebettete Schriften
 - lehnt redundante oder veraltete LaTeX-Pakete im Testlauf ab
-- prüft die produktiven Formatdefinitionen in `main.tex`
+- prüft die produktiven Formatdefinitionen in `hfh-formatierungen.sty`
 - prüft Leitfadenkapitel, LaTeX-Anpassungen und öffentliche Beispiele
 - prüft den Datenschutz und die Dateifreigabe des Overleaf-Archivs
 - lehnt EXIF-, IPTC-, Photoshop- und XMP-Daten in Beispielbildern ab

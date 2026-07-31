@@ -372,22 +372,26 @@ def audit_text(text: str) -> list[Issue]:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("tex_file", type=Path)
+    parser.add_argument("tex_files", type=Path, nargs="+")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
-    text = args.tex_file.read_text(encoding="utf-8")
+    text = "\n".join(
+        tex_file.read_text(encoding="utf-8")
+        for tex_file in args.tex_files
+    )
     issues = audit_text(text)
+    source_label = ", ".join(str(path) for path in args.tex_files)
     if issues:
         for issue in issues:
             print(
-                f"{args.tex_file}:{issue.line}: "
+                f"{source_label}:{issue.line}: "
                 f"{issue.code}: {issue.message}"
             )
         return 1
-    print(f"{args.tex_file}: alle geprüften inhaltlichen V-Regeln erfüllt")
+    print(f"{source_label}: alle geprüften inhaltlichen V-Regeln erfüllt")
     return 0
 
 

@@ -17,8 +17,8 @@ This work has the LPPL maintenance status "maintained".
 
 The Current Maintainer of this work is Ilya Zarubin.
 
-This work consists of the files main.tex, references.bib, README.md, and
-CITATION.cff.
+This work consists of the files main.tex, hfh-formatierungen.sty,
+references.bib, README.md, CITATION.cff, and the files below docs/.
 
 The local HFH Word document, generated PDF files, official title sheets,
 declarations of authorship, and user-supplied content are not part of this

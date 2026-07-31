@@ -42,7 +42,18 @@ def main() -> int:
         )
         run(sys.executable, "check_template_contract.py")
         run(sys.executable, "check_guidance_content.py")
-        run(sys.executable, "check_compliance.py", "../main.tex")
+        run(
+            sys.executable,
+            "check_compliance.py",
+            "../main.tex",
+            "../hfh-formatierungen.sty",
+            "../docs/00-frontmatter.tex",
+            "../docs/01-verwendungshinweis.tex",
+            "../docs/02-formale-aspekte.tex",
+            "../docs/03-aufbau-wissenschaftlicher-arbeiten.tex",
+            "../docs/04-verzeichnisse.tex",
+            "../docs/05-eigenstaendigkeitserklaerung.tex",
+        )
         run(
             sys.executable,
             "check_compliance.py",

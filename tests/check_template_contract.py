@@ -9,7 +9,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
-MAIN = ROOT / "main.tex"
+FORMATTING = ROOT / "hfh-formatierungen.sty"
 
 
 def require(pattern: str, text: str, message: str) -> None:
@@ -18,14 +18,17 @@ def require(pattern: str, text: str, message: str) -> None:
 
 
 def main() -> int:
-    text = MAIN.read_text(encoding="utf-8")
+    text = FORMATTING.read_text(encoding="utf-8")
 
     forbidden_packages = {
         "chngcntr": "die LaTeX-Kernelbefehle ersetzen chngcntr",
         "inputenc": "UTF-8 ist seit LaTeX 2018 Kernelstandard",
     }
     for package, reason in forbidden_packages.items():
-        pattern = rf"\\usepackage(?:\[[^\]]*\])?\{{{package}\}}"
+        pattern = (
+            rf"\\(?:usepackage|RequirePackage)"
+            rf"(?:\[[^\]]*\])?\{{{package}\}}"
+        )
         if re.search(pattern, text):
             print(
                 f"FEHLER: {package} darf nicht geladen werden ({reason})",
@@ -51,12 +54,14 @@ def main() -> int:
             "Abbildungen müssen global nummeriert werden",
         ),
         (
-            r"\\newcommand\s*\{\\source\}",
-            "die zentrierte Quellenzeile fehlt",
+            r"\\newcommand\s*\{\\source\}\[1\]\s*"
+            r"\{\\HFHSourceLine\{\\raggedright\}\{#1\}\}",
+            "die linksbündige Standard-Quellenzeile fehlt",
         ),
         (
-            r"\\newcommand\s*\{\\sourceleft\}",
-            "die linksbündige Quellenvariante fehlt",
+            r"\\newcommand\s*\{\\sourcecentered\}\[1\]\s*"
+            r"\{\\HFHSourceLine\{\\centering\}\{#1\}\}",
+            "die zentrierte Quellenalternative fehlt",
         ),
         (
             r"\\newcommand\s*\{\\sourceindented\}",
