@@ -37,6 +37,7 @@ main.pdf
 *.vrb
 
 # Editor- und Betriebssystemdateien
+.vscode/tasks.json
 .DS_Store
 *~
 *.swp

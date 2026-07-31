@@ -1,0 +1,303 @@
+\chapter{\DEEN
+  {Formale Aspekte zur Erstellung wissenschaftlicher Arbeiten}
+  {Formal Aspects of Academic Papers}}
+
+Der erste Eindruck, den die Betreuer/innen bzw. Prüfer/innen Ihrer Arbeit
+erhalten, ist ein formaler. Betrachten Sie daher die formale Gestaltung Ihrer
+Arbeit als ein Kriterium, welches in die Bewertung mit einfließt.
+
+Alle wichtigen Formatvorgaben, die für wissenschaftliche Arbeiten an der HFH
+gelten, sind in der Präambel dieser LaTeX-Vorlage definiert. Bei nicht
+zwingend vorgeschriebenen Formaten können Sie die dort gekennzeichneten
+KOMA-Script-, \texttt{caption}-, Schrift- und Abstandseinstellungen ändern.
+Eine Änderung wirkt sich auf alle Dokumentteile aus, die den jeweiligen
+Befehl verwenden. Soll beispielsweise die empfohlene Standardschrift
+geändert werden, wird die zentrale Schriftpaketzeile angepasst und nicht
+jeder Absatz einzeln formatiert. Die Kommentare in der Paketdatei
+\texttt{hfh-formatierungen.sty} verweisen mit A.1 bis J.11 auf die README.
+
+Die folgende Tabelle zeigt noch einmal die wesentlichen Formatierungen für
+eine wissenschaftliche Arbeit an der HFH im Überblick auf. Ob es sich dabei
+um eine zwingend einzuhaltende Vorgabe (V) der HFH handelt oder lediglich um
+eine Empfehlung (E) sehen Sie anhand der letzten Spalte.
+
+\begingroup
+\footnotesize
+\setstretch{1}
+\begin{longtable}{@{}p{0.22\textwidth}p{0.62\textwidth}
+  >{\centering\arraybackslash}p{0.08\textwidth}@{}}
+  \caption{Tabellenbeschriftung 1}
+  \label{tab:hfh-format}\\
+  \toprule
+  \textbf{Hauptpunkte} &
+  \textbf{Unterpunkte} &
+  \textbf{V / E} \\
+  \midrule
+  \endfirsthead
+  \caption[]{Tabellenbeschriftung 1 (Fortsetzung)}\\
+  \toprule
+  \textbf{Hauptpunkte} &
+  \textbf{Unterpunkte} &
+  \textbf{V / E} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endfoot
+
+  Seitenformat &
+  DIN A4, Hochformat &
+  V \\
+  &
+  einseitig bedruckt &
+  V \\
+  &
+  Ränder: L 3\,cm, R: 4\,cm, O/U: 2,5\,cm &
+  V \\
+  \midrule
+
+  Absatzformat &
+  Zeilenabstand 1,5-zeilig &
+  V \\
+  &
+  Blocksatz &
+  V \\
+  &
+  Abstand zwischen den Absätzen 6 Punkt
+  (neuer Absatz bei neuem Gedanken) &
+  E \\
+  &
+  automatische Silbentrennung &
+  E \\
+  \midrule
+
+  Zeichenformat &
+  gut lesbare Schriftart und Schriftgröße (Empfehlungen: Times New Roman in
+  12 Punkt, Arial in 11 Punkt, Univers in 11 Punkt) &
+  E \\
+  &
+  Schriftgröße Hauptüberschriften/1. Gliederungsebene 14 - 16 Punkt,
+  Fettdruck (im Textteil, nicht im Inhaltsverzeichnis) &
+  E \\
+  &
+  Schriftgröße Überschriften ab 2. Gliederungsebene 12 Punkt, Fettdruck &
+  E \\
+  \midrule
+
+  Kopf- / Fußzeilen &
+  Schriftgröße 2 Punkt kleiner als Standardschrift &
+  E \\
+  &
+  Name/Matrikelnummer in Kopfzeile &
+  V \\
+  \midrule
+
+  Fußnoten &
+  Fußnotenzeichen: Schriftgröße 9--10 Punkt hochgestellt &
+  E \\
+  &
+  Schriftgröße Fußnotentext 2 Punkt kleiner als Standardschrift &
+  V \\
+  &
+  Zeilenabstand innerhalb der Fußnote 1-zeilig &
+  V \\
+  &
+  Zeilenabstand zwischen den einzelnen Fußnoten 1,5-zeilig
+  (bzw. ca. 4 Punkt Abstand zur nächsten Fußnote) &
+  V \\
+  &
+  fortlaufende Fußnotennummerierung &
+  V \\
+  &
+  Fußnote beginnt grundsätzlich mit Großbuchstaben &
+  V \\
+  &
+  Punkt am Ende der Fußnote &
+  V \\
+  \midrule
+
+  Tabellen &
+  Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe &
+  V \\
+  &
+  Schriftgröße von Tabellennummer/-bezeichnung ca. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Abstand zwischen Bezeichnung und Tabelle ca. 6 Punkt &
+  E \\
+  &
+  Bezug/Verweis im laufenden Text &
+  V \\
+  &
+  Zeilenabstand innerhalb einer Tabelle 1-zeilig &
+  E \\
+  &
+  Schriftgröße in der Tabelle i.\,d.\,R. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Text in Kopfzeile / Randspalte der Tabelle ggf. fett &
+  E \\
+  \midrule
+
+  Abbildungen &
+  Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe &
+  V \\
+  &
+  Schriftgröße von Abbildungsnummer/-bezeichnung ca. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  &
+  Abstand zwischen Abbildung und Bezeichnung ca. 6 Punkt &
+  E \\
+  &
+  Abstand zwischen Bezeichnung und nachfolgendem Text ca. 12 Punkt &
+  E \\
+  &
+  Bezug / Verweis im laufenden Text &
+  V \\
+  &
+  Zeilenabstand bei Text innerhalb einer Abbildung 1-zeilig &
+  E \\
+  &
+  Schriftgröße in der Abbildung i.\,d.\,R. 2 Punkt kleiner als
+  Standardschrift &
+  E \\
+  \midrule
+
+  Formeln &
+  Erstellung mit Formeleditor und mit kapitelorientierter Nummerierung &
+  E \\
+  \midrule
+
+  Quellenverzeichnis, Verzeichnis der Gesetze, Rechtsverordnungen etc. &
+  Zeilenabstand innerhalb der Quellenangabe 1-zeilig &
+  V \\
+  &
+  Zeilenabstand zwischen den einzelnen Quellen 1,5-zeilig
+  (alternativ: 6 Punkt Abstand zur nächsten Quellenangabe) &
+  V \\
+  &
+  Sondereinzug: hängend bei 0,5\,cm &
+  E \\
+  &
+  Quellen nach Autor/Herausgeber alphabetisch aufsteigend sortiert &
+  V \\
+\end{longtable}
+\endgroup
+\source{HFH-Formatvorgaben, in diese LaTeX-Vorlage übertragen.}
+
+Sollten Sie für eine Tabelle oder Abbildung eine Quelle angeben, setzen Sie
+diese in einen neuen Absatz darunter. Verwenden Sie dafür standardmäßig
+\texttt{\string\source}. Die Quellenzeile ist dann linksbündig und beginnt auf
+derselben Linie wie die ebenfalls linksbündige Tabellen- oder
+Abbildungsbeschriftung. Tabelle 1 legt für Quellenzeilen keine Ausrichtung
+fest. Deshalb stehen mit \texttt{\string\sourcecentered} eine zentrierte und
+mit \texttt{\string\sourceindented} eine eingerückte Alternative bereit.
+
+\section{\DEEN{Muster für die Gliederung}{Outline Example}}
+
+Dieser Text kann in formaler Hinsicht als Muster für die Abfassung von
+wissenschaftlichen Arbeiten verwendet werden. Die Datei enthält außer den
+HFH-Richtlinien entsprechenden Formatdefinitionen bereits beispielhafte
+Textinhalte. Diese Textinhalte dienen als unverbindliches Muster für die
+Gliederung der zu schreibenden wissenschaftlichen Arbeit und können gelöscht
+und/oder überschrieben werden.
+
+\subsection{\DEEN{Gliederungstiefe}{Outline Depth}}
+
+Eine über drei (bei umfangreicheren Arbeiten vier) Ebenen hinausgehende
+Untergliederung ist im Allgemeinen zu vermeiden.
+
+\subsubsection{\dots}
+
+\subsection{\DEEN{Gliederungslogik}{Outline Logic}}
+
+Bei keinem Gliederungspunkt darf lediglich \textit{ein} Unterpunkt existieren:
+wenn „1.1.1“, dann auch „1.1.2“!
+
+\dots
+
+\section{\DEEN{Muster für Abbildungen}{Figure Examples}}
+
+Alle Abbildungen müssen grundsätzlich für sich „lesbar“ sein und bedürfen
+stets eines Bezugs im Text (bspw. „siehe Abb. 1“). Das HFH-Logo in
+Abbildung~\ref{fig:hfh-logo} veranschaulicht die erforderliche Kombination aus
+Beschriftung und Quellenzeile.
+
+\begin{hfhfigure}[htbp]
+  \includegraphics[width=1.10in]{images/hfh-logo.png}
+  \caption{Beispiel für eine Abbildung HFH-Logo}
+  \label{fig:hfh-logo}
+  % Standard: linksbündig
+  \source{Hamburger Fern-Hochschule.}
+  % Alternative: zentriert
+  % \sourcecentered{Hamburger Fern-Hochschule.}
+  % Alternative: Word-Abbildungsstil mit 2,25 cm Einzug
+  % \sourceindented[2.25cm]{Hamburger Fern-Hochschule.}
+\end{hfhfigure}
+
+Sofern die Abbildung aus einer anderen Quelle entnommen wurde, bedarf es
+einer Quellenangabe. Wurde der Inhalt gegenüber der Originalquelle verändert,
+so ist mit dem Zusatz „in Anlehnung an \dots“ oder „vgl. \dots“ darauf
+hinzuweisen. Ist die Abbildung selbstständig auf Basis eigener Überlegungen
+entstanden, sollte dies durch einen entsprechenden Vermerk (eigene
+Darstellung) kenntlich gemacht werden.
+
+Abbildung~\ref{fig:work} zeigt ein Arbeitsplatzmotiv, dessen Urheber und
+Bildnummer in der Quellenzeile genannt werden.
+
+\begin{hfhfigure}[htbp]
+  \includegraphics[width=1.81in]{images/arbeitsplatz.jpg}
+  \caption{Bei der Arbeit}
+  \label{fig:work}
+  % Standard: linksbündig
+  \source{ioannis kounadeas, Fotolia, Bild 4598956.}
+  % Alternative: zentriert
+  % \sourcecentered{ioannis kounadeas, Fotolia, Bild 4598956.}
+  % Alternative: Word-Abbildungsstil mit 2,25 cm Einzug
+  % \sourceindented[2.25cm]{%
+  %   ioannis kounadeas, Fotolia, Bild 4598956.}
+\end{hfhfigure}
+
+\section{\DEEN{Muster für Tabellen}{Table Example}}
+
+Tabellen werden neben der fortlaufenden Tabellennummer mit einer
+Tabellenüberschrift versehen. Tabelle~\ref{tab:sample} veranschaulicht den
+Aufbau aus Beschriftung, fett gesetzter Kopfzeile, Datenbereich und
+Quellenzeile.
+
+\begin{hfhtable}
+  \caption{Tabellenbeschriftung 2}
+  \label{tab:sample}
+  \begin{tabularx}{\textwidth}{@{}YYYY@{}}
+    \toprule
+    \textbf{Kopfzeile 1} &
+    \textbf{Kopfzeile 2} &
+    \textbf{Kopfzeile 3} &
+    \textbf{Kopfzeile 4} \\
+    \midrule
+    Zeile 1/Spalte 1 & Zeile 1/Spalte 2 &
+    Zeile 1/Spalte 3 & Zeile 1/Spalte 4 \\
+    Zeile 2/Spalte 1 & Zeile 2/Spalte 2 &
+    Zeile 2/Spalte 3 & Zeile 2/Spalte 4 \\
+    \bottomrule
+  \end{tabularx}
+  % Standard: linksbündig
+  \source{Eigene Darstellung.}
+  % Alternative: zentriert
+  % \sourcecentered{Eigene Darstellung.}
+  % Alternative: Word-Tabellenstil mit 1,75 cm Einzug
+  % \sourceindented[1.75cm]{Eigene Darstellung.}
+\end{hfhtable}
+
+\section{\DEEN{Muster für Formeln}{Equation Example}}
+
+Formeln werden mit kapitelbezogener Nummerierung gesetzt:
+% H.1
+\begin{equation}
+  \bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i.
+  \label{eq:mean}
+\end{equation}
+Gleichung~\eqref{eq:mean} definiert das arithmetische Mittel aus
+\(n\) Beobachtungen \(x_i\).

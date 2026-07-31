@@ -1,0 +1,148 @@
+\chapter{\DEEN
+  {Aufbau wissenschaftlicher Arbeiten}
+  {Structure of Academic Papers}}
+
+An der HFH sind verschiedene wissenschaftliche Arbeiten in Form von Haus-,
+Projekt- und Abschlussarbeiten zu erbringen. Eine solche wissenschaftliche
+Arbeit besteht dabei aus mehreren Teilen. Die verbindliche Reihenfolge der
+Teile einer wissenschaftlichen Arbeit an der HFH ist den folgenden
+Abschnitten zu entnehmen (Ergänzungen durch Verzeichnisse bzw. Anlagen sind
+je nach der von Ihnen behandelten Thematik möglich und zu empfehlen).
+
+\section{\DEEN{Titelblatt}{Title Page}}
+
+Das Titelblatt für themenvereinbarungspflichtige Arbeiten (z.\,B.
+Projektarbeit, Abschlussarbeit) erhalten Sie nach Themenanmeldung und
+-bestätigung vorgefertigt vom Prüfungsamt. Für andere wissenschaftliche
+Arbeiten finden Sie Gestaltungsvorgaben dazu in den separaten Hinweisen zu
+den jeweiligen Arbeiten.
+
+Das Titelblatt wird als „Seite 1“ mitgezählt, erhält aber selbst keine
+sichtbare Seitenzahl. In dieser LaTeX-Vorlage ersetzt
+\texttt{\string\MakeOfficialTitlePage\{datei.pdf\}} das generische Titelblatt
+durch die bereitgestellte Seite.
+
+\section{\DEEN{Inhaltsverzeichnis}{Table of Contents}}
+
+Das Inhaltsverzeichnis wird aus den Befehlen
+\texttt{\string\chapter}, \texttt{\string\section} und den tieferen
+Gliederungsbefehlen automatisch aufgebaut. Nach Änderungen aktualisiert ein
+vollständiger \texttt{latexmk}-Lauf die Einträge, Seitenzahlen und Verweise.
+
+Die HFH empfiehlt die Verwendung der Dezimalgliederung -- wie sie auch in
+dieser Vorlage genutzt wird. In juristischen Arbeiten wird häufig auch das
+alphanumerische System verwendet (siehe dazu Hinweise in den entsprechenden
+Studienbriefen zum wissenschaftlichen Arbeiten).
+
+\section{\DEEN
+  {Abbildungsverzeichnis und Tabellenverzeichnis}
+  {Lists of Figures and Tables}}
+
+Nach dem Inhaltsverzeichnis sind ein Abbildungsverzeichnis und ein
+Tabellenverzeichnis eingerichtet. Sie werden automatisch aus
+\texttt{\string\caption}-Befehlen erzeugt. Jede Abbildung und Tabelle erhält
+zusätzlich ein eindeutiges \texttt{\string\label}; im laufenden Text wird mit
+\texttt{\string\ref} darauf verwiesen. Quellen stehen mit
+\texttt{\string\source} in einem eigenen Absatz unter dem Objekt und werden
+dadurch nicht Bestandteil des Verzeichniseintrags. Nach Änderungen
+aktualisiert ein vollständiger \texttt{latexmk}-Lauf beide Verzeichnisse.
+
+\section{\DEEN{Abkürzungsverzeichnis}{List of Abbreviations}}
+
+Eine Erläuterung mit Beispielen finden Sie vorne im
+Abkürzungsverzeichnis.
+
+\section{\DEEN
+  {Inhaltsteil der wissenschaftlichen Arbeit}
+  {Main Body of the Academic Paper}}
+
+Dies ist der wesentliche Teil Ihrer Arbeit, der in der Regel aus einem
+einleitenden Teil, einem Hauptteil und einem abschließenden Teil besteht.
+
+\section{\DEEN{Quellenverzeichnis}{References}}
+
+Im Quellenverzeichnis werden alle (und \textit{ausschließlich} die) Quellen
+aufgeführt, die Sie in der Arbeit wortwörtlich oder sinngemäß zitiert haben.
+Ordnen Sie alle Einträge in das Quellenverzeichnis unabhängig von der Art der
+Quelle alphabetisch nach dem Nachnamen des (ersten) Verfassers bzw.
+Herausgebers.
+\TemplateHint{Der Verweis \citep{booth2016} demonstriert einen
+  Literaturbeleg. Ersetzen Sie ihn zusammen mit dem Beispieleintrag in
+  \texttt{references.bib} durch die tatsächlich verwendeten Quellen.}
+
+\section{\DEEN
+  {Rechtsprechungsverzeichnis (bei Bedarf)}
+  {Table of Cases (if Required)}}
+
+Es enthält eventuell verwendete gerichtliche Entscheidungen (Urteile,
+Beschlüsse etc.) mit Fundstelle.
+
+\section{\DEEN
+  {Verzeichnis der Verwaltungsanweisungen, Parlamentaria und Ähnliches
+   (bei Bedarf)}
+  {Administrative and Parliamentary Sources (if Required)}}
+
+Es enthält eventuell verwendete Verwaltungsvorschriften von Landes- oder
+Bundesbehörden und eventuell zitierte Parlamentaria (wie Bundestags- oder
+Bundesratsdrucksachen).
+
+\section{\DEEN
+  {Verzeichnis der eingesetzten KI-Werkzeuge (bei Bedarf)}
+  {Register of AI Tools Used (if Required)}}
+
+Wenn Sie KI-Tools als Hilfsmittel bei der Erstellung Ihrer wissenschaftlichen
+Arbeit verwenden, sollten Sie deren Einsatz sorgfältig dokumentieren.
+Detaillierte Hinweise dazu finden Sie in den „Informationen zum Umgang mit
+Künstlicher Intelligenz bei der Erstellung wissenschaftlicher Arbeiten an
+der HFH“ -- verfügbar im WebCampus unter den Studienbriefen zum Modul WSA.
+
+\section{\DEEN
+  {Anlagenverzeichnis (bei Bedarf)}
+  {List of Appendices (if Required)}}
+
+Werden der Arbeit mehrere Anlagen hinzugefügt, sollte ein Anlagenverzeichnis
+erstellt werden. Dieses gibt einen Überblick über die der Arbeit beigefügten
+Anlagen mit Nummer, Bezeichnung der Anlage und Seitenangabe in systematisch
+geordneter Reihenfolge.
+
+\section{\DEEN{Anlagen}{Appendices}}
+
+In den Anlagenteil (Anhang) werden all jene Dokumente aufgenommen, die dabei
+helfen, das Verständnis der Arbeit zu steigern, die aber bei einem Einfügen
+in den laufenden Text den Gedankenfluss stören würden. Überfrachten Sie den
+Anhang allerdings nicht mit Elementen, die anderweitig nicht unterzubringen
+sind. Das heißt, alle Anlagen sollten wirklich notwendig sein.
+
+Der Anhang ist nicht dahingehend zu „missbrauchen“, die Seitenbeschränkung
+durch Verlagerung von Textpassagen oder Abbildungen in den Anhang zu
+unterlaufen.
+
+\section{\DEEN
+  {Eigenständigkeitserklärung}
+  {Declaration of Authorship}}
+
+Mit der Anfertigung Ihrer wissenschaftlichen Arbeit übernehmen Sie die
+Verpflichtung, ehrlich wissenschaftlich zu arbeiten. Plagiieren, d.\,h.
+geistiges Eigentum stehlen, gilt als Täuschung und wird gemäß der
+Rahmenprüfungsordnung der HFH als nicht bestanden bewertet.
+
+Aus diesem Grund sind Sie verpflichtet, am Ende Ihrer Arbeit eine
+Eigenständigkeitserklärung abzugeben.
+
+% ---------------------------------------------------------------------------
+% Verzeichnisse nach dem Haupttext
+% ---------------------------------------------------------------------------
+\TemplateHint{%
+  Name, Vorname (Erscheinungsjahr): Titel der Quelle, ggf. Untertitel.
+  Auflage. Erscheinungsort: Verlag.\par
+  Name, Vorname (Erscheinungsjahr): Titel des Beitrags/Aufsatzes. ggf.
+  Untertitel. In: Name des Herausgebers (Hrsg.): Titel des Sammelwerkes.
+  Auflage, Erscheinungsort: Verlag, erste -- letzte Seite des
+  Beitrags/Aufsatzes im Sammelwerk.\par
+  Name, Vorname (Erscheinungsjahr): Titel des Aufsatzes. ggf. Untertitel. In:
+  Titel von Zeitschrift/Journal/Jahrbuch bzw. deren übliche Abkürzung.
+  Jahrgang als „Jg.“, ggf. Heftnummer als „H.“, erste -- letzte Seite bzw.
+  Spalte des Beitrags.\par
+  Name, Vorname (Jahr der Veröffentlichung/Aktualisierung): Titel der
+  Internetseite/des Internetdokumentes. ggf. Untertitel. URL: vollständige
+  Adresse der konkreten Seite [Stand: Tag Ihres letzten Zugriffs].}

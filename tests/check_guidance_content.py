@@ -10,6 +10,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MAIN = ROOT / "main.tex"
+FORMATTING = ROOT / "hfh-formatierungen.sty"
+DOCS = ROOT / "docs"
+INCLUDED_DOCS = (
+    "00-frontmatter",
+    "01-verwendungshinweis",
+    "02-formale-aspekte",
+    "03-aufbau-wissenschaftlicher-arbeiten",
+    "04-verzeichnisse",
+    "05-eigenstaendigkeitserklaerung",
+)
 
 REQUIRED_HEADINGS = (
     "Abstract",
@@ -39,7 +49,7 @@ REQUIRED_HEADINGS = (
 )
 
 REQUIRED_GUIDANCE = (
-    "Masterarbeiten wird ein Abstract im Umfang von etwa ein, maximal zwei",
+    "wird ein Abstract im Umfang von etwa ein, maximal zwei",
     "Die Nutzung der Vorlage entbindet Sie nicht davon",
     "Eine über drei (bei umfangreicheren Arbeiten vier) Ebenen",
     "wenn „1.1.1“, dann auch „1.1.2“",
@@ -75,20 +85,31 @@ def compact(text: str) -> str:
 
 
 def main() -> int:
-    text = compact(MAIN.read_text(encoding="utf-8"))
+    main_source = MAIN.read_text(encoding="utf-8")
+    source_files = (MAIN, FORMATTING, *sorted(DOCS.glob("*.tex")))
+    text = compact(
+        "\n".join(path.read_text(encoding="utf-8") for path in source_files)
+    )
     missing = [
         item
         for item in REQUIRED_HEADINGS + REQUIRED_GUIDANCE + LATEX_ADAPTATIONS
         if compact(item) not in text
     ]
     stale = [item for item in FORBIDDEN_WORD_INSTRUCTIONS if item in text]
+    missing.extend(
+        f"\\include{{docs/{name}}}"
+        for name in INCLUDED_DOCS
+        if f"\\include{{docs/{name}}}" not in main_source
+    )
+    if r"\input{docs/" in main_source:
+        stale.append(r"\input{docs/")
     if r"\nocite{*}" in text:
         stale.append(r"\nocite{*}")
 
     if text.count(r"\includegraphics") != 2:
         missing.append("genau zwei öffentliche Beispielabbildungen")
-    if text.count(r"% \sourceleft") != 3:
-        missing.append("drei kommentierte linksbündige Quellenvarianten")
+    if text.count(r"% \sourcecentered") != 3:
+        missing.append("drei kommentierte zentrierte Quellenvarianten")
     if text.count(r"% \sourceindented") != 3:
         missing.append("drei kommentierte eingerückte Quellenvarianten")
     if text.count(r"\label{app:material-") != 2:

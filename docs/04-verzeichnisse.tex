@@ -1,0 +1,127 @@
+\renewcommand{\bibname}{\DEEN{Quellenverzeichnis}{References}}
+\bibliographystyle{plainnat} % I.4
+\bibliography{references} % J.7
+
+\ifIncludeLegalRegisters % J.8
+  \addchap{\DEEN{Rechtsprechungsverzeichnis}{Table of Cases}}
+  \TemplateHint{%
+    Name des Gerichts (i.\,d.\,R. abgekürzt), Art der Entscheidung: Urt.
+    (= Urteil), Beschl. (= Beschluss), G. (= Gutachten), vom (Datum der
+    Entscheidung), Aktenzeichen, Fundstelle (Abkürzung, falls üblich),
+    Erscheinungsjahr, ggf. Band, Teil, erste Seite bzw. Spalte des
+    Entscheidungstextes.}
+  % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
+  \begin{hfhsourceentries}
+    \hfhsourceentry{Name des Gerichts \dots}
+  \end{hfhsourceentries}
+
+  \addchap{\DEEN
+    {Verzeichnis der Verwaltungsanweisungen und Parlamentaria}
+    {Administrative and Parliamentary Sources}}
+  \TemplateHint{%
+    Bezeichnung der erlassenden Behörde/Stelle vom (Datum), Aktenzeichen
+    (ggf. Betreff), Name der Fundstelle (übliche Abkürzung),
+    Erscheinungsjahr der Fundstelle, ggf. Band, Teil, erste Seite bzw.
+    Spalte.\par
+    Institution-Drucksache, Drucksachennummer vom (Datum),
+    Bezeichnung/Betreff der Drucksache, ggf. Seitenangaben.}
+  % I.1-I.4: Eintraege alphabetisch in diese Umgebung setzen.
+  \begin{hfhsourceentries}
+    \hfhsourceentry{Behörde, Datum, Aktenzeichen, Fundstelle.}
+    \hfhsourceentry{Institution-Drucksache, Nummer, Datum, Betreff.}
+  \end{hfhsourceentries}
+\fi
+
+\ifIncludeAIRegister % J.9
+  \addchap{\DEEN
+    {Verzeichnis der eingesetzten KI-Werkzeuge}
+    {Register of AI Tools Used}}
+  \TemplateHint{\DEEN
+    {Diesen Abschnitt nur behalten, wenn KI-Werkzeuge eingesetzt wurden. Die
+     Einträge müssen den tatsächlichen Einsatz nachvollziehbar dokumentieren.}
+    {Retain this section only if AI tools were used. Entries must document the
+     actual use transparently.}}
+
+  \begingroup
+  \footnotesize
+  \setstretch{1}
+  \begin{tabularx}{\textwidth}{@{}YYYY@{}}
+    \toprule
+    \textbf{Name des verwendeten KI-Tools} &
+    \textbf{Betroffene Teile der Arbeit} &
+    \textbf{Einsatzform / Genutzte Funktion} &
+    \textbf{Einsatztiefe bzw. Erläuterung, wie die Ergebnisse genutzt
+      wurden} \\
+    \midrule
+    \textit{(Name des genutzten KI-basierten Hilfsmittels, ggf. mit
+      Versionsangabe)} &
+    \textit{(Auf welche Teile der eigenen Arbeit hat sich die Nutzung
+      bezogen?)} &
+    \textit{Funktion} &
+    \textit{Kritische Prüfung und konkrete Verwendung} \\
+    \bottomrule
+  \end{tabularx}
+  \endgroup
+
+  \textit{Beispiele für Einsatzform / genutzte Funktion
+  (nicht abschließend):}
+  \begin{itemize}
+    \item Vorschläge für Textgliederung
+    \item Formulierungsvorschläge für einzelne Textpassagen
+    \item Vorschläge für Übergänge zwischen Abschnitten
+    \item Übersetzen von Fachartikel
+    \item Wortwiederholungen vermeiden, Synonyme finden
+    \item Beispiele finden
+    \item Vorschläge für Visualisierungen
+    \item Textkorrektur
+    \item \dots
+  \end{itemize}
+
+  \textit{Beispiele für Einsatztiefe bzw. Erläuterung, wie die Ergebnisse
+  genutzt wurden:}
+  \begin{itemize}
+    \item KI-Vorschlag diente lediglich zur Inspiration; finaler Titel wurde
+      eigenständig entwickelt.
+    \item Ergebnisse aus KI-gestütztem Brainstorming wurden selektiv
+      übernommen und kritisch reflektiert.
+    \item Vorschläge der KI dienten lediglich als Denkanstoß, tatsächlicher
+      Text vollständig selbst formuliert.
+    \item Vorschläge der KI anhand wissenschaftlicher Quellen überprüft und
+      stark überarbeitet.
+    \item Inhaltlich fehlerhafte KI-Antwort wurde erkannt und korrigiert.
+    \item KI-Übersetzung wurde überprüft und mit Fachvokabular ergänzt.
+    \item KI half beim Finden geeigneter Synonyme; Auswahl erfolgte unter
+      Berücksichtigung des Kontexts manuell.
+    \item KI-Hilfe beim Finden von Beispielen, aber Auswahl, Bewertung und
+      sprachliche Einbettung eigenständig.
+    \item KI-generierte Grafik wurde vollständig übernommen und als solche
+      kenntlich gemacht.
+  \end{itemize}
+\fi
+
+\ifIncludeAppendix % J.10
+  \addchap{\DEEN{Anlagenverzeichnis}{List of Appendices}}
+  \begin{tabularx}{\textwidth}{@{}lXr@{}}
+    \textbf{\DEEN{Anlage 1}{Appendix 1}:} &
+    \nameref{app:material-one}\dotfill & \pageref{app:material-one} \\
+    \textbf{\DEEN{Anlage 2}{Appendix 2}:} &
+    \nameref{app:material-two}\dotfill & \pageref{app:material-two}
+  \end{tabularx}
+
+  \appendix
+  \chapter{\DEEN{Bezeichnung der Anlage}{Appendix Title}}
+  \label{app:material-one}
+  Fügen Sie hier nur Material ein, das für das Verständnis notwendig ist,
+  aber den Lesefluss im Haupttext stören würde.
+
+  \chapter{\DEEN{Bezeichnung der Anlage}{Appendix Title}}
+  \label{app:material-two}
+  Fügen Sie hier nur Material ein, das für das Verständnis notwendig ist,
+  aber den Lesefluss im Haupttext stören würde.
+\fi
+
+% Diese Marke bestimmt die Gesamtzahl in der Fusszeile. Die abschliessende
+% Erklaerung ist absichtlich ausgenommen und zeigt keine Seitenzahl.
+\phantomsection
+\label{LastNumberedPage}
+\clearpage

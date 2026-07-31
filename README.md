@@ -1,27 +1,25 @@
 # HFH-LaTeX-Vorlage
 
-Minimalistische LaTeX-Vorlage für wissenschaftliche Arbeiten an der
-HFH Hamburger Fern-Hochschule, primär auf Deutsch und optional auf Englisch.
+Minimalistische LaTeX-Vorlage für wissenschaftliche Arbeiten an der HFH
+Hamburger Fern-Hochschule, primär auf Deutsch und optional auf Englisch.
 
 **Autor und aktueller Maintainer:** Ilya Zarubin, 2026
 
 [In Overleaf öffnen](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgithub.com%2FilyaZar%2Fhfh-latex-template%2Farchive%2Frefs%2Fheads%2Fmain.zip&engine=pdflatex&main_document=main.tex)
 
-> [!WARNING]
-> Diese Vorlage ersetzt nicht die jeweils aktuellen offiziellen Regelungen.
-> Sie erhebt keinen Anspruch auf Vollständigkeit, Fehlerfreiheit oder
-> dauerhafte Übereinstimmung mit allen studiengangsspezifischen
+> [!WARNING] Diese Vorlage ersetzt nicht die jeweils aktuellen offiziellen
+> Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit, Fehlerfreiheit
+> oder dauerhafte Übereinstimmung mit allen studiengangsspezifischen
 > HFH-Regelungen. Vor jeder Verwendung und insbesondere vor jeder Abgabe sind
 > die aktuellen Vorgaben der HFH für Seminar-, Haus-, Bachelor- und
-> Masterarbeiten zu prüfen. Bei Abweichungen gelten die offiziellen Vorgaben
-> der HFH, des Prüfungsamts und der betreuenden beziehungsweise prüfenden
-> Personen.
+> Masterarbeiten zu prüfen. Bei Abweichungen gelten die offiziellen Vorgaben der
+> HFH, des Prüfungsamts und der betreuenden beziehungsweise prüfenden Personen.
 
-Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Allgemeine
-Anleitungen und Beispiele aus der offiziellen Word-Vorlage sind enthalten;
-Word-spezifische Bedienhinweise wurden sachlogisch für LaTeX und Overleaf
-angepasst. Die Quelldokumente selbst sind nicht Bestandteil der öffentlichen
-Vorlage und werden nicht weiterverteilt.
+Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Allgemeine Anleitungen
+und Beispiele aus der offiziellen Word-Vorlage sind enthalten; Word-spezifische
+Bedienhinweise wurden sachlogisch für LaTeX und Overleaf angepasst. Die
+Quelldokumente selbst sind nicht Bestandteil der öffentlichen Vorlage und werden
+nicht weiterverteilt.
 
 ## Schnellstart
 
@@ -40,6 +38,29 @@ English text with English hyphenation.
 \end{otherlanguage}
 ```
 
+## Dateistruktur
+
+- `main.tex` enthält Dokumentklasse, Metadaten, Schalter und die geordnete Liste
+  aller Dokumentteile.
+- `hfh-formatierungen.sty` lädt die benötigten Pakete und enthält sämtliche
+  zentralen Formatdefinitionen und Vorlagenbefehle.
+- `docs/00-frontmatter.tex` enthält Titelblatt, Abstract und die vorderen
+  Verzeichnisse.
+- `docs/01-verwendungshinweis.tex` erläutert die Verwendung der Vorlage.
+- `docs/02-formale-aspekte.tex` enthält Tabelle 1 und die Formatbeispiele.
+- `docs/03-aufbau-wissenschaftlicher-arbeiten.tex` beschreibt den Aufbau.
+- `docs/04-verzeichnisse.tex` enthält Quellenverzeichnisse, KI-Verzeichnis und
+  Anlagen.
+- `docs/05-eigenstaendigkeitserklaerung.tex` enthält den Platzhalter für die
+  abschließende Erklärung.
+- `references.bib` enthält die Literaturdaten.
+
+`main.tex` bindet alle Dokumentteile mit `\include` ein. Dadurch beginnt jeder
+Teil auf einer neuen Seite, erhält eine eigene Hilfsdatei und kann bei Bedarf
+mit `\includeonly` ausgewählt werden. Soll ein eigener Teil ohne automatischen
+Seitenumbruch unmittelbar im laufenden Text fortgesetzt werden, kann dafür
+alternativ `\input` verwendet werden.
+
 ## Overleaf
 
 Die Vorlage ist für ein Overleaf-Projekt mit folgenden Einstellungen
@@ -52,8 +73,9 @@ vorbereitet:
 
 Der Link **In Overleaf öffnen** importiert das über `.gitattributes`
 freigegebene Archiv des jeweils aktuellen `main`-Branches als neues
-Overleaf-Projekt. Es enthält nur `main.tex`, `references.bib`, `README.md`,
-`LICENSE` und die öffentlichen Dateien unter `images/`. Entwicklungsdateien,
+Overleaf-Projekt. Es enthält nur die produktiven Dateien `main.tex`,
+`hfh-formatierungen.sty`, `references.bib`, `README.md`, `LICENSE`, die Kapitel
+unter `docs/` und die öffentlichen Dateien unter `images/`. Entwicklungsdateien,
 CI und Tests werden nicht importiert. Der Link funktioniert, sobald das
 Repository als `ilyaZar/hfh-latex-template` öffentlich erreichbar ist.
 
@@ -77,17 +99,17 @@ bereitgestellt; der Zugriff erfordert ein HFH-Benutzerkonto. Eine öffentliche
 [Fachbereich Technik](https://www.hfh-fernstudium.de/fernhochschule-fachbereich-technik).
 
 Bei anmeldepflichtigen Arbeiten stellt das Prüfungsamt nach der bestätigten
-Themenanmeldung ein offizielles Titelblatt bereit. Dieses ersetzt das
-generische Titelblatt mit:
+Themenanmeldung ein offizielles Titelblatt bereit. Dieses ersetzt das generische
+Titelblatt mit:
 
 ```latex
 \MakeOfficialTitlePage{offizielles-titelblatt.pdf}
 ```
 
-Die aktuelle Eigenständigkeitserklärung ist unverändert aus dem WebCampus
-zu übernehmen. Sie bildet die letzte Seite, erscheint nicht im
-Inhaltsverzeichnis und trägt keine sichtbare Seitenzahl. Der Text in
-`main.tex` ist nur ein Platzhalter.
+Die aktuelle Eigenständigkeitserklärung ist unverändert aus dem WebCampus zu
+übernehmen. Sie bildet die letzte Seite, erscheint nicht im Inhaltsverzeichnis
+und trägt keine sichtbare Seitenzahl. Der Text in `main.tex` ist nur ein
+Platzhalter.
 
 ## Prüfmatrix zu Tabelle 1
 
@@ -95,43 +117,43 @@ Die folgenden Tabellen geben Tabelle 1 der Word-Vorlage in unveränderter
 Reihenfolge und Formulierung wieder. Nur die Spalten `ID` und `Status` wurden
 ergänzt. Die Aufteilung nach Hauptpunkten dient der Lesbarkeit.
 
-`V` bedeutet „zwingend einzuhaltende Vorgabe“, `E` bedeutet „Empfehlung“.
-Der Status `auto` bezeichnet eine technisch gesetzte Vorgabe. `prüfen`
-bezeichnet eine Inhaltsregel: `main.tex` stellt Befehl, Umgebung und Muster
-bereit, die Verfasserin oder der Verfasser muss die konkrete Verwendung aber
-prüfen.
+`V` bedeutet „zwingend einzuhaltende Vorgabe“, `E` bedeutet „Empfehlung“. Der
+Status `auto` bezeichnet eine technisch gesetzte Vorgabe. `prüfen` bezeichnet
+eine Inhaltsregel: `hfh-formatierungen.sty` und die Dateien unter `docs/`
+stellen Befehl, Umgebung und Muster bereit, die Verfasserin oder der Verfasser
+muss die konkrete Verwendung aber prüfen.
 
 ### A - Seitenformat
 
-| ID  | Hauptpunkte  | Unterpunkte                            | V / E | Status |
-| --- | ------------ | -------------------------------------- | ----- | ------ |
-| A.1 | Seitenformat | DIN A4, Hochformat                     | V     | auto   |
-| A.2 |              | einseitig bedruckt                     | V     | auto   |
-| A.3 |              | Ränder: L 3 cm, R: 4 cm, O/U: 2,5 cm   | V     | auto   |
+| ID  | Hauptpunkte  | Unterpunkte                          | V / E | Status |
+| --- | ------------ | ------------------------------------ | ----- | ------ |
+| A.1 | Seitenformat | DIN A4, Hochformat                   | V     | auto   |
+| A.2 |              | einseitig bedruckt                   | V     | auto   |
+| A.3 |              | Ränder: L 3 cm, R: 4 cm, O/U: 2,5 cm | V     | auto   |
 
 ### B - Absatzformat
 
-| ID  | Hauptpunkte  | Unterpunkte                                                                  | V / E | Status |
-| --- | ------------ | ---------------------------------------------------------------------------- | ----- | ------ |
-| B.1 | Absatzformat | Zeilenabstand 1,5-zeilig                                                     | V     | auto   |
-| B.2 |              | Blocksatz                                                                    | V     | auto   |
-| B.3 |              | Abstand zwischen den Absätzen 6 Punkt (neuer Absatz bei neuem Gedanken)      | E     | auto   |
-| B.4 |              | automatische Silbentrennung                                                  | E     | auto   |
+| ID  | Hauptpunkte  | Unterpunkte                                                             | V / E | Status |
+| --- | ------------ | ----------------------------------------------------------------------- | ----- | ------ |
+| B.1 | Absatzformat | Zeilenabstand 1,5-zeilig                                                | V     | auto   |
+| B.2 |              | Blocksatz                                                               | V     | auto   |
+| B.3 |              | Abstand zwischen den Absätzen 6 Punkt (neuer Absatz bei neuem Gedanken) | E     | auto   |
+| B.4 |              | automatische Silbentrennung                                             | E     | auto   |
 
 ### C - Zeichenformat
 
-| ID  | Hauptpunkte   | Unterpunkte                                                                                                                  | V / E | Status |
-| --- | ------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----- | ------ |
-| C.1 | Zeichenformat | gut lesbare Schriftart und Schriftgröße (Empfehlungen: Times New Roman in 12 Punkt, Arial in 11 Punkt, Univers in 11 Punkt)  | E     | auto   |
-| C.2 |               | Schriftgröße Hauptüberschriften/1. Gliederungsebene 14 - 16 Punkt, Fettdruck (im Textteil, nicht im Inhaltsverzeichnis)      | E     | auto   |
-| C.3 |               | Schriftgröße Überschriften ab 2. Gliederungsebene 12 Punkt, Fettdruck                                                        | E     | auto   |
+| ID  | Hauptpunkte   | Unterpunkte                                                                                                                 | V / E | Status |
+| --- | ------------- | --------------------------------------------------------------------------------------------------------------------------- | ----- | ------ |
+| C.1 | Zeichenformat | gut lesbare Schriftart und Schriftgröße (Empfehlungen: Times New Roman in 12 Punkt, Arial in 11 Punkt, Univers in 11 Punkt) | E     | auto   |
+| C.2 |               | Schriftgröße Hauptüberschriften/1. Gliederungsebene 14 - 16 Punkt, Fettdruck (im Textteil, nicht im Inhaltsverzeichnis)     | E     | auto   |
+| C.3 |               | Schriftgröße Überschriften ab 2. Gliederungsebene 12 Punkt, Fettdruck                                                       | E     | auto   |
 
 ### D - Kopf- / Fußzeilen
 
-| ID  | Hauptpunkte        | Unterpunkte                                      | V / E | Status |
-| --- | ------------------ | ------------------------------------------------ | ----- | ------ |
-| D.1 | Kopf- / Fußzeilen  | Schriftgröße 2 Punkt kleiner als Standardschrift | E     | auto   |
-| D.2 |                    | Name/Matrikelnummer im Kopfzeile                 | V     | auto   |
+| ID  | Hauptpunkte       | Unterpunkte                                      | V / E | Status |
+| --- | ----------------- | ------------------------------------------------ | ----- | ------ |
+| D.1 | Kopf- / Fußzeilen | Schriftgröße 2 Punkt kleiner als Standardschrift | E     | auto   |
+| D.2 |                   | Name/Matrikelnummer im Kopfzeile                 | V     | auto   |
 
 ### E - Fußnoten
 
@@ -159,15 +181,15 @@ prüfen.
 
 ### G - Abbildungen
 
-| ID  | Hauptpunkte  | Unterpunkte                                                                            | V / E | Status |
-| --- | ------------ | -------------------------------------------------------------------------------------- | ----- | ------ |
-| G.1 | Abbildungen  | Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe                   | V     | prüfen |
-| G.2 |              | Schriftgröße von Abbildungsnummer/-bezeichnung ca. 2 Punkt kleiner als Standardschrift | E     | auto   |
-| G.3 |              | Abstand zwischen Abbildung und Bezeichnung ca. 6 Punkt                                 | E     | auto   |
-| G.4 |              | Abstand zwischen Bezeichnung und nachfolgendem Text ca. 12 Punkt                       | E     | auto   |
-| G.5 |              | Bezug/Verweis im laufenden Text                                                        | V     | prüfen |
-| G.6 |              | Zeilenabstand bei Text innerhalb einer Abbildung 1-zeilig                              | E     | auto   |
-| G.7 |              | Schriftgröße in der Abbildung i. d. R. 2 Punkt kleiner als Standardschrift             | E     | auto   |
+| ID  | Hauptpunkte | Unterpunkte                                                                            | V / E | Status |
+| --- | ----------- | -------------------------------------------------------------------------------------- | ----- | ------ |
+| G.1 | Abbildungen | Eindeutige Beschriftung, fortlaufende Nummerierung und Quellenangabe                   | V     | prüfen |
+| G.2 |             | Schriftgröße von Abbildungsnummer/-bezeichnung ca. 2 Punkt kleiner als Standardschrift | E     | auto   |
+| G.3 |             | Abstand zwischen Abbildung und Bezeichnung ca. 6 Punkt                                 | E     | auto   |
+| G.4 |             | Abstand zwischen Bezeichnung und nachfolgendem Text ca. 12 Punkt                       | E     | auto   |
+| G.5 |             | Bezug/Verweis im laufenden Text                                                        | V     | prüfen |
+| G.6 |             | Zeilenabstand bei Text innerhalb einer Abbildung 1-zeilig                              | E     | auto   |
+| G.7 |             | Schriftgröße in der Abbildung i. d. R. 2 Punkt kleiner als Standardschrift             | E     | auto   |
 
 ### H - Formeln
 
@@ -177,17 +199,18 @@ prüfen.
 
 ### I - Quellenverzeichnisse
 
-| ID  | Hauptpunkte                                                               | Unterpunkte                                                                                                       | V / E | Status |
-| --- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ----- | ------ |
-| I.1 | Quellenverzeichnis, Verzeichnis der Gesetze, Rechtsverordnungen etc.      | Zeilenabstand innerhalb der Quellenangabe 1-zeilig                                                                | V     | auto   |
-| I.2 |                                                                           | Zeilenabstand zwischen den einzelnen Quellen 1,5-zeilig (alternativ: 6 Punkt Abstand zur nächsten Quellenangabe)  | V     | auto   |
-| I.3 |                                                                           | Sondereinzug: hängend bei 0,5 cm                                                                                  | E     | auto   |
-| I.4 |                                                                           | Quellen nach Autor/Herausgeber alphabetisch aufsteigend sortiert                                                  | V     | prüfen |
+| ID  | Hauptpunkte                                                          | Unterpunkte                                                                                                      | V / E | Status |
+| --- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----- | ------ |
+| I.1 | Quellenverzeichnis, Verzeichnis der Gesetze, Rechtsverordnungen etc. | Zeilenabstand innerhalb der Quellenangabe 1-zeilig                                                               | V     | auto   |
+| I.2 |                                                                      | Zeilenabstand zwischen den einzelnen Quellen 1,5-zeilig (alternativ: 6 Punkt Abstand zur nächsten Quellenangabe) | V     | auto   |
+| I.3 |                                                                      | Sondereinzug: hängend bei 0,5 cm                                                                                 | E     | auto   |
+| I.4 |                                                                      | Quellen nach Autor/Herausgeber alphabetisch aufsteigend sortiert                                                 | V     | prüfen |
 
 ### LaTeX-Nachweise
 
 Die IDs stehen als Kommentare unmittelbar an den zuständigen Befehlen in
-`main.tex`. Die wichtigsten Zuordnungen sind:
+`main.tex`, `hfh-formatierungen.sty` und den Dateien unter `docs/`. Die
+wichtigsten Zuordnungen sind:
 
 - A.1-A.3: Klassenoptionen `a4paper`, `oneside` und Paket `geometry`
 - B.1-B.4: Klassenstandard Blocksatz, `setspace`, `\parskip` und `babel`
@@ -234,19 +257,18 @@ Inhaltsvorgaben. Auch diese sind geprüft:
   höchstens vier Ebenen umfassen. Ein Gliederungspunkt darf nicht nur einen
   Unterpunkt besitzen. `secnumdepth`, `tocdepth` und der Mustertext bilden die
   Regeln ab.
-- J.7 - Das Quellenverzeichnis enthält ausschließlich zitierte Quellen.
-  BibTeX erzeugt es aus den tatsächlich zitierten Einträgen in
-  `references.bib`.
+- J.7 - Das Quellenverzeichnis enthält ausschließlich zitierte Quellen. BibTeX
+  erzeugt es aus den tatsächlich zitierten Einträgen in `references.bib`.
 - J.8 - Rechtsprechungs- sowie Verwaltungs- und Parlamentariaverzeichnisse
   werden nur bei Bedarf aktiviert. Die Vorlagenhinweise nennen die
   erforderlichen Fundstellen; `hfhsourceentries` setzt deren Format.
 - J.9 - Der Einsatz von KI-Werkzeugen ist bei tatsächlicher Nutzung
-  nachvollziehbar zu dokumentieren. Der optionale Schalter und die
-  Mustertabelle stellen die geforderten Felder bereit.
-- J.10 - Mehrere Anlagen erhalten ein Anlagenverzeichnis mit Nummer,
-  Bezeichnung und Seite. Anlagen müssen für das Verständnis notwendig sein
-  und dürfen eine Seitenbegrenzung nicht umgehen. Schalter, Verzeichnis und
-  Vorlagenhinweis bilden dies ab.
+  nachvollziehbar zu dokumentieren. Der optionale Schalter und die Mustertabelle
+  stellen die geforderten Felder bereit.
+- J.10 - Mehrere Anlagen erhalten ein Anlagenverzeichnis mit Nummer, Bezeichnung
+  und Seite. Anlagen müssen für das Verständnis notwendig sein und dürfen eine
+  Seitenbegrenzung nicht umgehen. Schalter, Verzeichnis und Vorlagenhinweis
+  bilden dies ab.
 - J.11 - Die aktuelle Eigenständigkeitserklärung aus dem WebCampus wird
   unverändert als letzte Seite eingefügt, nicht im Inhaltsverzeichnis
   aufgeführt, nicht sichtbar nummeriert, datiert und unterschrieben. Der
@@ -269,15 +291,14 @@ Inhaltsvorgaben. Auch diese sind geprüft:
 
 ## Lizenz
 
-Copyright (c) 2026 Ilya Zarubin. Die Vorlagendateien stehen unter der
-LaTeX Project Public License, Version 1.3c oder später. Einzelheiten stehen in
+Copyright (c) 2026 Ilya Zarubin. Die Vorlagendateien stehen unter der LaTeX
+Project Public License, Version 1.3c oder später. Einzelheiten stehen in
 `LICENSE`. Die Lizenz gilt nicht für die nicht verteilte HFH-Word-Datei, das
-HFH-Logo, das Bild `images/arbeitsplatz.jpg` oder für später von Nutzerinnen
-und Nutzern eingefügte offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt
-laut eingebetteter Quellenangabe der offiziellen Vorlage von ioannis
-kounadeas, Fotolia, Bild 4598956. Die Bilddateien wurden ausschließlich aus
-der offiziellen HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben
-unberührt.
+HFH-Logo, das Bild `images/arbeitsplatz.jpg` oder für später von Nutzerinnen und
+Nutzern eingefügte offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt laut
+eingebetteter Quellenangabe der offiziellen Vorlage von ioannis kounadeas,
+Fotolia, Bild 4598956. Die Bilddateien wurden ausschließlich aus der offiziellen
+HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben unberührt.
 
 ## Quellen und Dokumentation
 

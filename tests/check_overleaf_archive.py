@@ -14,6 +14,13 @@ ROOT = Path(__file__).resolve().parent.parent
 REQUIRED_ARCHIVE_FILES = {
     "LICENSE",
     "README.md",
+    "docs/00-frontmatter.tex",
+    "docs/01-verwendungshinweis.tex",
+    "docs/02-formale-aspekte.tex",
+    "docs/03-aufbau-wissenschaftlicher-arbeiten.tex",
+    "docs/04-verzeichnisse.tex",
+    "docs/05-eigenstaendigkeitserklaerung.tex",
+    "hfh-formatierungen.sty",
     "main.tex",
     "references.bib",
 }
