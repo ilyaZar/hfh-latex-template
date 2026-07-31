@@ -3,33 +3,32 @@
 Minimalistische LaTeX-Vorlage für wissenschaftliche Arbeiten an der HFH
 Hamburger Fern-Hochschule, primär auf Deutsch und optional auf Englisch.
 
-**Autor und aktueller Maintainer:** Ilya Zarubin, 2026
-
 [In Overleaf öffnen](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgithub.com%2FilyaZar%2Fhfh-latex-template%2Farchive%2Frefs%2Fheads%2Fmain.zip&engine=pdflatex&main_document=main.tex)
 
-> [!WARNING] Diese Vorlage ersetzt nicht die jeweils aktuellen offiziellen
-> Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit, Fehlerfreiheit
-> oder dauerhafte Übereinstimmung mit allen studiengangsspezifischen
-> HFH-Regelungen. Vor jeder Verwendung und insbesondere vor jeder Abgabe sind
-> die aktuellen Vorgaben der HFH für Seminar-, Haus-, Bachelor- und
-> Masterarbeiten zu prüfen. Bei Abweichungen gelten die offiziellen Vorgaben der
-> HFH, des Prüfungsamts und der betreuenden beziehungsweise prüfenden Personen.
+> **Wichtiger Hinweis:** Diese Vorlage ersetzt nicht die jeweils aktuellen
+> offiziellen Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit,
+> Fehlerfreiheit oder dauerhafte Übereinstimmung mit allen
+> studiengangsspezifischen HFH-Regelungen. Vor jeder Verwendung und insbesondere
+> vor jeder Abgabe sind die aktuellen Vorgaben der HFH für Seminar-, Haus-,
+> Bachelor- und Masterarbeiten zu prüfen. Bei Abweichungen gelten die
+> offiziellen Vorgaben der HFH, des Prüfungsamts und der betreuenden
+> beziehungsweise prüfenden Personen.
 
 Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Allgemeine Anleitungen
-und Beispiele aus der offiziellen Word-Vorlage sind enthalten; Word-spezifische
-Bedienhinweise wurden sachlogisch für LaTeX und Overleaf angepasst. Die
-Quelldokumente selbst sind nicht Bestandteil der öffentlichen Vorlage und werden
-nicht weiterverteilt.
+und Beispiele aus der offiziellen Word-Vorlage sind (so weit möglich und
+sinnvoll) übernommen; Word-spezifische Bedienhinweise wurden sachlogisch für
+LaTeX und Overleaf angepasst.
 
-## Schnellstart
+## Quick install
 
-1. Den Metadatenblock am Anfang von `main.tex` bearbeiten.
-2. `\MainLanguage` auf `ngerman` oder `english` setzen.
-3. Für Bachelor- und Seminararbeiten `\IncludeAbstractfalse` setzen.
-4. Optionale Verzeichnisse über die Schalter in `main.tex` konfigurieren.
-5. Quellen in `references.bib` eintragen und mit `\parencite` oder `\textcite`
+1. Den Link **In Overleaf öffnen** (siehe Anfang der README)
+2. Den Metadatenblock am Anfang von `main.tex` bearbeiten.
+3. `\MainLanguage` auf `ngerman` oder `english` setzen.
+4. Für Bachelor- und Seminararbeiten `\IncludeAbstractfalse` setzen.
+5. Optionale Verzeichnisse über die Schalter in `main.tex` konfigurieren.
+6. Quellen in `references.bib` eintragen und mit `\parencite` oder `\textcite`
    zitieren.
-6. Mit `latexmk -pdf main.tex` oder in Overleaf mit pdfLaTeX kompilieren.
+7. Mit `latexmk -pdf main.tex` oder in Overleaf mit pdfLaTeX kompilieren.
 
 Einzelne englische Passagen erhalten mit Babel englische Silbentrennung:
 
@@ -41,20 +40,20 @@ English text with English hyphenation.
 
 ## Dateistruktur
 
-- `main.tex` enthält Dokumentklasse, Metadaten, Schalter und die geordnete Liste
-  aller Dokumentteile.
+- `main.tex` enthält Dokumentklasse, Metadaten, weitere Einstellungen und die
+  geordnete Liste aller Dokumentteile
 - `hfh-formatierungen.sty` lädt die benötigten Pakete und enthält sämtliche
-  zentralen Formatdefinitionen und Vorlagenbefehle.
+  zentralen Formatdefinitionen und Vorlagenbefehle
 - `docs/00-frontmatter.tex` enthält Titelblatt, Abstract und die vorderen
-  Verzeichnisse.
-- `docs/01-verwendungshinweis.tex` erläutert die Verwendung der Vorlage.
-- `docs/02-formale-aspekte.tex` enthält Tabelle 1 und die Formatbeispiele.
-- `docs/03-aufbau-wissenschaftlicher-arbeiten.tex` beschreibt den Aufbau.
+  Verzeichnisse
+- `docs/01-verwendungshinweis.tex` erläutert die Verwendung der Vorlage
+- `docs/02-formale-aspekte.tex` enthält Tabelle 1 und die Formatbeispiele
+- `docs/03-aufbau-wissenschaftlicher-arbeiten.tex` beschreibt den Aufbau
 - `docs/04-verzeichnisse.tex` enthält Quellenverzeichnisse, KI-Verzeichnis und
-  Anlagen.
+  Anlagen
 - `docs/05-eigenstaendigkeitserklaerung.tex` enthält den Platzhalter für die
-  abschließende Erklärung.
-- `references.bib` enthält die Literaturdaten.
+  abschließende Erklärung
+- `references.bib` enthält die Literaturdaten
 
 `main.tex` bindet alle Dokumentteile mit `\include` ein. Dadurch beginnt jeder
 Teil auf einer neuen Seite, erhält eine eigene Hilfsdatei und kann bei Bedarf
@@ -74,21 +73,14 @@ vorbereitet:
 
 Der Link **In Overleaf öffnen** importiert das über `.gitattributes`
 freigegebene Archiv des jeweils aktuellen `main`-Branches als neues
-Overleaf-Projekt. Es enthält nur die produktiven Dateien `main.tex`,
+Overleaf-Projekt. Es enthält nur die relevanten Dateien `main.tex`,
 `hfh-formatierungen.sty`, `references.bib`, `README.md`, `LICENSE`, die Kapitel
 unter `docs/` und die öffentlichen Dateien unter `images/`. Entwicklungsdateien,
-CI und Tests werden nicht importiert. Der Link funktioniert, sobald das
-Repository als `ilyaZar/hfh-latex-template` öffentlich erreichbar ist.
-
-Eine Einreichung in die Overleaf Gallery ist vorgesehen. Overleaf akzeptiert
-offizielle Hochschulvorlagen für Abschlussarbeiten, wenn die Beschreibung auf
-die offizielle Hochschulseite mit den Gestaltungs- oder Einreichungsvorgaben
-verweist. In der Gallery-Beschreibung sind deshalb die
-[Modulhandbücher der Technikstudiengänge im HFH-WebCampus](https://campus.hamburger-fh.de/material/bug-material/fb-technik)
-(Anmeldung erforderlich) sowie die öffentlichen
-[HFH-Hinweise zur Abschlussarbeit](https://www.hfh-fernstudium.de/blog/abschlussarbeit-so-nimmst-du-die-letzte-huerde-des-studiums)
-anzugeben. Die öffentliche HFH-Seite beschreibt auch das Pflichtmodul
-`Wissenschaftliches Arbeiten (WSA)`.
+CI und Tests werden nicht importiert, und bleiben im GitHub repo. Das heißt
+auch, dass wenn das repo geclont wird
+(`git clone git@github.com:ilyaZar/hfh-latex-template.git`), und das template
+manuell bei Overleaf hochgeladen wird, man am besten auch die tests und andere
+irrelevante Dateien rauslässt.
 
 ## Offizielle Seiten
 
@@ -112,7 +104,7 @@ Die aktuelle Eigenständigkeitserklärung ist unverändert aus dem WebCampus zu
 und trägt keine sichtbare Seitenzahl. Der Text in `main.tex` ist nur ein
 Platzhalter.
 
-## Prüfmatrix zu Tabelle 1
+## Formatvorgaben
 
 Die folgenden Tabellen geben Tabelle 1 der Word-Vorlage in unveränderter
 Reihenfolge und Formulierung wieder. Nur die Spalten `ID` und `Status` wurden
@@ -295,12 +287,14 @@ Inhaltsvorgaben. Auch diese sind geprüft:
 
 Copyright (c) 2026 Ilya Zarubin. Die Vorlagendateien stehen unter der LaTeX
 Project Public License, Version 1.3c oder später. Einzelheiten stehen in
-`LICENSE`. Die Lizenz gilt nicht für die nicht verteilte HFH-Word-Datei, das
-HFH-Logo, das Bild `images/arbeitsplatz.jpg` oder für später von Nutzerinnen und
-Nutzern eingefügte offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt laut
-eingebetteter Quellenangabe der offiziellen Vorlage von ioannis kounadeas,
-Fotolia, Bild 4598956. Die Bilddateien wurden ausschließlich aus der offiziellen
-HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben unberührt.
+`LICENSE`. Die Lizenz gilt nicht für das HFH-Logo, das Bild
+`images/arbeitsplatz.jpg` oder für später von Nutzerinnen und Nutzern eingefügte
+offizielle HFH-Dokumente. Das Arbeitsplatzbild stammt laut eingebetteter
+Quellenangabe der offiziellen Vorlage von ioannis kounadeas, Fotolia,
+Bild 4598956. Die Bilddateien wurden ausschließlich aus der offiziellen
+HFH-Vorlage übernommen; ihre jeweiligen Rechte bleiben unberührt. Ansonsten kann
+die Vorlage für jeden Studierenden der HFH für Abschluss und Bachelorarbeiten
+frei genutzt werden.
 
 ## Quellen und Dokumentation
 
