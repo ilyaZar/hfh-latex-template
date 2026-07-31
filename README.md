@@ -5,15 +5,6 @@ Hamburger Fern-Hochschule, primär auf Deutsch und optional auf Englisch.
 
 [In Overleaf öffnen](https://www.overleaf.com/docs?snip_uri=https%3A%2F%2Fgithub.com%2FilyaZar%2Fhfh-latex-template%2Farchive%2Frefs%2Fheads%2Fmain.zip&engine=pdflatex&main_document=main.tex)
 
-> **Wichtiger Hinweis:** Diese Vorlage ersetzt nicht die jeweils aktuellen
-> offiziellen Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit,
-> Fehlerfreiheit oder dauerhafte Übereinstimmung mit allen
-> studiengangsspezifischen HFH-Regelungen. Vor jeder Verwendung und insbesondere
-> vor jeder Abgabe sind die aktuellen Vorgaben der HFH für Seminar-, Haus-,
-> Bachelor- und Masterarbeiten zu prüfen. Bei Abweichungen gelten die
-> offiziellen Vorgaben der HFH, des Prüfungsamts und der betreuenden
-> beziehungsweise prüfenden Personen.
-
 Die Vorlage wurde anhand der HFH-Formatvorgaben erstellt. Allgemeine Anleitungen
 und Beispiele aus der offiziellen Word-Vorlage sind (so weit möglich und
 sinnvoll) übernommen; Word-spezifische Bedienhinweise wurden sachlogisch für
@@ -282,6 +273,16 @@ Inhaltsvorgaben. Auch diese sind geprüft:
 10. Optionales Verzeichnis der eingesetzten KI-Werkzeuge
 11. Optionales Anlagenverzeichnis und Anlagen
 12. Offizielle Eigenständigkeitserklärung als unnummerierte letzte Seite
+
+## Disclaimer
+
+> **Wichtiger Hinweis:** Diese Vorlage ersetzt nicht die jeweils aktuellen
+> offiziellen Regelungen. Sie erhebt keinen Anspruch auf Vollständigkeit,
+> Fehlerfreiheit oder dauerhafte Übereinstimmung mit allen
+> studiengangsspezifischen HFH-Regelungen. Vor jeder Verwendung und insbesondere
+> vor jeder Abgabe sollten die aktuellen Vorgaben der HFH für Seminar-, Haus-,
+> Bachelor- und Masterarbeiten geprüft werden. Ansonsten Versucht die Vorlage so
+> aktuell wie möglich zu sein.
 
 ## Lizenz
 
