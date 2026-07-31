@@ -27,7 +27,8 @@ nicht weiterverteilt.
 2. `\MainLanguage` auf `ngerman` oder `english` setzen.
 3. Für Bachelor- und Seminararbeiten `\IncludeAbstractfalse` setzen.
 4. Optionale Verzeichnisse über die Schalter in `main.tex` konfigurieren.
-5. Quellen in `references.bib` eintragen und im Text zitieren.
+5. Quellen in `references.bib` eintragen und mit `\parencite` oder `\textcite`
+   zitieren.
 6. Mit `latexmk -pdf main.tex` oder in Overleaf mit pdfLaTeX kompilieren.
 
 Einzelne englische Passagen erhalten mit Babel englische Silbentrennung:
@@ -69,7 +70,7 @@ vorbereitet:
 - Hauptdokument: `main.tex`
 - Compiler: pdfLaTeX
 - TeX Live: aktuelle von Overleaf angebotene Version
-- Bibliografie: BibTeX über `natbib` und `plainnat`
+- Bibliografie: `biblatex` mit dem von Overleaf unterstützten Biber-Backend
 
 Der Link **In Overleaf öffnen** importiert das über `.gitattributes`
 freigegebene Archiv des jeweils aktuellen `main`-Branches als neues
@@ -224,7 +225,7 @@ wichtigsten Zuordnungen sind:
 - G.1-G.7: `caption`, `hfhfigure`, `\source`, `\ref`, `\intextsep` und
   `\textfloatsep`
 - H.1: `\numberwithin{equation}{chapter}` und die Umgebung `equation`
-- I.1-I.4: `\singlespacing`, `\bibsep`, `\bibhang`, `plainnat`,
+- I.1-I.4: `biblatex` mit Biber, `\singlespacing`, `\bibitemsep`, `\bibhang`,
   `hfhsourceentries` und `\hfhsourceentry`
 
 Die vier Punkte mit reinem Textbezug können nicht verlässlich automatisiert
@@ -257,8 +258,9 @@ Inhaltsvorgaben. Auch diese sind geprüft:
   höchstens vier Ebenen umfassen. Ein Gliederungspunkt darf nicht nur einen
   Unterpunkt besitzen. `secnumdepth`, `tocdepth` und der Mustertext bilden die
   Regeln ab.
-- J.7 - Das Quellenverzeichnis enthält ausschließlich zitierte Quellen. BibTeX
-  erzeugt es aus den tatsächlich zitierten Einträgen in `references.bib`.
+- J.7 - Das Quellenverzeichnis enthält ausschließlich zitierte Quellen.
+  `biblatex` erzeugt es mit Biber aus den tatsächlich zitierten Einträgen in
+  `references.bib`.
 - J.8 - Rechtsprechungs- sowie Verwaltungs- und Parlamentariaverzeichnisse
   werden nur bei Bedarf aktiviert. Die Vorlagenhinweise nennen die
   erforderlichen Fundstellen; `hfhsourceentries` setzt deren Format.

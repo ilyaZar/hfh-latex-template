@@ -145,7 +145,7 @@ def check(pdf: Path, log: Path) -> None:
     if "??" in text:
         raise CheckError("PDF enthält eine ungelöste Referenz")
 
-    bibliography = ("Beate Adler.", "Clara Becker.", "Anton Zimmer.")
+    bibliography = ("Adler, Beate", "Becker, Clara", "Zimmer, Anton")
     positions = [text.find(name) for name in bibliography]
     if any(position < 0 for position in positions):
         raise CheckError("Mindestens ein Literatureintrag fehlt")
@@ -211,15 +211,22 @@ def check(pdf: Path, log: Path) -> None:
             "Nach der Abbildungsquelle fehlen ungefähr 12 pt Abstand"
         )
 
-    first_bib_line = find_line(bbox, 7, "Beate Adler.")
-    first_bib_continuation = find_line(bbox, 7, "lichen verzeichnissen.")
-    second_bib_line = find_line(bbox, 7, "Clara Becker.")
+    first_bib_line = find_line(bbox, 7, "Adler, Beate")
+    first_bib_continuation = find_line(bbox, 7, "senschaftlichen")
+    first_bib_last_line = find_line(bbox, 7, "119.")
+    second_bib_line = find_line(bbox, 7, "Becker, Clara")
     hanging_indent = first_bib_continuation[1] - first_bib_line[1]
     bibliography_line_spacing = (
         first_bib_continuation[2] - first_bib_line[2]
     )
-    bibliography_gap = second_bib_line[2] - first_bib_continuation[2]
+    bibliography_gap = second_bib_line[2] - first_bib_last_line[2]
     between(hanging_indent, 13.8, 14.6, "Hängender Einzug")
+    between(
+        bibliography_line_spacing,
+        14.0,
+        15.0,
+        "Grundlinienabstand innerhalb einer Quelle",
+    )
     between(bibliography_gap, 19.8, 21.0, "Abstand zwischen Quellen")
 
     print(f"PDF-Seiten: 8, Format: {width:.2f} x {height:.2f} pt")

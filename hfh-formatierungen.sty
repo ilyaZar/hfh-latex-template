@@ -112,10 +112,27 @@
   \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
-\RequirePackage[round,authoryear]{natbib}
+\RequirePackage{xurl}
+\RequirePackage{csquotes}
+\RequirePackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  sortlocale=de_DE,
+  giveninits=false,
+  maxbibnames=99,
+  dashed=false,
+  doi=false,
+  eprint=false,
+  isbn=false
+]{biblatex}
+\DeclareNameAlias{sortname}{family-given}
 \setlength{\bibhang}{0.5cm} % I.3
-\setlength{\bibsep}{6pt} % I.2
-\AtBeginEnvironment{thebibliography}{\singlespacing} % I.1
+\setlength{\bibitemsep}{6pt} % I.2
+\setlength{\bibparsep}{0pt}
+\AtBeginBibliography{% I.1
+  \singlespacing
+  \setlength{\parskip}{0pt}}
 
 % Fuer Rechts- und Verwaltungsquellen dieselben Abstaende verwenden.
 \newenvironment{hfhsourceentries}
@@ -124,7 +141,6 @@
 \newcommand{\hfhsourceentry}[1]{%
   \par\noindent\hangindent=0.5cm\hangafter=1 #1\par} % I.3
 
-\RequirePackage{xurl}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage{bookmark}
 \RequirePackage{pdfpages}
