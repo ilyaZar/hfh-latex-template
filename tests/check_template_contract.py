@@ -23,6 +23,7 @@ def main() -> int:
     forbidden_packages = {
         "chngcntr": "die LaTeX-Kernelbefehle ersetzen chngcntr",
         "inputenc": "UTF-8 ist seit LaTeX 2018 Kernelstandard",
+        "natbib": "biblatex mit Biber ersetzt natbib",
     }
     for package, reason in forbidden_packages.items():
         pattern = (
@@ -66,6 +67,23 @@ def main() -> int:
         (
             r"\\newcommand\s*\{\\sourceindented\}",
             "die eingerückte Quellenvariante fehlt",
+        ),
+        (
+            r"\\RequirePackage\s*\[[^]]*backend=biber[^]]*\]"
+            r"\s*\{biblatex\}",
+            "biblatex muss Biber als Backend verwenden",
+        ),
+        (
+            r"sorting=nyt",
+            "das Quellenverzeichnis muss nach Name, Jahr und Titel sortieren",
+        ),
+        (
+            r"\\setlength\s*\{\\bibhang\}\s*\{0\.5cm\}",
+            "der hängende Einzug muss 0,5 cm betragen",
+        ),
+        (
+            r"\\setlength\s*\{\\bibitemsep\}\s*\{6pt\}",
+            "zwischen Literatureinträgen müssen 6 pt liegen",
         ),
     )
 

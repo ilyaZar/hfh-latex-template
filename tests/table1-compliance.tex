@@ -106,11 +106,28 @@
   \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
 \newcolumntype{Y}{>{\raggedright\arraybackslash}X}
 
-\usepackage{etoolbox}
-\usepackage[round,authoryear]{natbib}
+\usepackage{xurl}
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  sorting=nyt,
+  sortlocale=de_DE,
+  giveninits=false,
+  maxbibnames=99,
+  dashed=false,
+  doi=false,
+  eprint=false,
+  isbn=false
+]{biblatex}
+\addbibresource{fixtures/compliance-references.bib}
+\DeclareNameAlias{sortname}{family-given}
 \setlength{\bibhang}{0.5cm}
-\setlength{\bibsep}{6pt}
-\AtBeginEnvironment{thebibliography}{\singlespacing}
+\setlength{\bibitemsep}{6pt}
+\setlength{\bibparsep}{0pt}
+\AtBeginBibliography{%
+  \singlespacing
+  \setlength{\parskip}{0pt}}
 
 \newenvironment{hfhsourceentries}
   {\par\begingroup\singlespacing\setlength{\parskip}{6pt}}
@@ -237,12 +254,11 @@ Kapitels global als Nummer zwei erscheinen.
 \chapter{Quellenverzeichnisse}
 
 Die Literatur wurde absichtlich in nichtalphabetischer Reihenfolge zitiert
-\citep{zimmer2022,adler2020,becker2021}. Der Bibliografiestil muss die Einträge
+\parencite{zimmer2022,adler2020,becker2021}. Der Bibliografiestil muss die
+Einträge
 trotzdem alphabetisch nach Autor ausgeben.
 
-\renewcommand{\bibname}{Quellenverzeichnis}
-\bibliographystyle{plainnat}
-\bibliography{fixtures/compliance-references}
+\printbibliography[heading=bibintoc,title={Quellenverzeichnis}]
 
 \addchap{Rechtsprechungsverzeichnis}
 

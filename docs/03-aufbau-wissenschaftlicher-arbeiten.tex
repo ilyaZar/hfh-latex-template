@@ -66,8 +66,24 @@ aufgeführt, die Sie in der Arbeit wortwörtlich oder sinngemäß zitiert haben.
 Ordnen Sie alle Einträge in das Quellenverzeichnis unabhängig von der Art der
 Quelle alphabetisch nach dem Nachnamen des (ersten) Verfassers bzw.
 Herausgebers.
-\TemplateHint{Der Verweis \citep{booth2016} demonstriert einen
-  Literaturbeleg. Ersetzen Sie ihn zusammen mit dem Beispieleintrag in
+
+Diese Vorlage verwaltet Literatur mit \texttt{biblatex} und Biber. Erfassen
+Sie jede Quelle einmal strukturiert in \texttt{references.bib}. Geeignete
+Eintragstypen sind etwa Buch (\texttt{@book}), Sammelbandbeitrag
+(\texttt{@incollection}), Zeitschriftenaufsatz (\texttt{@article}) und
+Onlinequelle (\texttt{@online}). Im Text erzeugt
+\texttt{\string\parencite\{schlüssel\}} einen Klammerbeleg;
+\texttt{\string\textcite\{schlüssel\}} bindet den Namen in den Satz ein. Ein
+vollständiger \texttt{latexmk}-Lauf beziehungsweise Overleaf führt Biber
+automatisch aus.
+
+Der Befehl \texttt{\string\printbibliography} erzeugt das
+Quellenverzeichnis automatisch an der vorgesehenen Stelle. Es berücksichtigt
+standardmäßig nur zitierte Datensätze und sortiert sie nach Name, Jahr und
+Titel. Formatieren oder sortieren Sie die Einträge deshalb nicht von Hand.
+\TemplateHint{Der Sammelbeleg
+  \parencite{booth2016,musterbeitrag2024,musteraufsatz2023,musteronline2025}
+  demonstriert die vier Eintragstypen. Ersetzen Sie die Beispiele in
   \texttt{references.bib} durch die tatsächlich verwendeten Quellen.}
 
 \section{\DEEN

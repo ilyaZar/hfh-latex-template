@@ -1,6 +1,7 @@
-\renewcommand{\bibname}{\DEEN{Quellenverzeichnis}{References}}
-\bibliographystyle{plainnat} % I.4
-\bibliography{references} % J.7
+\printbibliography[
+  heading=bibintoc,
+  title={\DEEN{Quellenverzeichnis}{References}}
+] % I.1-I.4, J.7
 
 \ifIncludeLegalRegisters % J.8
   \addchap{\DEEN{Rechtsprechungsverzeichnis}{Table of Cases}}
