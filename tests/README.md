@@ -1,28 +1,27 @@
-# Tabelle-1-Compliance-Tests
+# Vorlagenprüfungen
 
-Diese Tests prüfen ausschließlich synthetische LaTeX-Beispiele. Sie benötigen
-weder private Quelldokumente noch daraus abgeleitete Texte, Bilder oder
-Metadaten.
+Die Prüfungen bauen die öffentliche Vorlage und eine synthetische
+LaTeX-Fixture. Sie benötigen weder private Quelldokumente noch daraus
+abgeleitete Texte, Bilder oder Metadaten.
 
 ## Ausführen
 
-Im Verzeichnis `tests/`:
+Im Repository:
 
-```bash
-python3 run_table1_compliance.py
+```sh
+bash tests/run.sh
 ```
 
 Der Lauf:
 
+- kompiliert die öffentliche Vorlage
 - kompiliert eine achtseitige synthetische Testdatei
 - prüft Fußnoten, Tabellen, Abbildungen und Quellenverzeichnisse
 - prüft fortlaufende Nummerierung, Beschriftungen, Labels und Verweise
-- prüft offensichtliche Inhaltsverstöße mit positiven und negativen Fällen
 - vermisst A4-Format, Abstände, Einzüge und eingebettete Schriften
 - lehnt redundante oder veraltete LaTeX-Pakete im Testlauf ab
 - prüft die produktiven Formatdefinitionen in `hfh-formatierungen.sty`
 - vermisst Einseitigkeit, Abstände und Textspalte des Inhaltsverzeichnisses
-- prüft Leitfadenkapitel, LaTeX-Anpassungen und öffentliche Beispiele
 - prüft den Datenschutz und die Dateifreigabe des Overleaf-Archivs
 - lehnt EXIF-, IPTC-, Photoshop- und XMP-Daten in Beispielbildern ab
 
@@ -41,9 +40,6 @@ werden nicht versioniert.
 |     6 | Nichtalphabetische Zitierreihenfolge                     |
 |     7 | Automatisch alphabetisch sortiertes Quellenverzeichnis   |
 |     8 | Manuell alphabetisches Rechtsprechungsverzeichnis        |
-
-Der statische Prüfer erkennt nur offensichtliche Verstöße. Inhaltliche
-Richtigkeit und stark verschachtelte eigene Makros bleiben manuell zu prüfen.
 
 ## GitHub Actions
 
