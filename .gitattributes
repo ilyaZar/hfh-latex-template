@@ -6,3 +6,6 @@
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /CITATION.cff export-ignore
+
+# Diese Kapitel sind Vorlagenquelltext, keine Repository-Dokumentation.
+/docs/*.tex linguist-documentation=false

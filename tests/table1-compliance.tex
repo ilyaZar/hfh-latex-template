@@ -1,8 +1,7 @@
-% Isolierter Regressionstest fuer die Regeln E-I aus Tabelle 1.
+% Isolierte Fixture fuer die Regeln E-I aus Tabelle 1.
 %
-% Die Datei bildet die produktiven Formatdefinitionen nach, veraendert aber
-% ../main.tex nicht. Sie verwendet nur aktuelle LaTeX-Kernel-, KOMA-Script-
-% und aktiv gepflegte Standardpakete.
+% Die Datei verwendet die produktiven Formatdefinitionen mit kontrolliertem
+% Inhalt, ohne main.tex zu veraendern.
 \documentclass[
   12pt,
   a4paper,
@@ -12,131 +11,21 @@
   bibliography=totoc
 ]{scrreprt}
 
+\newcommand{\MainLanguage}{ngerman}
+\newcommand{\ThesisType}{Compliance-Test}
+\newcommand{\ThesisTitle}{Tabelle-1-Compliance}
 \newcommand{\AuthorName}{Compliance-Test}
 \newcommand{\MatriculationNumber}{0000000}
+\newcommand{\DegreeProgramme}{Teststudiengang}
+\newcommand{\Department}{Testfachbereich}
+\newcommand{\FirstExaminer}{Erstprüfung}
+\newcommand{\SecondExaminer}{Zweitprüfung}
+\newcommand{\SubmissionDate}{1. Januar 2026}
 
-\usepackage[T1]{fontenc}
-\usepackage[english,ngerman]{babel}
-\usepackage{newtxtext,newtxmath}
-\usepackage{geometry}
-\geometry{
-  a4paper,
-  portrait,
-  left=3cm,
-  right=4cm,
-  top=2.5cm,
-  bottom=2.5cm
-}
-
-\usepackage{setspace}
-\setstretch{1.43}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt}
-
+\usepackage{hfh-formatierungen}
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
-\setkomafont{disposition}{\normalfont\bfseries\setstretch{1}}
-\setkomafont{chapter}{\fontsize{14}{17}\selectfont}
-\setkomafont{section}{\fontsize{12}{14.5}\selectfont}
-\setkomafont{subsection}{\fontsize{12}{14.5}\selectfont}
-\setkomafont{subsubsection}{\fontsize{12}{14.5}\selectfont}
-\RedeclareSectionCommand[beforeskip=0pt,afterskip=18pt]{chapter}
-\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{section}
-\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsection}
-\RedeclareSectionCommand[beforeskip=18pt,afterskip=12pt]{subsubsection}
-
-\usepackage[automark,singlespacing=true]{scrlayer-scrpage}
-\clearpairofpagestyles
-\ihead{\AuthorName}
-\ohead{\MatriculationNumber}
-\ofoot{}
-\AtBeginDocument{%
-  \selectlanguage{ngerman}%
-  \ofoot{Seite \thepage\ von \pageref*{LastNumberedPage}}}
-\setkomafont{pageheadfoot}{%
-  \normalfont\fontsize{10}{12}\selectfont}
-\setlength{\headheight}{15pt}
-\pagestyle{scrheadings}
-\renewcommand*{\chapterpagestyle}{scrheadings}
-
-% \counterwithout ist seit LaTeX 2018 Bestandteil des Kernels. Das fruehere
-% Kompatibilitaetspaket chngcntr ist fuer diesen Test deshalb nicht noetig.
-\counterwithout{footnote}{chapter}
-\providecommand{\HFHTestFootnoteSep}{14pt}
-\setlength{\footnotesep}{\HFHTestFootnoteSep}
-\newcommand*{\HFHFootnoteMark}{%
-  \raisebox{0.7ex}{\fontsize{9}{9}\selectfont\thefootnotemark}}
-\deffootnotemark{\HFHFootnoteMark}
-\deffootnote[0.5cm]{0.5cm}{0cm}{%
-  \raggedright\makebox[0.5cm][l]{\HFHFootnoteMark}}
-
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{caption}
-\captionsetup{
-  format=plain,
-  justification=justified,
-  singlelinecheck=false,
-  font={footnotesize,it},
-  labelfont={bf,it},
-  labelsep=colon,
-  skip=6pt
-}
-\counterwithout{figure}{chapter}
-\counterwithout{table}{chapter}
-\setlength{\intextsep}{12pt}
-\setlength{\textfloatsep}{12pt}
-
-\newenvironment{hfhtable}[1][htbp]
-  {\begin{table}[#1]\centering\footnotesize\setstretch{1}}
-  {\end{table}}
-\newenvironment{hfhfigure}[1][htbp]
-  {\begin{figure}[#1]\centering\footnotesize\setstretch{1}}
-  {\end{figure}}
-\newcommand{\HFHSourceLine}[2]{%
-  \par\vspace{3pt}\begingroup
-    \footnotesize\itshape\setstretch{1}#1%
-    Quelle: #2\par
-  \endgroup}
-\newcommand{\source}[1]{\HFHSourceLine{\raggedright}{#1}}
-\newcommand{\sourcecentered}[1]{\HFHSourceLine{\centering}{#1}}
-\newcommand{\sourceindented}[2][1.75cm]{%
-  \HFHSourceLine{\raggedright\leftskip=#1\relax}{#2}}
-\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
-
-\usepackage{xurl}
-\usepackage{csquotes}
-\usepackage[
-  backend=biber,
-  style=authoryear,
-  sorting=nyt,
-  sortlocale=de_DE,
-  giveninits=false,
-  maxbibnames=99,
-  dashed=false,
-  doi=false,
-  eprint=false,
-  isbn=false
-]{biblatex}
 \addbibresource{fixtures/compliance-references.bib}
-\DeclareNameAlias{sortname}{family-given}
-\setlength{\bibhang}{0.5cm}
-\setlength{\bibitemsep}{6pt}
-\setlength{\bibparsep}{0pt}
-\AtBeginBibliography{%
-  \singlespacing
-  \setlength{\parskip}{0pt}}
-
-\newenvironment{hfhsourceentries}
-  {\par\begingroup\singlespacing\setlength{\parskip}{6pt}}
-  {\par\endgroup}
-\newcommand{\hfhsourceentry}[1]{%
-  \par\noindent\hangindent=0.5cm\hangafter=1 #1\par}
-
-\usepackage[hidelinks]{hyperref}
-\usepackage{bookmark}
 
 \begin{document}
 

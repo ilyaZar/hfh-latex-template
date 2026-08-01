@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prüft Text, Abstände, Einzüge und Schriften der Compliance-Test-PDF."""
+"""Prüft die gerenderten PDFs der Vorlage und der Compliance-Fixture."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ from xml.etree import ElementTree
 
 XHTML = "http://www.w3.org/1999/xhtml"
 X = f"{{{XHTML}}}"
+ROOT = Path(__file__).resolve().parent.parent
+TESTS = ROOT / "tests"
 
 
 class CheckError(RuntimeError):
@@ -66,6 +68,16 @@ def find_line(
     )
 
 
+def find_page_line(
+    page: list[tuple[str, float, float]],
+    prefix: str,
+) -> tuple[str, float, float]:
+    for line in page:
+        if line[0].startswith(prefix):
+            return line
+    raise CheckError(f"Inhaltsverzeichniszeile {prefix!r} fehlt")
+
+
 def between(value: float, lower: float, upper: float, label: str) -> None:
     if not lower <= value <= upper:
         raise CheckError(
@@ -74,7 +86,7 @@ def between(value: float, lower: float, upper: float, label: str) -> None:
         )
 
 
-def check(pdf: Path, log: Path) -> None:
+def check_fixture(pdf: Path, log: Path) -> None:
     info = run("pdfinfo", str(pdf))
     pages_match = re.search(r"^Pages:\s+(\d+)$", info, re.MULTILINE)
     size_match = re.search(
@@ -105,6 +117,7 @@ def check(pdf: Path, log: Path) -> None:
         "chngcntr.sty",
         "inputenc.sty",
         "mathptmx.sty",
+        "natbib.sty",
         "times.sty",
         "txfonts.sty",
     ):
@@ -250,18 +263,80 @@ def check(pdf: Path, log: Path) -> None:
     print("Schriften eingebettet, Nummerierung und Sortierung korrekt")
 
 
+def check_template(pdf: Path) -> None:
+    if not pdf.exists():
+        raise CheckError("main.pdf fehlt; Vorlage vor dem Test kompilieren")
+
+    pages = parse_bbox(pdf)
+    toc_pages = [
+        index
+        for index, page in enumerate(pages)
+        if any(
+            text == "Inhaltsverzeichnis" and x < 100
+            for text, x, _ in page
+        )
+    ]
+    if len(toc_pages) != 1:
+        raise CheckError("Das Inhaltsverzeichnis muss genau eine Seite belegen")
+
+    toc_index = toc_pages[0]
+    toc = pages[toc_index]
+    if toc_index + 1 >= len(pages):
+        raise CheckError("Auf das Inhaltsverzeichnis folgt keine weitere Seite")
+    next_page = pages[toc_index + 1]
+    if not any(
+        text == "Abbildungsverzeichnis" and x < 100
+        for text, x, _ in next_page
+    ):
+        raise CheckError(
+            "Das Abbildungsverzeichnis muss direkt auf das einseitige "
+            "Inhaltsverzeichnis folgen"
+        )
+
+    usage = find_page_line(toc, "Verwendungshinweis")
+    chapter = find_page_line(toc, "Formale Aspekte")
+    section = find_page_line(toc, "Muster für die Gliederung")
+    subsection = find_page_line(toc, "Gliederungstiefe")
+    second_chapter = find_page_line(toc, "Aufbau wissenschaftlicher Arbeiten")
+    find_page_line(toc, "Bezeichnung der Anlage")
+
+    chapter_gap = chapter[2] - usage[2]
+    normal_gap = subsection[2] - section[2]
+    between(chapter_gap, 20.0, 20.8, "Abstand vor Haupteintrag")
+    between(normal_gap, 17.0, 17.8, "Abstand normaler Einträge")
+
+    title_positions = (
+        chapter[1],
+        section[1],
+        subsection[1],
+        second_chapter[1],
+    )
+    for position in title_positions:
+        between(position, 133.5, 135.5, "Beginn der Textspalte")
+
+    print(
+        "Inhaltsverzeichnis: eine Seite, "
+        f"Abstände {normal_gap:.2f}/{chapter_gap:.2f} pt, "
+        f"Textspalte {chapter[1]:.2f} pt"
+    )
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "pdf",
-        nargs="?",
+        "--fixture-pdf",
         type=Path,
-        default=Path("table1-compliance.pdf"),
+        default=TESTS / "table1-compliance.pdf",
     )
     parser.add_argument(
-        "--log",
+        "--fixture-log",
         type=Path,
-        default=Path("table1-compliance.log"),
+        default=TESTS / "table1-compliance.log",
+    )
+    parser.add_argument(
+        "--template-pdf",
+        type=Path,
+        default=ROOT / "main.pdf",
     )
     return parser.parse_args()
 
@@ -269,11 +344,12 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        check(args.pdf, args.log)
+        check_fixture(args.fixture_pdf, args.fixture_log)
+        check_template(args.template_pdf)
     except CheckError as error:
         print(f"FEHLER: {error}", file=sys.stderr)
         return 1
-    print("Gerenderte Tabelle-1-Prüfung bestanden")
+    print("Gerenderte PDF-Prüfungen bestanden")
     return 0
 
 

@@ -25,4 +25,4 @@ jobs:
           os: debian
           extra_system_packages: git python3 poppler-utils
           post_compile: |
-            python3 tests/run_table1_compliance.py
+            bash tests/run.sh
